@@ -1,0 +1,53 @@
+<?php
+// $Id: context_geoip.module,v 1.1 2010/11/17 23:57:28 introfini Exp $
+
+/**
+ * 
+ * Make module compatible with context 3
+ * implement hook_ctools_plugin_api().
+ */
+function context_geoip_ctools_plugin_api($module, $api) {
+  if ($module == 'context' && $api == 'plugins') {
+    return array('version' => 3);
+  }
+}
+
+/**
+ * Implementation of hook_context_registry().
+ */
+function context_geoip_context_registry() {
+  $registry = array();
+  $registry['conditions'] = array(
+    'geoip' => array(
+      'title' => t('Geo IP'),
+      'plugin' => 'context_geoip_condition',
+    ),
+  );
+  return $registry;
+}
+
+/**
+ * Implementation of hook_context_plugins().
+ */
+function context_geoip_context_plugins() {
+  $plugins = array();
+  $plugins['context_geoip_condition'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'context_geoip'),
+      'file' => 'context_geoip_condition.inc',
+      'class' => 'context_geoip_condition',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+
+/**
+ * Implementation of hook_context_page_reaction()
+ */
+function context_geoip_context_page_condition() {
+  if ($plugin = context_get_plugin('condition', 'geoip')) {
+    $plugin->execute();
+  }
+}

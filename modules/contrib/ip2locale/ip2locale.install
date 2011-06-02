@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install file for IP to Locale module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function ip2locale_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'ip2locale_%'");
+}
+
+/**
+ * Implementation of hook_update_N().
+ */
+function ip2locale_update_6100() {
+  $ret = array();
+  variable_set('ip2locale_backend_ip2country_enabled', variable_get('ip2locale_backend_uc_ip2country_enabled', 0));
+  variable_del('ip2locale_backend_uc_ip2country_enabled');
+  return $ret;
+}

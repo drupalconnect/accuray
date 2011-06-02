@@ -1,0 +1,11 @@
+name = GeoIP Country
+description = Allows nodes to be displayed for select countries
+core = 6.x
+dependencies[] = geoip
+
+; Information added by drupal.org packaging script on 2010-10-19
+version = "6.x-1.0-beta4"
+core = "6.x"
+project = "geoip_country"
+datestamp = "1287514569"
+

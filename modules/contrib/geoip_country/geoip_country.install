@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Implementaton of hook_install().
+ */
+function geoip_country_install() {
+  drupal_install_schema('geoip_country');
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function geoip_country_uninstall() {
+  drupal_uninstall_schema('geoip_country');
+
+  // remove variables created by geoip_country
+  db_query("DELETE FROM {variable} WHERE name LIKE 'geoip_country_%'");
+
+}
+
+/**
+ * Implementation of hook_schema()
+ */
+function geoip_country_schema() {
+  $schema = array();
+
+  $schema['geoip_country_node'] = array(
+    'description' => t('site_node'),
+    'fields' => array(
+      'gid' => array(
+        'description' => t('The primary id.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('The node id.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'primary key' => TRUE,
+        'unique' => TRUE,
+        'default' => 0,
+      ),
+      'code' => array(
+        'description' => t('The country codes.'),
+        'type' => 'varchar',
+        'length' => 8,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'gid' => array('gid'),
+      'nid' => array('nid'),
+    ),
+    'primary key' => array('gid'),
+  );
+
+  return $schema;
+}
+
+function geoip_country_update_6001(&$sandbox) {
+  $ret = array();
+  // drop exclude field
+  db_drop_field($ret, 'geoip_country_node', 'exclude');
+
+  // update variables
+  $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'geoip_country_%'");
+  return $ret;
+}
+
+function geoip_country_update_6002(&$sandbox) {
+  $ret = array();
+  return $ret;
+}

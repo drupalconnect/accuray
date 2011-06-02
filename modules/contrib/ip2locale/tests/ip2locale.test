@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Tests for IP to Locale
+ */
+
+
+class IP2LocaleTestCase extends DrupalWebTestCase {
+
+  function getInfo() {
+    return array(
+      'name' => t('IP to Locale tests'),
+      'desc' => t('Tests IP to Locale redirects'),
+      'group' => t('IP to Locale tests')
+    );
+  }
+
+  function setUp() {
+    parent::setUp('ip2locale');
+  }
+
+  /**
+  * Function to test ...
+  * TODO: Write some tests!!!
+  **/
+  //function test_ip2locale_sometest() {
+  //}
+
+}

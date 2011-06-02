@@ -1,0 +1,14 @@
+name = Content Multigroup
+description = Combine multiple CCK fields into repeating field collections that work in unison.
+dependencies[] = content
+dependencies[] = fieldgroup
+package = CCK
+core = 6.x
+
+
+; Information added by drupal.org packaging script on 2011-03-18
+version = "6.x-3.x-dev"
+core = "6.x"
+project = "cck"
+datestamp = "1300406575"
+

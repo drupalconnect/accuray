@@ -1,0 +1,15 @@
+; $Id: apachesolr_multilingual_textfile.info,v 1.2 2010/03/25 16:49:17 mkalkbrenner Exp $
+name = Apache Solr (Multilingual) Textfiles
+description = edit apachesolr textfiles
+dependencies[] = apachesolr_multilingual
+dependencies[] = locale
+package = Apache Solr
+core = "6.x"
+
+
+; Information added by drupal.org packaging script on 2010-09-02
+version = "6.x-1.0-beta3"
+core = "6.x"
+project = "apachesolr_multilingual"
+datestamp = "1283442104"
+

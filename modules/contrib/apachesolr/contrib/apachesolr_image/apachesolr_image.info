@@ -1,0 +1,15 @@
+name = Apache Solr image module integration
+description = Integrates the Apache Solr and Image modules
+dependencies[] = image
+dependencies[] = apachesolr
+package = Apache Solr
+core = "6.x"
+
+
+
+; Information added by drupal.org packaging script on 2011-03-31
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "apachesolr"
+datestamp = "1301572911"
+

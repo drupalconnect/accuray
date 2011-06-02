@@ -1,0 +1,16 @@
+; $Id: context_geoip.info,v 1.1 2010/11/17 23:57:28 introfini Exp $
+name = "Context Geo IP"
+dependencies[] = "context"
+dependencies[] = "geoip"
+description = "User's IP as a Context condition."
+package = "Context"
+core = "6.x"
+
+
+
+; Information added by drupal.org packaging script on 2010-11-18
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "context_geoip"
+datestamp = "1290105403"
+

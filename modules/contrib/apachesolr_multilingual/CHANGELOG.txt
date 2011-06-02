@@ -1,0 +1,93 @@
+// $Id: CHANGELOG.txt,v 1.13.2.39 2010/09/02 15:27:08 mkalkbrenner Exp $
+
+Apache Solr Multilingual 6.x-1.0-beta3, 2010-09-10
+--------------------------------------------------
+[#863154] mkalkbrenner: SpellCheckComponent error
+[#866546] mkalkbrenner: Warning: Call-time pass-by-reference
+[       ] mkalkbrenner: changed some code according to drupal coding standards
+[#887064] mkalkbrenner: How to configure Tomcat to work with Accents and Umlauts
+[       ] mkalkbrenner: merged schema.xml drupal-1.1
+[       ] mkalkbrenner: set preserveOriginal to 1 by default like apachesolr 6.x-1.2 does
+[       ] mkalkbrenner: Apply advanced settings to config files created by "Unique (Non-English) Language Configuration Download" as well
+[       ] mkalkbrenner: display advanced solr settings for all active languages
+[       ] mkalkbrenner: moved advanced solr configuration settings to dedicated module
+[       ] mkalkbrenner: made data dir configurable
+[#876494] mkalkbrenner: Chaotic taxonomy search fields, hard to make sense of them
+[#899636] linksunten, mkalkbrenner: corrupt validation in admin files
+
+
+Apache Solr Multilingual 6.x-1.0-beta2, 2010-07-19
+--------------------------------------------------
+[       ] mkalkbrenner: changing "language" neutral" mapping requires re-index but not a new solr config.
+[       ] mkalkbrenner: fixed wrong usage of t().
+[       ] mkalkbrenner: added alternative language facet block
+
+
+Apache Solr Multilingual 6.x-1.0-beta1, 2010-07-05
+--------------------------------------------------
+[       ] mkalkbrenner: If "language" neutral" is mapped to another language the document gets indexed using this language. "Language neutral" will not occure as an filter in the language facet anymore.
+[       ] mkalkbrenner: Skip dataDir in solrconfig.xml for Multi Core Setup
+[       ] mkalkbrenner: Allow user to adjust Auto Commit Max Time
+[#394728] mkalkbrenner: By default filter by the user's language and provide setting on settings page.
+[       ] mkalkbrenner: fixed bug that language specific highlighting did not work if spell checking is disabled
+[       ] mkalkbrenner: warn user if changes to drupal config require changes to solr config
+
+
+Apache Solr Multilingual 6.x-1.0-alpha5, 2010-06-28
+---------------------------------------------------
+[       ] mkalkbrenner: HotFix: textfile generation did not work in alpha4
+
+
+Apache Solr Multilingual 6.x-1.0-alpha4, 2010-06-28
+---------------------------------------------------
+[#805336] mkalkbrenner: Hightlighting & body stored="false": no snippets
+[#793912] mkalkbrenner: Think about "Search fields" tab
+[#783924] mkalkbrenner: think about ts_*
+[       ] mkalkbrenner, mhuder: added advanced language specific index options
+[       ] mhuder: only validate spell length if any language has been selected
+[       ] mhuder: updates on ts_ fields support
+
+
+Apache Solr Multilingual 6.x-1.0-alpha3, 2010-05-19
+---------------------------------------------------
+[#783516] mkalkbrenner: apacheslor_multilingual must not depend on i18n
+[#778650] mkalkbrenner: language specific spell checking
+[#788842] mkalkbrenner: fieldType textSpell conficts with fieldType text
+
+
+Apache Solr Multilingual 6.x-1.0-alpha2, 2010-04-27
+---------------------------------------------------
+[       ] mkalkbrenner: deal with language neutral content
+[#778650] mkalkbrenner: language specific spell checking (work in progress)
+[#769752] mhuder: Index translated taxonomy terms
+[#778646] mhuder: language specific handling of tags
+[#779628] mkalkbrenner, mhuder: provide language specific "gettableFiles"
+[       ] mkalkbrenner: protwords must be lowercase
+[       ] mkalkbrenner: cleaned up apachesolr_multilingual_textfile
+[#782804] mkalkbrenner: support compound word splitter
+
+
+Apache Solr Multilingual 6.x-1.0-alpha1, 2010-03-10
+---------------------------------------------------
+[       ] mkalkbrenner: first protoype for title and body
+[       ] mhuder: added first prototype of schema generator for multiple languages
+[       ] mkalkbrenner: added variable to decide if translations should be indexed
+[       ] mkalkbrenner: added tabs to apache solr admin backend
+[       ] mhuder: added support for single language schema.xml
+[#750426] mkalkbrenner: removed textTight. see http://drupal.org/node/750426
+[       ] mkalkbrenner: prepared multiple spell fields
+[       ] mkalkbrenner: added compound splitter to fieldType text
+[       ] mhuder: added module apachesolr_multilingual_textfile to administer stopwords and so on
+[       ] mhuder: automated generation of apachesolr textfiles
+[       ] mhuder: added isolatin1accent_filter
+[       ] mkalkbrenner: adjusted access rights
+[       ] mkalkbrenner: added deatailed instructions to README.txt
+[       ] mkalkbrenner: added fieldType_textSpell_LANGUAGE.xml
+[       ] mhuder: added improved language selection
+[#750426] mkalkbrenner: set schema version to 0.9.5. see http://drupal.org/node/750426#comment-2779560
+[       ] mhuder: provide config file for download
+[       ] mkalkbrenner: changed some wording
+[       ] mhuder: imroved config file for download
+[       ] mkalkbrenner: reviewed and cleaned up some code
+[       ] mkalkbrenner: solr doesn't contain a stemmer for all languages
+[       ] mkalkbrenner: adjusted README

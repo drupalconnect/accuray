@@ -1,0 +1,215 @@
+<?php
+
+/***************** hook functions ****************/
+
+/**
+ * Implementation of hook_menu().
+ */
+function geoip_country_menu() {
+  $items = array();
+
+  $items['admin/settings/geoip_country'] = array(
+    'title' => 'GeoIP country',
+    'description' => 'Configure the allowed countries.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('geoip_country_options_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+function geoip_country_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'geoip_country'), 
+  );
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function geoip_country_form_alter(&$form, $form_state, $form_id) {
+  if ($form['type']['#value'] . '_node_form' == $form_id) {
+    $types = variable_get('geoip_country_content_types', array());
+    $node = $form['#node'];
+    if (in_array($node->type, $types)) {
+
+      $countries = _geoip_country_get_countries();
+
+      $form['geoip_country'] = array(
+        '#title' => t('Set Geo Rules'),
+        '#type' => 'fieldset',
+        '#collapsed' => FALSE,
+        '#collapsible' => TRUE,
+      );
+      $form['geoip_country']['countries'] = array(
+        '#title' => t('Countries'),
+        '#description' => t('If you select one or more countries, the node will be only accessible from the selected countries. Leaving blank will allow node access from everywhere.'),
+        '#type' => 'select',
+        '#size' => 5,
+        '#multiple' => TRUE,
+        '#default_value' => $node->countries ? $node->countries : array(),
+        '#options' => $countries,
+      );
+    }
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi()
+ */
+function geoip_country_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($op == 'load') {
+    $types = variable_get('geoip_country_content_types', array());
+    if (in_array($node->type, $types)) {
+      $q = 'SELECT * FROM {geoip_country_node} WHERE nid = %d';
+      $res = db_query($q, $node->nid);
+      $countries = array();
+      while($row = db_fetch_object($res)) {
+        $countries[$row->code] = $row->code;
+      }
+      $node->countries = $countries;
+    }
+  }
+  elseif ($op == 'insert' || $op == 'update') {
+    $types = variable_get('geoip_country_content_types', array());
+    if (in_array($node->type, $types) && $node->countries) {
+      $q = 'DELETE FROM {geoip_country_node} WHERE nid = %d';
+      db_query($q, $node->nid);
+      $codes = array_keys($node->countries);
+      $success = TRUE;
+      foreach($codes as $code) {
+        $q = "INSERT INTO {geoip_country_node} (nid,code) VALUES (%d, '%s')";
+        if (db_query($q, $node->nid, $code) == FALSE) {
+          $success = FALSE;
+          watchdog(WATCHDOG_ERROR, "Error in SQL: INSERT INTO {geoip_country_node} (nid,code} VALUES (%d, '%s'), $node->nid, $code");
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Settings page for admin
+ */
+function geoip_country_options_form() {
+  $form = array();
+  $options = array();
+
+
+  $form['geoip_country_content_types'] = array(
+    '#title' => t('Select content types need GeoIP control'),
+    '#type' => 'checkboxes',
+    '#default_value' => variable_get('geoip_country_content_types', array()),
+    '#options' => node_get_types('names'),
+  );
+
+  $countries = geoip_country_values();
+  unset($countries['A1']);
+  unset($countries['A2']);
+  asort($countries);
+
+  $form['geoip_country_countries'] = array(
+    '#title' => t('Select countries need GeoIP control'),
+    '#type' => 'checkboxes',
+    '#default_value' => variable_get('geoip_country_countries', array()),
+    '#options' => $countries,
+  );
+
+  $form = system_settings_form($form);
+  $form['#submit'][] = 'geoip_country_options_form_submit';
+  return $form;
+}
+
+function geoip_country_options_form_submit() {
+  drupal_set_message(t("If you changed the settings here, please <a href='/admin/content/node-settings'>rebuild content access permissions</a>."));
+}
+
+/**
+ * Implementation of hook_node_access_records().
+ */
+function geoip_country_node_access_records($node) {
+  if (!$node->countries) {
+    // accessible by every one
+    return;
+  }
+
+  $types = variable_get('geoip_country_content_types', array());
+  if (!in_array($node->type, $types)) {
+    // accessible by every one
+    return;
+  }
+
+  $grants = array();
+
+  foreach (array_keys($node->countries) as $code) {
+    $grants[] = array(
+      'realm' => 'access_'. $code,
+      'gid' => 1,
+      'grant_view' => TRUE,
+      'grant_update' => FALSE,
+      'grant_delete' => FALSE,
+      'priority' => 0,
+    );
+  }
+  $grants[] = array(
+    'realm' => 'access_ALL',
+    'gid' => 1,
+    'grant_view' => TRUE,
+    'grant_update' => FALSE,
+    'grant_delete' => FALSE,
+    'priority' => 0,
+  );  
+
+  return $grants;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function geoip_country_perm() {
+  return array('access all countries');
+}
+
+/**
+ * Implementation of hook_node_grants().
+ */
+function geoip_country_node_grants($account, $op) {
+  // get country code by current user's IP
+  $country = geoip_country_code();
+
+  // If countries selected but don't match selection, only allow super-admin
+  if ($account->uid == 1 || user_access('access all countries', $account)) {
+    $grants['access_ALL'][] = 1;
+  }
+  else {
+    // not super user, test grants using current country value
+    $grants['access_'. $country][] = 1;
+  }
+  return $grants;
+}
+
+/***************** private functions ****************/
+
+/**
+ * Get all enabled countries
+ *
+ * @return
+ *   Associative array of country codes
+ */
+function _geoip_country_get_countries() {
+  static $countries = array();
+
+  if (!$countries) {
+    $countries = array();
+    $all_countries = geoip_country_values();
+    foreach(variable_get('geoip_country_countries', array()) as $country_iso => $country) {
+      if ($country) {
+        $countries[$country_iso] = $all_countries[$country_iso];
+      }
+    }
+    asort($countries); 
+  }
+  return $countries;
+}

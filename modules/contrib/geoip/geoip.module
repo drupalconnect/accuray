@@ -1,0 +1,263 @@
+<?php
+
+/**
+ * @file
+ * API for using the MaxMind GeoLite Country database.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function geoip_init() {
+  // Disable caching on JSON request.
+  if ($_GET['q'] == 'geoip/json/country') {
+    $GLOBALS['conf']['cache'] = CACHE_DISABLED;
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function geoip_menu() {
+  $items['admin/settings/geoip'] = array(
+    'title' => 'GeoIP',
+    'description' => 'Configure the path to the GeoIP database.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('geoip_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'geoip.admin.inc',
+  );
+  $items['geoip/json/country'] = array(
+    'page callback' => 'geoip_json_country',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_requirements().
+ */
+function geoip_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  // Test for a valid GeoIP database
+  $requirements['geoip_database'] = array(
+    'title' => $t('GeoIP Database'),
+  );
+
+  $file = geoip_data_file();
+
+  if (!$file || !file_exists($file)) {
+    $requirements['geoip_database']['value'] = l('Missing', 'admin/settings/geoip');
+    $requirements['geoip_database']['description'] = $t('The GeoIP database file is missing or not configured. Download the latest file at <a href="@url">MaxMind.com</a>.', array('@url' => 'http://www.maxmind.com/download/geoip/database/GeoIP.dat.gz'));
+    $requirements['geoip_database']['severity'] = ($phase == 'runtime') ? REQUIREMENT_WARNING : REQUIREMENT_ERROR;
+  }
+  else {
+    $mtime = filemtime($file);
+    if ($mtime < strtotime('1 months ago')) {
+      $requirements['geoip_database']['value'] = $t('Out of date');
+      $requirements['geoip_database']['description'] = $t('The GeoIP database file is more than a month old. Download the latest file at <a href="@url">MaxMind.com</a>.', array('@url' => 'http://www.maxmind.com/download/geoip/database/GeoIP.dat.gz'));
+      $requirements['geoip_database']['severity'] = REQUIREMENT_WARNING;
+    }
+    else {
+      $requirements['geoip_database']['value'] = $t('Installed');
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Helper function to add the GeoIP JavaScript.
+ */
+function geoip_add_js() {
+  static $geoip_json_included;
+
+  if (!$geoip_json_included) {
+    $geoip_json_included = TRUE;
+
+    $settings = array(
+      'lifetime' => 1, // Lifetime of country cookie in days.
+    );
+    drupal_add_js(array('geoip' => $settings), 'setting');
+    drupal_add_js(drupal_get_path('module', 'geoip') .'/geoip.js');
+  }
+}
+
+/**
+ * Callback handler that returns JSON data of the country.
+ */
+function geoip_json_country() {
+  drupal_json(geoip_country_code($ip));
+  exit();
+}
+
+/**
+ * Helper function to get the current ip address.
+ */
+function geoip_ip_address() {
+  if (variable_get('geoip_debug', FALSE) && !empty($_GET['geoip_debug'])) {
+    $ip = $_GET['geoip_debug'];
+    drupal_set_message(t('GeoIP is in debug mode. Using IP: %ip', array('%ip' => $ip)));
+  }
+  else {
+    $ip = ip_address();
+  }
+  return $ip;
+}
+
+/**
+ * Singleton wrapper around geoip_open().
+ */
+function geoip_instance() {
+  $data_file = geoip_data_file();
+  if (!$data_file || !file_exists($data_file)) {
+    return FALSE;
+  }
+
+  // geoip.inc is common to both database types
+  _geoip_load_lib();
+  $instance = geoip_open($data_file, GEOIP_STANDARD);
+
+  // conditionally load the geoipcity include file
+  if ($instance->databaseType == GEOIP_CITY_EDITION_REV1) {
+    _geoip_load_lib('geoipcity.inc');
+  }
+
+  return $instance;
+}
+
+/**
+ * Get the file path of the geoip module.  This is a wrapper around
+ * drupal_get_path() that falls back to simply using the directory of the
+ * module file if too early in the bootstrap.
+ */
+function geoip_get_path() {
+  if (function_exists('drupal_get_path')) {
+    // Let drupal set the path
+    $path = drupal_get_path('module', 'geoip');
+  }
+  else {
+    // Fallback to trying to find the path based on PHP's knowledge of our
+    // current path.
+    $path = dirname(__FILE__);
+  }
+  return $path;
+}
+
+/**
+ * Return the path of the GeoIP.dat data file.
+ */
+function geoip_data_file() {
+  return variable_get('geoip_data_file', 'sites/all/libraries/geoip/GeoIP.dat');
+}
+
+/**
+ * Include the external geoip libraries.
+ *
+ * @param
+ *   The file to be included.  Must reside in the lib sub-directory.
+ */
+function _geoip_load_lib($file = 'geoip.inc') {
+  static $loaded = array();
+
+  // If we've haven't tried to include geoip.inc do so. Otherwise, just fall
+  // through.
+  if (!isset($loaded[$file])) {
+    $loaded[$file] = TRUE;
+    include_once(geoip_get_path() . '/lib/'. $file);
+  }
+}
+
+/**
+ * @defgroup geoip GeoIP Public API
+ * @{
+ * GeoIP Public API functions
+ */
+
+/**
+ * API function to return the country code for a given IP. Defaults to using the
+ * current user's IP if not specified. This function works with both the country
+ * and city level databases.
+ */
+function geoip_country_code($ip = NULL) {
+  $ip = $ip ? $ip : geoip_ip_address();
+  $gi = geoip_instance();
+
+  if (!$gi) {
+    return FALSE;
+  }
+
+  $cc = geoip_country_code_by_addr($gi, $ip);
+
+  geoip_close($gi);
+
+  if (variable_get('geoip_debug', FALSE) && !empty($_GET['geoip_debug'])) {
+    drupal_set_message(t('GeoIP reports country: %cc', array('%cc' => $cc)));
+  }
+
+  return $cc;
+}
+
+/**
+ * API function to return the city data for a given IP. Defaults to using the
+ * current user's IP if not specified. This function only works with the city
+ * level database and will return false in all other cases.
+ */
+function geoip_city($ip = NULL) {
+  $ip = $ip ? $ip : geoip_ip_address();
+  $gi = geoip_instance();
+
+  if (!$gi) {
+    return FALSE;
+  }
+  elseif ($gi->databaseType != GEOIP_CITY_EDITION_REV1) {
+    // If not using a city database, there is nothing to do.
+    geoip_close($gi);
+    return FALSE;
+  }
+
+
+  $record = geoip_record_by_addr($gi, $ip);
+
+  geoip_close($gi);
+
+  if (variable_get('geoip_debug', FALSE) && !empty($_GET['geoip_debug'])) {
+    drupal_set_message(t('GeoIP reports city: %city', array('%city' => $record->city)));
+  }
+
+  return $record;
+}
+
+/**
+ * API function to retrieve the region name, given a country code and region
+ * code. This function relies on the geoipregionvars.php file, which is just a
+ * huge array.
+ */
+function geoip_region_name($country_code, $region_code) {
+  static $GEOIP_REGION_NAME;
+  if (!isset($GEOIP_REGION_NAME)) {
+    include drupal_get_path('module', 'geoip') .'/lib/geoipregionvars.php';
+  }
+
+  return $GEOIP_REGION_NAME[$country_code][$region_code];
+}
+
+/**
+ * Return a list of country codes as specified by http://www.maxmind.com/app/iso3166
+ */
+function geoip_country_values() {
+  static $countries = NULL;
+  if (!isset($countries)) {
+    module_load_include('inc', 'geoip', 'geoip.values');
+    $countries = _geoip_country_values();
+  }
+  return $countries;
+}
+
+/**
+ * @} End of "defgroup geoip".
+ */

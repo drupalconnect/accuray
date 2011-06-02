@@ -1,0 +1,10 @@
+name         = IP to Locale
+description  = Redirect users to site version based on IP address
+package      = Location
+core         = 6.x
+; Information added by drupal.org packaging script on 2011-04-03
+version = "6.x-1.0-rc1"
+core = "6.x"
+project = "ip2locale"
+datestamp = "1301820667"
+

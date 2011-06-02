@@ -1,0 +1,65 @@
+<?php
+// $Id: apachesolr_multilingual_textfile.install,v 1.2.2.1 2010/08/18 20:16:43 mkalkbrenner Exp $
+
+/**
+ * @file
+ * Database schema of
+ * @see apachesolr_multilingual_textfile.module
+ *
+ * @author Markus Kalkbrenner | Cocomore AG
+ *   @see http://drupal.org/user/124705
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function apachesolr_multilingual_textfile_install() {
+  // Create tables.
+  drupal_install_schema('apachesolr_multilingual_textfile');
+  // Set initital Vars: Enable "language" on content type apachesolr_multilingual_textfile
+  variable_set('language_content_type_apachesolr_multilingual_textfile', '1');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function apachesolr_multilingual_textfile_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('apachesolr_multilingual_textfile');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function apachesolr_multilingual_textfile_schema() {
+  $schema['apachesolr_multilingual_textfiles'] = array(
+  'description' => 'apachesolr_multilingual_textfiles',
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "apachesolr_multilingual_textfiles nid",
+      ),
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => "apachesolr_multilingual_textfiles vid",
+      ),
+      'filename' => array(
+        'description' => 'the filename',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big'
+      ),
+    ),
+    'primary key' => array('nid', 'vid'),
+  );
+
+  return $schema;
+}
+
+

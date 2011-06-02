@@ -1,0 +1,14 @@
+name = Apache Solr CCK text search
+description = Index and search on CCK text fields. Only needed when using the CCK Content Permissions module.
+dependencies[] = apachesolr
+dependencies[] = apachesolr_search
+dependencies[] = text
+dependencies[] = content_permissions
+package = Apache Solr
+core = "6.x"
+; Information added by drupal.org packaging script on 2011-03-31
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "apachesolr"
+datestamp = "1301572911"
+
