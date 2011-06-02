@@ -1,0 +1,8 @@
+name = Apache Solr Panels
+description = Integrates Apache Solr Search with Panels.
+package = Apache Solr
+core = 6.x
+dependencies[] = apachesolr_search
+dependencies[] = ctools
+dependencies[] = page_manager
+dependencies[] = panels
