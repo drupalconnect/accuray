@@ -1,0 +1,46 @@
+/**
+ * @file
+ *
+ * Plugin to provide an apachesolr context
+ */
+
+/**
+ * Plugins are described by creating a $plugin array which will be used
+ * by the system that includes this file.
+ */
+$plugin = array(
+  'title' => t('Apache Solr Query'),
+  'description' => t('An Apache Solr query context'),
+  'context' => 'ctools_context_create_solrquery',
+  'keyword' => 'solrquery',
+  'no ui' => TRUE,
+  'context name' => 'solrquery',
+  'convert list' => array(
+    'raw' => t('Solr response'),
+  ),
+  'convert' => 'ctools_context_solrquery_convert',
+  'placeholder form' => array(
+    '#type' => 'textfield',
+    '#description' => t('Enter the string for this context.'),
+  ),
+);
+
+/**
+ * It's important to remember that $conf is optional here, because contexts
+ * are not always created from the UI.
+ */
+function ctools_context_create_solrquery($empty, $data = NULL, $conf = FALSE) {
+  dsm('create solr query');
+  $context = new ctools_context('solrquery');
+  $context->plugin = 'solrquery';
+
+  if ($empty) {
+    return $context;
+  }
+
+  if ($data !== FALSE ) {
+    $context->data = $data;
+    //$context->title = check_plain($data);
+    return $context;
+  }
+}

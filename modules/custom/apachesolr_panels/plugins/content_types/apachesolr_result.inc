@@ -7,7 +7,7 @@ if (module_exists('apachesolr_search')) {
     'title' => t('Apache Solr search results'),
     'icon' => 'icon_search.png',
     'description' => t('The results of an Apache Solr search.'),
-    'required context' => new ctools_context_optional(t('Context to fetch search query from'), 'string'),
+    'required context' => new ctools_context_optional(t('Context to fetch search query from'), 'solrquery'),
     'category' => t('Apache Solr Search'),
     'defaults' => array(
       'keys_action' => 'none',
@@ -40,9 +40,9 @@ function apachesolr_panels_apachesolr_result_content_type_render($subtype, $conf
   $block->delta = 'results';
 
   $search = array(
-    'keys' => '',
-    'filters' => $_GET['filters'],
-    'sort' => $_GET['solrsort'],
+    'keys' => !empty($context->data['keys']) ? $context->data['keys'] : '',
+    'filters' => !empty($context->data['filters']) ? $context->data['filters'] : $_GET['filters'],
+    'sort' => !empty($context->data['sort']) ? $context->data['sort'] : $_GET['solrsort'],
   );
 
   // Use keywords from the selected context if set to do so.
