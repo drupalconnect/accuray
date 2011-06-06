@@ -1,0 +1,12 @@
+name = "Domain Alias"
+description = "Advanced domain matching methods for Domain Access."
+core = 6.x
+package = Domain Access
+dependencies[] = domain
+
+; Information added by drupal.org packaging script on 2011-06-06
+version = "6.x-2.11"
+core = "6.x"
+project = "domain"
+datestamp = "1307326615"
+
