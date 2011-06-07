@@ -33,6 +33,7 @@ function ctools_termoffset_ctools_access_check($conf, $context) {
       $depth = count($intermediaries);
       break;
   }
+  
   return $depth == $offset ? TRUE : FALSE;
 }
 

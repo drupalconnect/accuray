@@ -103,7 +103,14 @@ function ctools_context_solrresponse_convert($context, $type) {
   foreach ($response->facet_counts->facet_fields->$field as $field_value => $count) {
     $values[] = $field_value;
   }
-
+  
+  $function = 'ctools_context_solrresponse_' . $field . '_convert';
+  
+  // Allow modules to tweak the facets list
+  if (function_exists($function)) {
+    $function($values, $context);
+  }  
+  
   switch ($type_format) {
     case 'arglist':
       return implode(',', $values);
@@ -111,5 +118,38 @@ function ctools_context_solrresponse_convert($context, $type) {
       return implode(', ', $values);
     case 'formatted':
       return implode(', ', $values);  
+  }
+}
+
+
+/**
+ * Fiter the list of facet items to show only the next level in the taxonomy hierarchy
+ */
+function ctools_context_solrresponse_im_vid_2_convert(&$values, $context) {
+  $query = $context->data->query;
+  
+  $depth = 0;
+  
+  // find the deepest active term
+  foreach ($values as $value) {
+    // check whether any of the values is active    
+    if ($query->has_filter('tid', $value)) {      
+      // calculate the depth of the term and increase max depth if needed
+      $parents = taxonomy_get_parents_all($value);
+      $depth = (count($parents) > $depth ? count($parents) : $depth);
+    }      
+  }
+  
+  $parents = array();
+ 
+  $values_copy = $values;
+ 
+  // remove values that are deeper than the maximum depth
+  foreach ($values_copy as $i => $value) {
+    $parents = taxonomy_get_parents_all($value);
+    if (count($parents) != $depth + 1) {
+      unset($values[$i]);
+    }
+    
   }
 }

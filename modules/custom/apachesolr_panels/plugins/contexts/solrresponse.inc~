@@ -49,9 +49,8 @@ function ctools_context_create_solrresponse($empty, $data = NULL, $conf = FALSE)
   
   list($query, $response) = apachesolr_do_query('apachesolr_search', $current_query, $params, $page);
 
-  //dpm($current_query->get_filters());  
-
-  dpm($data);  
+  // We need to remove filters originally passed as arguments in the path.
+  
   
   apachesolr_current_query($query);
   apachesolr_static_response_cache($response);
@@ -104,7 +103,15 @@ function ctools_context_solrresponse_convert($context, $type) {
   foreach ($response->facet_counts->facet_fields->$field as $field_value => $count) {
     $values[] = $field_value;
   }
-
+  
+  $function = 'ctools_context_solrresponse_' . $field . '_convert';
+  
+  if (function_exists($function)) {
+    dpm($values);
+    $function($values, $context);
+    dpm($values);
+  }  
+  
   switch ($type_format) {
     case 'arglist':
       return implode(',', $values);
@@ -112,5 +119,38 @@ function ctools_context_solrresponse_convert($context, $type) {
       return implode(', ', $values);
     case 'formatted':
       return implode(', ', $values);  
+  }
+}
+
+
+/**
+ * Fiter the list of facet items to show only the next level in the taxonomy hierarchy
+ */
+function ctools_context_solrresponse_im_vid_2_convert(&$values, $context) {
+  $query = $context->data->query;
+  
+  $depth = 0;
+  
+  // find the deepest active term
+  foreach ($values as $value) {
+    // check whether any of the values is active    
+    if ($query->has_filter('tid', $value)) {      
+      // calculate the depth of the term and increase max depth if needed
+      $parents = taxonomy_get_parents_all($value);
+      $depth = (count($parents) > $depth ? count($parents) : $depth);
+    }      
+  }
+  
+  $parents = array();
+ 
+  $values_copy = $values;
+ 
+  // remove values that are deeper than the maximum depth
+  foreach ($values_copy as $i => $value) {
+    $parents = taxonomy_get_parents_all($value);
+    if (count($parents) != $depth + 1) {
+      unset($values[$i]);
+    }
+    
   }
 }

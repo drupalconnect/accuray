@@ -25,15 +25,19 @@ function ctools_termoffset_ctools_access_check($conf, $context) {
   
   switch ($direction) {
     case 'top':
+      dsm('counting from top');
       $depth = 0;
       $intermediaries = _get_term_max_depth($context->data, $depth);
       break;
     case 'bottom':
+      dsm('counting from bottom');
       $intermediaries = taxonomy_get_parents_all($context->data->tid);
       $depth = count($intermediaries);
       break;
   }
-  dsm($depth . ' / ' . $offset);
+  
+  dsm($context->data->tid . ' Offset: ' . $offset . ', Depth: ' . $depth);
+  
   return $depth == $offset ? TRUE : FALSE;
 }
 
