@@ -103,7 +103,6 @@
 .buildmode-teaser .field-field-file-info ul {
   padding: 0;
 }
-
 .buildmode-teaser .field-field-file-info ul li {
   list-style-type: none;
 } 
