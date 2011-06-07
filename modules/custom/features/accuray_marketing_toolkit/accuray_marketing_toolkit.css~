@@ -1,0 +1,10 @@
+/**
+ * Provides basic styles for toolkit related views and panels
+ * @file accuray_marketing_toolkit.css
+ */
+ 
+/***************************************************
+ *                      Views
+ ***************************************************/ 
+ 
+views_view view view-MarketingToolkitOverview view-id-MarketingToolkitOverview view-display-id-panel_pane_1 view-dom-id-1
