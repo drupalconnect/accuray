@@ -140,6 +140,11 @@ div#site-name /* The name of the website */ {
   margin-right: 10px;
 }
 
+.no-sidebars #content .section {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 #navigation /* the navigation region */ {
 }
 
@@ -149,10 +154,7 @@ div#site-name /* The name of the website */ {
 }
 
 #page-title {
-  background: #d9e0e8;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  
 }
 
 #mission /* The mission statement of the site (displayed on homepage) */ {
@@ -169,6 +171,16 @@ h1.title, /* The title of the page */
 h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
 h3.title /* Comment title */ {
   margin: 0;
+}
+
+h1.title {
+  background: #d9e0e8;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 10px;
 }
 
 h2.title {
