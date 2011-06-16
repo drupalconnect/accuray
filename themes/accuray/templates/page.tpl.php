@@ -203,7 +203,7 @@
             array(
               'id' => 'main-menu',
               'class' => 'links clearfix',
-            ),
+            ), 
             array(
               'text' => t('Main menu'),
               'level' => 'h2',
