@@ -120,7 +120,7 @@ h2 {
   margin-top: 0.909em; /* Equivalent to 1em in the page's base font: 1 / 1.1 = 0.909 */
   margin-bottom: 0.909em;
   font-weight: normal;
-  text-transform: uppercase;
+  text-transform: uppercase; 
 }
 
 h3,

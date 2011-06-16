@@ -180,7 +180,7 @@ tr.even /* Some tables have rows marked even or odd. */ {
   /* background-color: #eee; */ /* Drupal core uses a #eee background */
 }
 
-tr.odd {
+tr.odd { 
   /* background-color: #eee; */ /* Drupal core uses a #eee background */
 }
 

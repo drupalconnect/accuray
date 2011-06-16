@@ -14,7 +14,7 @@ body {
 }
 
 #page-wrapper {
-  background: url(../images/bg-page-left.png) left top repeat-y;
+  background: url(../images/bg-page-left.png) left top repeat-y; 
 }
 
 #page-wrapper-inner {
