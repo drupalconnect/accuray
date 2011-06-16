@@ -62,6 +62,7 @@ body {
 }
 
 #header .section {
+  padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -77,6 +78,7 @@ body {
 }
 
 #name-and-slogan /* Wrapper for website name and slogan */ {
+  float:left;
 }
 
 h1#site-name,
@@ -85,6 +87,12 @@ div#site-name /* The name of the website */ {
   font-size: 2em;
   line-height: 1.3em;
   font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+#site-name strong {
+  font-weight: normal;
 }
 
 #site-name a:link,
@@ -95,13 +103,15 @@ div#site-name /* The name of the website */ {
 
 #site-name a:hover,
 #site-name a:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #site-slogan /* The slogan (or tagline) of a website */ {
 }
 
 .region-header /* Wrapper for any blocks placed in the header region */ {
+  float: right;
+  min-width: 500px;
 }
 
 /*
@@ -140,6 +150,11 @@ div#site-name /* The name of the website */ {
   margin-right: 10px;
 }
 
+.no-sidebars #content .section {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 #navigation /* the navigation region */ {
 }
 
@@ -149,10 +164,7 @@ div#site-name /* The name of the website */ {
 }
 
 #page-title {
-  background: #d9e0e8;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  
 }
 
 #mission /* The mission statement of the site (displayed on homepage) */ {
@@ -171,6 +183,16 @@ h3.title /* Comment title */ {
   margin: 0;
 }
 
+h1.title {
+  background: #d9e0e8;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 10px;
+}
+
 h2.title {
   font-weight: normal;
   text-transform: uppercase;
@@ -180,7 +202,7 @@ tr.even /* Some tables have rows marked even or odd. */ {
   /* background-color: #eee; */ /* Drupal core uses a #eee background */
 }
 
-tr.odd {
+tr.odd { 
   /* background-color: #eee; */ /* Drupal core uses a #eee background */
 }
 
@@ -302,7 +324,7 @@ ul.links li {
 #footer .section {
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 #footer-message /* Wrapper for the footer message from Drupal's "Site information"
@@ -331,6 +353,10 @@ ul.links li {
 }
 
 .box .content /* Box's content wrapper */ {
+}
+
+.container-inline /* divs that need to be like spans */ {
+  float: left;
 }
 
 /*

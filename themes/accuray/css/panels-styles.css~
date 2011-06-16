@@ -12,7 +12,7 @@
   font-weight: normal;
 }
 
-#mini-panel-header .panels-flexible-column-last .pane-content {
+#mini-panel-header .panels-flexible-column-center .pane-content /* column class is in pane column config */ {
   float: right;
   
 }
