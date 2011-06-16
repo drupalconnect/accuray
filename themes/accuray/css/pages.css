@@ -85,6 +85,12 @@ div#site-name /* The name of the website */ {
   font-size: 2em;
   line-height: 1.3em;
   font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+#site-name strong {
+  font-weight: normal;
 }
 
 #site-name a:link,
