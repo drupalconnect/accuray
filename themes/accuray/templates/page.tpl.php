@@ -159,7 +159,12 @@
     </div></div><!-- /.section, /#header -->
 
     <div id="main-wrapper"><div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
-
+      <?php if($title): ?>
+        <div id="page-title">      
+          <h1 class="title"><?php print $title; ?></h1>
+        </div>
+      <?php endif; ?>
+      
       <div id="content" class="column"><div class="section">
 
         <?php if ($mission): ?>
@@ -168,9 +173,8 @@
 
         <?php print $highlight; ?>
 
-        <?php print $breadcrumb; ?>
         <?php if ($title): ?>
-          <h1 class="title"><?php print $title; ?></h1>
+          <!--<h1 class="title"><?php print $title; ?></h1>-->
         <?php endif; ?>
         <?php print $messages; ?>
         <?php if ($tabs): ?>
@@ -208,6 +212,8 @@
           ?>
 
           <?php print $navigation; ?>
+          
+          <?php print $breadcrumb; ?>
 
         </div></div><!-- /.section, /#navigation -->
       <?php endif; ?>

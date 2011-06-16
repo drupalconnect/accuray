@@ -96,12 +96,20 @@ function accuray_preprocess(&$vars, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
+
 function accuray_preprocess_page(&$vars, $hook) {
   $vars['sample_variable'] = t('Lorem ipsum.');
 
   // To remove a class from $classes_array, use array_diff().
   //$vars['classes_array'] = array_diff($vars['classes_array'], array('class-to-remove'));
+  //$vars['title'] = drupal_get_title();
+  if (!empty($vars['title'])) {
+    $vars['classes_array'][] = 'with-title';
+  }
+  
+  if (!empty($vars['title']) && (!empty($vars['navigation']) || !empty($vars['primary_links']))) {
+    $vars['classes_array'][] = 'with-navigation-and-title';
+  }
 }
 // */
 

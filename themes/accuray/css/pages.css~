@@ -17,14 +17,9 @@ body {
 }
 
 #page-wrapper {
-  background: url(../images/bg-page-top.png) left top no-repeat;
-  
 }
 
 #page-wrapper-inner {
-  background: url(../images/bg-page-top.png) right top no-repeat;
-  margin-left: 10px;
-  padding-top: 9px;
 }
 
 #page {
@@ -67,6 +62,8 @@ body {
 }
 
 #header .section {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #logo /* Wrapping link for logo */ {
@@ -87,6 +84,7 @@ div#site-name /* The name of the website */ {
   margin: 0;
   font-size: 2em;
   line-height: 1.3em;
+  font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
 }
 
 #site-name a:link,
@@ -122,6 +120,39 @@ div#site-name /* The name of the website */ {
 }
 
 #content .section {
+  padding: 10px 20px;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.sidebar-first #content .section {
+  margin-left: 10px;
+  margin-right: 20px; /* extra 10px moves the region inside the 10px shadow. */
+}
+
+.sidebar-second #content .section {
+  margin-right: 10px;
+}
+
+.two-sidebars #content .section {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#navigation /* the navigation region */ {
+}
+
+#navigation .section {
+  margin: 0 10px; /* this clears the drop shadow */
+  padding: 0 10px;
+}
+
+#page-title {
+  background: #d9e0e8;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
 #mission /* The mission statement of the site (displayed on homepage) */ {
@@ -138,6 +169,11 @@ h1.title, /* The title of the page */
 h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
 h3.title /* Comment title */ {
   margin: 0;
+}
+
+h2.title {
+  font-weight: normal;
+  text-transform: uppercase;
 }
 
 tr.even /* Some tables have rows marked even or odd. */ {
@@ -231,9 +267,17 @@ ul.links li {
  * (see the layout.css file.)
  */
 .region-sidebar-first {
+  
 }
 
 .region-sidebar-first .section {
+  margin: 0;
+  margin-left: 20px;
+  padding: 10px;
+  background: #e1edf9;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
 /*
@@ -246,6 +290,7 @@ ul.links li {
 }
 
 .region-sidebar-second .section {
+  padding: 10px 20px;
 }
 
 /*
@@ -255,6 +300,9 @@ ul.links li {
 }
 
 #footer .section {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
 #footer-message /* Wrapper for the footer message from Drupal's "Site information"

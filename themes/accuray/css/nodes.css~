@@ -91,9 +91,6 @@
 .buildmode-teaser .node {
   min-height: 80px; /* gradient images are 40px each in height. Make sure they don't overlap */
   background: url(../images/gradient-gray-vertical-bottom.png) left bottom repeat-x;
-}
-
-.buildmode-teaser .node-type-asset {
   border: 1px solid #CCC;
   border-radius: 3px;
   -moz-border-radius: 3px;
@@ -103,6 +100,7 @@
 .buildmode-teaser .field-field-file-info ul {
   padding: 0;
 }
+
 .buildmode-teaser .field-field-file-info ul li {
   list-style-type: none;
 } 
