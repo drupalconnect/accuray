@@ -353,10 +353,6 @@ ul.links li {
 .box .content /* Box's content wrapper */ {
 }
 
-.container-inline /* divs that need to be like spans */ {
-  float: left;
-}
-
 /*
  * Markup free clearing (See: http://www.positioniseverything.net/easyclearing.html )
  */
