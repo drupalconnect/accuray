@@ -1,0 +1,288 @@
+<?php
+// $Id: jump.module,v 1.1.4.11 2011/01/23 00:17:29 nicholasalipaz Exp $
+
+/**
+ * @file
+ * Provides an API for adding jump menus based on configured
+ * menus, vocabularies, or custom php code.
+ */
+
+/**
+ * Implementation of hook_menu().
+ *
+ * @return array
+ */
+function jump_menu() {
+  $items = array();
+  $items['admin/settings/jump'] = array(
+    'title' => 'Jump Settings',
+    'description' => 'Configure Jump module settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jump_settings'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer menu'),
+  );
+  return $items;
+}
+
+/**
+ * Menu callback for 'admin/settings/jump'.
+ *
+ * @return string
+ */
+function jump_settings() {
+  $form['jump_activepageinmenu'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show active page in menu.'),
+    '#default_value' => variable_get('jump_activepageinmenu', 1),
+    '#description' => t('This setting will force the jump menu to show the current page as the default selection in the jump menu when checked.  If you have a menu option that you would always like displayed at the top of the menu, like <em>Select a menu item</em>, you will want to uncheck this. This setting controls this behavior for all jump menus sitewide.  You can override this setting on a block-by-block basis.'),
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * Implementation of hook_block().
+ *
+ * @param string $op
+ * @param integer $delta
+ * @param array $edit
+ * @return array
+ */
+function jump_block($op = 'list', $delta = 0, $edit = array()) {
+  if ($op == 'list') {
+    $blocks = array();
+    foreach (menu_get_menus() as $name => $title) {
+      $blocks['menu-'. $name] = array(
+        'info' => t('Jump menu: !menu', array('!menu' => $name))
+      );
+    }
+
+    $vocs = taxonomy_get_vocabularies();
+    foreach ($vocs as $vid => $vocabulary) {
+      $blocks['taxo-'. $vid] = array(
+        'info' => t('Jump menu: !voc', array('!voc' => $vocabulary->name))
+      );
+    }
+    return $blocks;
+  }
+  elseif ($op == 'view') {
+    // The first 5 characters of $delta should be one of:
+    //    menu-
+    //    taxo-
+    $subject = '';
+    $jumpmenu_type = substr($delta, 0, 4);
+    $jumpmenu_name = substr($delta, 5);
+    $active = jump_get_active_setting($delta);
+    if ($jumpmenu_type == 'menu') {
+      $form = jump_quickly($jumpmenu_name, 'menu', $active);
+
+      // Use the menu label as the default block subject
+      $menus = menu_get_menus();
+      $subject = $menus[$jumpmenu_name];
+    }
+    elseif ($jumpmenu_type == 'taxo') {
+      $form = jump_quickly($jumpmenu_name, 'taxo', $active);
+
+      // Use the vocabulary name as the default block subject
+      $vocab = taxonomy_vocabulary_load($jumpmenu_name);
+      $subject = $vocab->name;
+    }
+
+    return array('subject' => $subject, 'content' => $form);
+  }
+  elseif ($op == 'configure') {
+    $form = array();
+    $form['jump_activepageinmenu_'. $delta] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show active page in jump menu.'),
+      '#default_value' => variable_get('jump_activepageinmenu_'. $delta, 1),
+      '#description' => t('This setting will force the jump menu to show the current page as the default selection in this block\'s jump menu.'),
+    );
+    return $form;
+  }
+  elseif ($op == 'save') {
+    variable_set('jump_activepageinmenu_'. $delta, $edit['jump_activepageinmenu_'. $delta]);
+    return;
+  }
+}
+
+/**
+ * Get a quick-jump menu form that contains a dropdown and a go button.
+ *
+ * @staticvar integer $num_jump_forms
+ * @param string $name
+ *   If it's an array, then these are the options for the select box.  If it's
+ *   a scalar, then check the type to see what it means.
+ * @param string $type
+ *   If 'menu' then $name is the menu name from which the options will be
+ *   derived.  If 'taxo' then $name is the vocabulary id from which the terms
+ *   will be derived.  If 'custom' then $name should be an array that contains
+ *   the options.
+ * @param integer $active
+ * @return array
+ */
+function jump_quickly($name = 'navigation', $type = 'menu', $active = -1) {
+  if ($active === -1) {
+    $active = variable_get('jump_activepageinmenu', 1);
+  }
+
+  if (is_array($name)) {
+    $options = $name;
+  }
+  else {
+    $options = array();
+    if ($type == 'menu') {
+      jump_menu_get_menu_options($options, $name);
+    }
+    elseif ($type == 'taxo') {
+      jump_menu_get_taxo_options($options, $name);
+    }
+  }
+
+  // Give each form on the page a unique id so we can handle multiple
+  // jump forms...
+  static $num_jump_forms = 0;
+  $num_jump_forms++;
+
+  return drupal_get_form('jump_quickly_form_' . $num_jump_forms, $options, $active);
+}
+
+/**
+ * Form constructor for the jump form.
+ *
+ * @param array $form_state
+ * @param array $options
+ * @param integer $active
+ * @return array
+ */
+function jump_quickly_form(&$form_state, $options, $active) {
+  $default = '';
+  if ($active) {
+    if (isset($options[$_GET['q']])) {
+      $default = $_GET['q'];
+    }
+  }
+
+  $form = array();
+  $form['#submit'][] = 'jump_quickly_form_submit';
+  $form['#theme'] = 'jump_quickly_form';
+  $form['#attributes']['class'] = 'jump-quickly';
+  $form['jump_goto'] = array(
+    '#type' => 'select',
+    '#default_value' => $default,
+    '#options' => $options
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Go')
+  );
+
+  return $form;
+}
+
+/**
+ * Form submit callback for the jump form.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function jump_quickly_form_submit($form, &$form_state) {
+  if (!empty($form_state['values']['jump_goto'])) {
+    $fragment = explode('#', $form_state['values']['jump_goto']);
+    if (isset($fragment[1])) {
+      drupal_goto($fragment[0], NULL, $fragment[1]);
+    }
+    else {
+      drupal_goto($form_state['values']['jump_goto']);
+    }
+  }
+}
+
+/**
+ * Theme function for jump form.
+ *
+ * @param array $form
+ * @return string
+ */
+function theme_jump_quickly_form($form) {
+  $output = '<div class="container-inline">';
+  $output .= drupal_render($form['jump_goto']);
+  $output .= drupal_render($form['submit']);
+  $output .= '</div>';
+  $output .= drupal_render($form);
+  return $output;
+}
+
+/**
+ * Utility function to retrieve an array of menu items for the jump menu.
+ *
+ * @param array $options
+ * @param string $name
+ */
+function jump_menu_get_menu_options(&$options, $name) {
+  $tree = menu_tree_page_data($name);
+  $front = variable_get('site_frontpage', 'node');
+  foreach ($tree as $data) {
+    if (!$data['link']['hidden']) {
+      $href = ($data['link']['href'] == '<front>') ? $front : $data['link']['href'];
+      $href = (isset($data['link']['options']['fragment'])) ? $href . '#' . $data['link']['options']['fragment'] : $href;
+      $options[$href] = $data['link']['title'];
+    }
+  }
+}
+
+/**
+ * Utility function to retrieve an array of taxonomy terms for the jump menu.
+ *
+ * @param array $options
+ * @param integer $vid
+ */
+function jump_menu_get_taxo_options(&$options, $vid) {
+  $tree = taxonomy_get_tree($vid);
+  foreach ($tree as $term) {
+    $options[taxonomy_term_path($term)] = $term->name;
+  }
+}
+
+/**
+ * Implementation of hook_forms().
+ *   Allows us to use the same callbacks for forms with different ids.
+ *
+ * @param string $form_id
+ * @return array
+ */
+function jump_forms($form_id) {
+  // Ensure we map a callback for our form and not something else
+  $forms = array();
+  if (strpos($form_id, 'jump_quickly_form') === 0) {
+    // Let the forms API know where to get the form data corresponding
+    // to this form id.
+    $forms[$form_id] = array('callback' => 'jump_quickly_form');
+  }
+  return $forms;
+}
+
+/**
+ * Implementation of hook_theme().
+ * 
+ * @return array
+ */
+function jump_theme() {
+  return array(
+    'jump_quickly_form' => array(
+      'arguments' => array('form')
+    )
+  );
+}
+
+/**
+ * Utility function to retrieve the 'active' setting for a give block.
+ *
+ * @param string $delta
+ * @return integer
+ */
+function jump_get_active_setting($delta) {
+  $active_site_default = variable_get('jump_activepageinmenu', 1);
+  $active = variable_get('jump_activepageinmenu_'. $delta, $active_site_default);
+  return $active;
+}

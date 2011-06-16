@@ -1,0 +1,34 @@
+<?php
+// $Id: jump.install,v 1.1.2.3 2011/01/23 00:11:06 nicholasalipaz Exp $
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function jump_uninstall() {
+  db_query("DELETE from {variable} WHERE name LIKE 'jump_activepageinmenu%'");
+}
+
+/**
+ * Implementation of hook_update_N().
+ * Upgrade function for issue #344054 which fixes the deltas for jump menus
+ * to make them more css friendly.
+ *
+ * @return array
+ */
+function jump_update_6012() {
+  $ret = array();
+  $result = db_query("SELECT * from {blocks} WHERE module='jump'");
+  if (!$result) {
+    $ret['#abort'] = array('success' => FALSE, 'query' => t('Could not select from the blocks table.'));
+  }
+  else {
+    while ($block = db_fetch_object($result)) {
+      $fixed_delta = preg_replace('/:/', '-', $block->delta);
+      if ($fixed_delta != $block->delta) {
+        $ret[] = update_sql("UPDATE {blocks} SET delta='$fixed_delta' WHERE bid=$block->bid");
+      }
+    }
+  }
+
+  return $ret;
+}
