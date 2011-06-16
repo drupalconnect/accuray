@@ -173,7 +173,6 @@
 
         <?php print $highlight; ?>
 
-        <?php print $breadcrumb; ?>
         <?php if ($title): ?>
           <!--<h1 class="title"><?php print $title; ?></h1>-->
         <?php endif; ?>
@@ -204,7 +203,7 @@
             array(
               'id' => 'main-menu',
               'class' => 'links clearfix',
-            ),
+            ), 
             array(
               'text' => t('Main menu'),
               'level' => 'h2',
@@ -213,6 +212,8 @@
           ?>
 
           <?php print $navigation; ?>
+          
+          <?php print $breadcrumb; ?>
 
         </div></div><!-- /.section, /#navigation -->
       <?php endif; ?>

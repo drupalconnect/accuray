@@ -62,6 +62,7 @@ body {
 }
 
 #header .section {
+  padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -77,6 +78,7 @@ body {
 }
 
 #name-and-slogan /* Wrapper for website name and slogan */ {
+  float:left;
 }
 
 h1#site-name,
@@ -101,7 +103,7 @@ div#site-name /* The name of the website */ {
 
 #site-name a:hover,
 #site-name a:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #site-slogan /* The slogan (or tagline) of a website */ {
@@ -349,6 +351,10 @@ ul.links li {
 }
 
 .box .content /* Box's content wrapper */ {
+}
+
+.container-inline /* divs that need to be like spans */ {
+  float: left;
 }
 
 /*

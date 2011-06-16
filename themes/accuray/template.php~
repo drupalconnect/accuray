@@ -107,7 +107,7 @@ function accuray_preprocess_page(&$vars, $hook) {
     $vars['classes_array'][] = 'with-title';
   }
   
-  if (!empty($vars['title']) && (!empty($vars['navigation']) || !empty($vars['primary_links'])) {
+  if (!empty($vars['title']) && (!empty($vars['navigation']) || !empty($vars['primary_links']))) {
     $vars['classes_array'][] = 'with-navigation-and-title';
   }
 }
