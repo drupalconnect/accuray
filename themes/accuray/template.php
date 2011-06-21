@@ -161,3 +161,38 @@ function accuray_preprocess_block(&$vars, $hook) {
   $vars['sample_variable'] = t('Lorem ipsum.');
 }
 // */
+
+function accuray_breadcrumb($breadcrumb) {
+  // Make sure we always have at least the 'Home' breadcrumb
+  if (!count($breadcrumb)) {
+    $breadcrumb[] = l('Home', '<front>');
+  }
+  
+  // Determine if we are to display the breadcrumb.
+  $show_breadcrumb = theme_get_setting('zen_breadcrumb');
+  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
+
+    // Optionally get rid of the homepage link.
+    $show_breadcrumb_home = theme_get_setting('zen_breadcrumb_home');
+    if (!$show_breadcrumb_home) {
+      array_shift($breadcrumb);
+    }
+
+    // Return the breadcrumb with separators.
+    if (!empty($breadcrumb)) {
+      $breadcrumb_separator = theme_get_setting('zen_breadcrumb_separator');
+      $trailing_separator = $title = '';
+      if (theme_get_setting('zen_breadcrumb_title')) {
+        if ($title = drupal_get_title()) {
+          $trailing_separator = $breadcrumb_separator;
+        }
+      }
+      elseif (theme_get_setting('zen_breadcrumb_trailing')) {
+        $trailing_separator = $breadcrumb_separator;
+      }
+      return '<div class="breadcrumb">' . implode($breadcrumb_separator, $breadcrumb) . "$trailing_separator$title</div>";
+    }
+  }
+  // Otherwise, return an empty string.
+  return '';
+}
