@@ -1,0 +1,15 @@
+<?php
+// $Id: domaincontext.install,v 1.1 2010/08/27 17:38:54 xjm Exp $
+
+/**
+ * @file
+ * Install file for the domaincontext module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function domaincontext_enable() {
+  context_invalidate_cache();
+}
+

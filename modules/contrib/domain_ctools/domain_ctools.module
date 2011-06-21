@@ -1,0 +1,28 @@
+<?php
+// $Id: domain_ctools.module,v 1.1 2009/08/23 17:01:11 agentken Exp $
+
+/*
+ * @file Domain CTools.
+ * Chaos Tools plugins for Domain Access.
+ *
+ * This file contains API hooks to regster the module.
+ */
+
+/**
+ * Implement hook_ctools_plugin_api().
+ */
+function domain_ctools_ctools_plugin_api($module, $api) {
+  if ($module == 'page_manager') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implement hook_ctools_plugin_directory().
+ */
+function domain_ctools_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+

@@ -1,0 +1,60 @@
+<?php
+// $Id: domaincontext.module,v 1.1 2010/08/27 17:38:54 xjm Exp $
+
+/**
+ * @file
+ * Provides a Domain condition plugin for the Context module.
+ */
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function domaincontext_ctools_plugin_api($module, $api) {
+  if ($module == 'context' && $api == 'plugins') {
+    return array('version' => 3);
+  }
+}
+
+
+/**
+ * Implements hook_context_plugins().
+ */
+function domaincontext_context_plugins() {
+  $plugins = array();
+  $plugins['domaincontext_context_condition_domain'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'domaincontext') . '/plugins',
+      'file' => 'domaincontext_context_condition_domain.inc',
+      'class' => 'domaincontext_context_condition_domain',
+      'parent' => 'context_condition',
+    )
+  );
+  return $plugins;
+}
+
+
+/**
+ * Implements hook_context_registry().
+ *
+ * Register the domaincontext condition in the context registry.
+ */
+function domaincontext_context_registry() {
+  if (module_exists('domain')) {
+    $registry['conditions']['domain'] = array(
+      'title' => t('Domain'),
+      'description' => t('Set this context when viewing a node depending on its domains.'),
+      'plugin' => 'domaincontext_context_condition_domain',
+    );
+    return $registry;
+  }
+}
+
+
+/**
+ * Implements hook_init().
+ */
+function domaincontext_init() {
+  if ($plugin = context_get_plugin('condition', 'domain')) {
+    $plugin->execute();
+  }
+}

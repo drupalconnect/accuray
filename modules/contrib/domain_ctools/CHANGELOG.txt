@@ -1,0 +1,13 @@
+// $Id: CHANGELOG.txt,v 1.2 2009/10/24 16:16:54 agentken Exp $
+
+CHANGELOG file for Domain CTools
+
+24-OCT-2009
+
+-- #595698. Formats for selection options.
+-- Uses the new _access inactive domains_ permission.
+-- Creates the 6.x.1.1 release.
+
+23-AUG-2009
+  -- Initial commit.
+  -- Creates 6.x.1.0 release.
