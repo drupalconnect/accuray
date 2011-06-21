@@ -1,0 +1,6 @@
+// $Id: CHANGELOG.txt,v 1.1 2010/08/27 17:38:54 xjm Exp $
+
+Domain Context 6.x-1.x-dev, xxxx-xx-xx
+---------------------------------------
+ o by xjm: Coding standards cleanup.
+ o by rasantiago, rjstatic: Approved domaincontext module.

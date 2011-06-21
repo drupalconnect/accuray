@@ -1,0 +1,15 @@
+;  $Id: domain_ctools.info,v 1.1 2009/08/23 17:01:11 agentken Exp $
+name = Domain Ctools
+description = Chaos Tools plugins for Domain Access.
+package = Domain Access
+core = 6.x
+dependencies[] = domain
+dependencies[] = ctools
+
+
+; Information added by drupal.org packaging script on 2009-11-01
+version = "6.x-1.1"
+core = "6.x"
+project = "domain_ctools"
+datestamp = "1257104115"
+
