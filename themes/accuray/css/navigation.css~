@@ -65,7 +65,7 @@ li a.active {
   font-size: 0.7em;
   color: #e2e9e8;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: uppercase; 
 }
 
 .breadcrumb a:hover {
@@ -74,6 +74,10 @@ li a.active {
 }
 
 #secondary-menu {
+}
+
+.secondary-links {
+  margin: 0;
 }
 
 /*

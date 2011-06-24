@@ -67,6 +67,11 @@ body {
   padding-right: 20px;
 }
 
+#header a {
+  color: #4d4d4d;
+  text-decoration: none;
+}
+
 #logo /* Wrapping link for logo */ {
   float: left; /* LTR */
   margin: 0;
@@ -351,10 +356,6 @@ ul.links li {
 }
 
 .box .content /* Box's content wrapper */ {
-}
-
-.container-inline /* divs that need to be like spans */ {
-  float: left;
 }
 
 /*

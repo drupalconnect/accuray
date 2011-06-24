@@ -2,6 +2,10 @@
  * @file
  * Panels Styling
  */
+div.panel-pane, div.node {
+    margin: inherit;
+    padding: inherit;
+}
 
 .pane-page-site-name {
   margin: 0;
@@ -10,6 +14,10 @@
   font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
   text-transform: uppercase;
   font-weight: normal;
+}
+
+.pane-page-secondary-links ul.links {
+  margin: 0;
 }
 
 #mini-panel-header .panels-flexible-column-last .pane-content {

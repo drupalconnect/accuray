@@ -9,5 +9,4 @@
 }
 
 .view-id-LineageNestedList .item-list ul li {
-  list-style: outside none;
 }
