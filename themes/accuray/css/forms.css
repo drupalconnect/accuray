@@ -2,7 +2,12 @@
  * @file
  * Form Styling
  */
-
+.form-item,
+.form-checkboxes,
+.form-select,
+.form-submit {
+  font-size: 1em;
+}
 
 .form-item,
 .form-checkboxes,

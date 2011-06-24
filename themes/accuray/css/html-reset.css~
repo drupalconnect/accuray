@@ -83,15 +83,23 @@ fieldset {
 
 
 @font-face {
-    font-family: 'WinterthurCondensedRegular';
-    src: url('../fonts/WinterthurCondensed-webfont.eot');
-    src: url('../fonts/WinterthurCondensed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/WinterthurCondensed-webfont.woff') format('woff'),
-         url('../fonts/WinterthurCondensed-webfont.ttf') format('truetype'),
-         url('../fonts/WinterthurCondensed-webfont.svg#WinterthurCondensedRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'MyriadPro';
+	  src: url('../fonts/MyriadPro-Regular.ttf') format('truetype'),
+	  src: url('../fonts/MyriadPro-Regular.woff') format('woff');
+	  font-weight: normal;
+}
 
+@font-face {
+    font-family: 'MyriadPro';
+	  src: url('../fonts/MyriadPro-Bold.otf');
+	  font-weight: bold;
+}
+
+@font-face {
+    font-family: 'MyriadPro';
+	  src: url('../fonts/MyriadPro-It.otf');
+	  font-weight: normal;
+	  font-style: italic;
 }
 
 pre,
@@ -120,7 +128,7 @@ h2 {
   margin-top: 0.909em; /* Equivalent to 1em in the page's base font: 1 / 1.1 = 0.909 */
   margin-bottom: 0.909em;
   font-weight: normal;
-  text-transform: uppercase;
+  text-transform: uppercase; 
 }
 
 h3,

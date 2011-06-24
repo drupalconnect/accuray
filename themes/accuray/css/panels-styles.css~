@@ -2,6 +2,10 @@
  * @file
  * Panels Styling
  */
+.div.panel-pane, div.node {
+    margin: inherit;
+    padding: inherit;
+}
 
 .pane-page-site-name {
   margin: 0;
@@ -12,7 +16,11 @@
   font-weight: normal;
 }
 
-#mini-panel-header .panels-flexible-column-center .pane-content /* column class is in pane column config */ {
+.pane-page-secondary-links ul.links {
+  margin: 0;
+}
+
+#mini-panel-header .panels-flexible-column-last .pane-content {
   float: right;
   
 }

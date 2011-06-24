@@ -67,6 +67,11 @@ body {
   padding-right: 20px;
 }
 
+#header a {
+  color: #4d4d4d;
+  text-decoration: none;
+}
+
 #logo /* Wrapping link for logo */ {
   float: left; /* LTR */
   margin: 0;
@@ -86,7 +91,7 @@ div#site-name /* The name of the website */ {
   margin: 0;
   font-size: 2em;
   line-height: 1.3em;
-  font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
+  font: 40px/48px 'MyriadPro', Arial, sans-serif;letter-spacing: 0;
   text-transform: uppercase;
   font-weight: normal;
 }

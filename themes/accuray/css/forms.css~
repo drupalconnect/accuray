@@ -2,7 +2,12 @@
  * @file
  * Form Styling
  */
-
+.form-item,
+.form-checkboxes,
+.form-select,
+.form-submit {
+  font-size: 1em;
+}
 
 .form-item,
 .form-checkboxes,
@@ -40,6 +45,7 @@
 }
 
 .form-submit /* The submit button */ {
+  font-size: 1em;
 }
 
 .container-inline div,
@@ -87,7 +93,7 @@
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   margin: 0;
-  height: 0;
+  padding: 0;
 }
 
 /*
