@@ -1,0 +1,5 @@
+o Take this recursion!
+o The evil found a loophole.
+o #903540 by voxpelli: Improve the .info file.
+o @TODO Changelog for query aggregation.
+o #977644 by ericduran: Add views3 area handler.
