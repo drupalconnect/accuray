@@ -1,11 +1,15 @@
-; $Id: custom_breadcrumbs.info,v 1.6 2008/01/27 08:30:15 eaton Exp $
+; $Id: custom_breadcrumbs.info,v 1.6.4.1 2009/03/28 21:31:24 mgn Exp $
 name = Custom Breadcrumbs
-description = Allows administrators to define custom breadcrumb trails for each node type.
+package = Custom Breadcrumbs
+description = Allows administrators to define custom breadcrumb trails for node types.
 core = 6.x
 
-; Information added by drupal.org packaging script on 2009-09-30
-version = "6.x-1.5"
+
+
+
+; Information added by drupal.org packaging script on 2011-01-08
+version = "6.x-2.0-rc1"
 core = "6.x"
 project = "custom_breadcrumbs"
-datestamp = "1254352214"
+datestamp = "1294462254"
 
