@@ -3,6 +3,14 @@
  * Views Styling
  */
 
+.view-id-LineageNestedList h3 {
+  float: left;
+  clear: both;
+}
+
+.view-id-LineageNestedList .item-list .item-list h3 {
+  float: none;
+}
 
 .view-id-LineageNestedList .item-list ul {
   padding: 0;
@@ -10,4 +18,10 @@
 
 .view-id-LineageNestedList .item-list ul li {
   list-style: outside none;
+}
+
+.view-id-LineageNestedList .item-list .item-list {
+}
+
+.view-id-LineageNestedList .item-list ul li li {
 }
