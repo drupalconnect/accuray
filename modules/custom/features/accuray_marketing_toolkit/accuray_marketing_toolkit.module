@@ -1,4 +1,0 @@
-<?php
-
-include_once('accuray_marketing_toolkit.features.inc');
-drupal_add_css(drupal_get_path('module', 'accuray_marketing_toolkit') . '/accuray_marketing_toolkit.css');
