@@ -30,6 +30,11 @@ function accuray_locations_views_default_views() {
   $handler->display->display_options['style_options']['alignment'] = 'vertical';
   $handler->display->display_options['style_options']['fill_single_line'] = 1;
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   /* Field: Taxonomy: Term */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'term_data';
@@ -188,13 +193,19 @@ return FALSE;
   $handler = $view->new_display('panel_pane', 'Locations (pane)', 'panel_pane_locations');
   $handler->display->display_options['display_description'] = 'Provide locations in a content pane';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_plugin'] = 'semanticviews_default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'ds';
   $handler->display->display_options['row_options']['changing'] = 0;
   $handler->display->display_options['row_options']['advanced'] = 0;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Argument: Location: Province */
   $handler->display->display_options['arguments']['province']['id'] = 'province';
@@ -359,6 +370,7 @@ return FALSE;
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('Text area'),
     t('Regions'),
     t('Locations grouped by region'),
     t('locations/[province_1]'),
