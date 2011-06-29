@@ -422,3 +422,25 @@ ul.links li {
   float: right;
 }
 
+
+.smallest {
+  font-size: 25%;
+}
+
+.small {
+  font-size: 50%;
+}
+
+.normal {
+  font-size: 100%;
+}
+
+.large {
+  font-size: 150%;
+}
+
+.largest {
+  font-size: 175%;
+}
+
+
