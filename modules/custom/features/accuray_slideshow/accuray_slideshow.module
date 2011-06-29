@@ -1,0 +1,3 @@
+<?php
+
+include_once('accuray_slideshow.features.inc');
