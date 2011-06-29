@@ -2,13 +2,12 @@
  * @file
  * Views Styling
  */
-
 .view-id-LineageNestedList h3 {
   float: left;
   clear: both;
 }
 
-.view-id-LineageNestedList h3 item-list h3 {
+.view-id-LineageNestedList .item-list .item-list h3 {
   float: none;
 }
 
@@ -24,4 +23,27 @@
 }
 
 .view-id-LineageNestedList .item-list ul li li {
+}
+
+.view-id-Slideshow .view-content {
+  position: relative;
+}
+
+.views_slideshow_singleframe_pager {
+  position: absolute;
+  bottom: 0;
+  z-index: 9999;
+  padding: 10px;
+}
+
+.views_slideshow_singleframe_pager a {
+  display: block;
+  float: left;
+  margin-right: 3px;
+  padding: 2px 4px;
+  background: #a6b2c0;
+  color: #fff;
+  font-weight: normal;
+  text-decoration: none;
+  opacity: 0.8;
 }

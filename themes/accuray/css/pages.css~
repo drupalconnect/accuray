@@ -91,7 +91,7 @@ div#site-name /* The name of the website */ {
   margin: 0;
   font-size: 2em;
   line-height: 1.3em;
-  font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
+  font: 40px/48px 'MyriadPro', Arial, sans-serif;letter-spacing: 0;
   text-transform: uppercase;
   font-weight: normal;
 }
@@ -396,3 +396,25 @@ ul.links li {
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
 }
+
+
+/*****************************************************
+ * styles for use in setting and layout out body text
+ *****************************************************/
+
+.background-content {
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  overflow: hidden;
+}
+
+.foreground-content {
+  float: left;
+  width: 100%;
+}
+ 
+.float-right {
+  float: right;
+}
+
