@@ -2,9 +2,33 @@
  * @file
  * Panels Styling
  */
-.div.panel-pane, div.node {
+div.panel-pane, div.node {
     margin: inherit;
     padding: inherit;
+}
+
+#panel-page-home .panels-flexible-region .panels-flexible-region-inside {
+  background: #e5e5e5;
+  margin: 5px;
+  padding: 5px;
+  min-height: 200px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#panel-page-home .panels-region-first .panels-flexible-region-inside {
+  background: #e1edf9;
+  margin-left: 0;
+}
+
+#panel-page-home .panels-region-last .panels-flexible-region-inside {
+  margin-right: 0;
+}
+
+#panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside {
+  margin: 0;
+  padding: 0;
 }
 
 .pane-page-site-name {
