@@ -31,6 +31,7 @@ body {
 }
 
 #header {
+  background: url(../images/bg-logo.png) 12px 7px no-repeat;
 }
 
 #header .section {

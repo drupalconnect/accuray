@@ -56,9 +56,13 @@ div.panel-pane, div.node {
   margin: 0;
   font-size: 2em;
   line-height: 1.3em;
-  font: 40px/48px 'WinterthurCondensedRegular', Arial, sans-serif;letter-spacing: 0;
   text-transform: uppercase;
   font-weight: normal;
+  text-indent: -10000px;
+  background: url(../images/bg-site-name.png) 12px 30px no-repeat;
+  width: 250px;
+  height: 65px;
+  display: block;
 }
 
 .pane-page-secondary-links ul.links {
