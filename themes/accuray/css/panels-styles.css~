@@ -29,6 +29,7 @@ div.panel-pane, div.node {
 #panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside {
   margin: 0;
   padding: 0;
+  background: transparent none;
 }
 
 .pane-page-site-name {
