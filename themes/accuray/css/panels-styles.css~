@@ -2,6 +2,14 @@
  * @file
  * Panels Styling
  */
+ 
+.panels-row-menubar {
+  background:  #113b6d;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+ 
 div.panel-pane, div.node {
     margin: inherit;
     padding: inherit;
@@ -31,6 +39,10 @@ div.panel-pane, div.node {
   padding: 0;
   background: transparent none;
   height: auto;
+}
+
+#panel-page-home .pane-content ul li {
+  list-style-image: url(../images/bullet-square.png);
 }
 
 .pane-page-site-name {

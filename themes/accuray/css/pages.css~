@@ -409,6 +409,10 @@ ul.links li {
   overflow: hidden;
 }
 
+.background-content img {
+  width: 100%;
+}
+
 .foreground-content {
   float: left;
   width: 100%;
