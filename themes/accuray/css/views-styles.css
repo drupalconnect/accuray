@@ -2,6 +2,22 @@
  * @file
  * Views Styling
  */
+
+/**
+ * Generic styles
+ */
+.view-content .item-list li {
+  margin-bottom: 1em;
+}
+.views-field-title a {
+  color: #407FBC;
+}
+
+/**
+ * Styling for hierarchical browsing
+ */ 
+ 
+ 
 .view-id-LineageNestedList h3 {
   float: left;
   clear: both;
