@@ -95,11 +95,11 @@ function accuray_events_views_default_views() {
   $handler->display->display_options['fields']['view']['view'] = 'NodeTeasers';
   $handler->display->display_options['fields']['view']['arguments'] = '[nid]';
   $handler->display->display_options['fields']['view']['query_aggregation'] = 0;
-  /* Sort criterion: Broken/missing handler */
-  $handler->display->display_options['sorts']['field_date_repeat_value']['id'] = 'field_date_repeat_value';
-  $handler->display->display_options['sorts']['field_date_repeat_value']['table'] = 'node_data_field_date_repeat';
-  $handler->display->display_options['sorts']['field_date_repeat_value']['field'] = 'field_date_repeat_value';
-  $handler->display->display_options['sorts']['field_date_repeat_value']['order'] = 'DESC';
+  /* Sort criterion: Content: Event date (field_date) - From date */
+  $handler->display->display_options['sorts']['field_date_value']['id'] = 'field_date_value';
+  $handler->display->display_options['sorts']['field_date_value']['table'] = 'node_data_field_date';
+  $handler->display->display_options['sorts']['field_date_value']['field'] = 'field_date_value';
+  $handler->display->display_options['sorts']['field_date_value']['order'] = 'DESC';
   /* Filter: Node: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -123,6 +123,116 @@ function accuray_events_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_events');
   $handler->display->display_options['path'] = 'events';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Event date (field_date) - From date */
+  $handler->display->display_options['fields']['field_date_value']['id'] = 'field_date_value';
+  $handler->display->display_options['fields']['field_date_value']['table'] = 'node_data_field_date';
+  $handler->display->display_options['fields']['field_date_value']['field'] = 'field_date_value';
+  $handler->display->display_options['fields']['field_date_value']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_date_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_date_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_date_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_date_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_date_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_date_value']['label_type'] = 'none';
+  $handler->display->display_options['fields']['field_date_value']['format'] = 'short';
+  /* Field: Location: City */
+  $handler->display->display_options['fields']['city']['id'] = 'city';
+  $handler->display->display_options['fields']['city']['table'] = 'location';
+  $handler->display->display_options['fields']['city']['field'] = 'city';
+  $handler->display->display_options['fields']['city']['label'] = '';
+  $handler->display->display_options['fields']['city']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['city']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['city']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['city']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['city']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['city']['empty_zero'] = 0;
+  /* Field: Location: Province */
+  $handler->display->display_options['fields']['province']['id'] = 'province';
+  $handler->display->display_options['fields']['province']['table'] = 'location';
+  $handler->display->display_options['fields']['province']['field'] = 'province';
+  $handler->display->display_options['fields']['province']['label'] = '';
+  $handler->display->display_options['fields']['province']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['province']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['province']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['province']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['province']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['province']['empty_zero'] = 0;
+  /* Field: Node: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[city], [province] ([field_date_value])';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
   $translatables['Events'] = array(
     t('Defaults'),
     t('Events'),
@@ -135,6 +245,8 @@ function accuray_events_views_default_views() {
     t('Text area'),
     t('No new events have been scheduled. Please check back soon!'),
     t('Page'),
+    t('Block'),
+    t('[city], [province] ([field_date_value])'),
   );
 
   $views[$view->name] = $view;
