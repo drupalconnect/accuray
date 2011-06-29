@@ -33,6 +33,10 @@ div.panel-pane, div.node {
   height: auto;
 }
 
+#panel-page-home .pane-content ul li {
+  list-style-image: url(../images/bullet-square.png);
+}
+
 .pane-page-site-name {
   margin: 0;
   font-size: 2em;
