@@ -30,6 +30,7 @@ div.panel-pane, div.node {
   margin: 0;
   padding: 0;
   background: transparent none;
+  height: auto;
 }
 
 .pane-page-site-name {
