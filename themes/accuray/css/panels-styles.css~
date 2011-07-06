@@ -64,6 +64,15 @@ div.panel-pane, div.node {
   -webkit-border-radius: 5px;
 }
 
+.panels-row-menubar .pane-block ul.menu li {
+  float: left;
+  list-style: outside none;
+}
+
+.panels-row-menubar .pane-block ul.menu li a {
+  color: #E2E9E8;
+}
+
 .panels-row-contentbox {
   background: #f2f2f2;
   border-radius: 3px;
