@@ -100,6 +100,10 @@ div.panel-pane, div.node {
   padding-right: 0.5em;
 }
 
+.panel-menu-secondary-links ul.menu li.last a {
+  border-right: 0 none;
+}
+
 .panels-row-menubar .pane-block ul.menu li a {
   color: #E2E9E8;
   text-transform: uppercase;
