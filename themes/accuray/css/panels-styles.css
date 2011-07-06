@@ -57,6 +57,11 @@ div.panel-pane, div.node {
 /**
  * "Footer" minipanel
  */
+#mini-panel-footer .inside {
+  margin: 0;
+  padding: 0;
+}
+
 .panels-row-menubar {
   background:  #113b6d;
   border-radius: 5px;
