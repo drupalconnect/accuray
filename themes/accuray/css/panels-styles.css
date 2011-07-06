@@ -67,10 +67,15 @@ div.panel-pane, div.node {
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
   list-style: outside none;
+  margin-right: 0.5em;
+  padding-right: 0.5em;
+  border-right: 1px solid #E2E9E8;
 }
 
 .panels-row-menubar .pane-block ul.menu li a {
   color: #E2E9E8;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 .panels-row-menubar .pane-block ul.menu li a:hover {
