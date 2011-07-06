@@ -62,21 +62,16 @@ div.panel-pane, div.node {
   padding: 0;
 }
 
+#mini-panel-footer .panels-flexible-region .inside {
+  margin: 0;
+  padding: 0 5px;
+}
+
 .panels-row-menubar {
   background:  #113b6d;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-}
-
-.panels-row-menubar .inside {
-  margin: 0;
-  padding: 0;
-}
-
-.panels-row-menubar .panels-flexible-region .inside {
-  margin: 0;
-  padding: 0;
 }
 
 .panels-row-menubar .pane-block ul {
