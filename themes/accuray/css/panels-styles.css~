@@ -2,7 +2,18 @@
  * @file
  * Panels Styling
  */
- 
+
+/**
+ * Generic styles
+ */ 
+div.panel-pane, div.node {
+    margin: inherit;
+    padding: inherit;
+}
+
+/**
+ * "Footer" Minipanel
+ */
 .panels-row-menubar {
   background:  #113b6d;
   border-radius: 5px;
@@ -16,23 +27,12 @@
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
- 
-div.panel-pane, div.node {
-    margin: inherit;
-    padding: inherit;
-}
 
-#panel-page-home .panels-flexible-region .panels-flexible-region-inside {
-  background: #e5e5e5;
-  margin: 5px;
-  padding: 5px;
-  min-height: 200px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
+/**
+ * "Home" panel page
+ */
 
-#panel-page-home .panels-region-first .panels-flexible-region-inside {
+#panel-page-home .panels-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
   margin-left: 0;
 }
@@ -41,12 +41,30 @@ div.panel-pane, div.node {
   margin-right: 0;
 }
 
-#panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside {
-  margin: 0;
-  padding: 0;
-  background: transparent none;
-  height: auto;
+.panels-flexible-row .inside {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
+
+.panels-flexible-row .no-padding .inside {
+  padding: 0;
+}
+
+.panels-flexible-row .no-margin .inside {
+  margin: 0;
+}
+
+//#panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside /* The top region holds the slideshow and shouldn't get any additional styling */ {
+//  margin: 0;
+//  padding: 0;
+//  background: transparent none;
+//  height: auto;
+//}
+
+/* Styles for specific content within the "Home" panel page */
 
 #panel-page-home .pane-content ul li {
   list-style-image: url(../images/bullet-square.png);
@@ -61,7 +79,7 @@ div.panel-pane, div.node {
   text-indent: -10000px;
   background: url(../images/bg-site-name.png) 12px 30px no-repeat;
   width: 250px;
-  height: 104px;
+  height: 65px;
   display: block;
 }
 
