@@ -66,6 +66,15 @@ div.panel-pane, div.node {
 
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
+  list-style: outside none;
+}
+
+.panels-row-menubar .pane-block ul.menu li a {
+  color: #E2E9E8;
+}
+
+.panels-row-menubar .pane-block ul.menu li a:hover {
+  color: #FFF;
 }
 
 .panels-row-contentbox {
