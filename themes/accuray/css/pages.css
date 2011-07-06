@@ -426,8 +426,12 @@ ul.links li {
   font-size: 25%;
 }
 
-.small {
+.smaller {
   font-size: 50%;
+}
+
+.small {
+  font-size: 75%;
 }
 
 .normal {
