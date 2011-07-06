@@ -71,6 +71,7 @@ div.panel-pane, div.node {
 
 #mini-panel-footer p {
   margin-top: 0;
+}
 
 #mini-panel-footer .panels-flexible-region .inside {
   margin: 0;
