@@ -11,8 +11,53 @@ div.panel-pane, div.node {
     padding: inherit;
 }
 
+.panels-flexible-row .inside {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+.panels-flexible-row .no-padding .inside {
+  padding: 0;
+}
+
+.panels-flexible-row .no-margin .inside {
+  margin: 0;
+}
+
 /**
- * "Footer" Minipanel
+ * "Header" minipanel
+ */
+#mini-panel-header .pane-block {
+  float: right;
+}
+
+#mini-panel-header h2.pane-title {
+  float: left;
+  margin: 0;
+  font-weight: normal;
+  text-transform: none;
+  font-size: 100%;
+}
+
+
+#mini-panel-header .pane-menu-menu-stay-in-touch ul.menu {
+  padding: 0;
+  margin: 0;
+}
+
+#mini-panel-header .pane-menu-menu-stay-in-touch ul.menu li {
+  float: left;
+  list-style: outside none;
+  margin-right: 1em;
+}
+
+
+
+/**
+ * "Footer" minipanel
  */
 .panels-row-menubar {
   background:  #113b6d;
@@ -39,22 +84,6 @@ div.panel-pane, div.node {
 
 #panel-page-home .panels-region-last .panels-flexible-region-inside {
   margin-right: 0;
-}
-
-.panels-flexible-row .inside {
-  padding: 5px;
-  margin: 5px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-
-.panels-flexible-row .no-padding .inside {
-  padding: 0;
-}
-
-.panels-flexible-row .no-margin .inside {
-  margin: 0;
 }
 
 //#panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside /* The top region holds the slideshow and shouldn't get any additional styling */ {
@@ -85,9 +114,4 @@ div.panel-pane, div.node {
 
 .pane-page-secondary-links ul.links {
   margin: 0;
-}
-
-#mini-panel-header .panels-flexible-column-last .pane-content {
-  float: right;
-  
 }
