@@ -19,11 +19,11 @@ div.panel-pane, div.node {
   -webkit-border-radius: 3px;
 }
 
-.panels-flexible-row .no-padding .inside {
+.no-padding .inside {
   padding: 0;
 }
 
-.panels-flexible-row .no-margin .inside {
+.no-margin .inside {
   margin: 0;
 }
 
