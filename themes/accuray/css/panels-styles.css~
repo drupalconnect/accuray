@@ -67,7 +67,12 @@ div.panel-pane, div.node {
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
   list-style: outside none;
-  margin-right: 1em;
+  margin-right: 0.5em;
+  padding-right: 0.5em;
+}
+
+.pane-menu-secondary-links ul.menu li a {
+  border-right: 1px solid #E2E9E8;
 }
 
 .panels-row-menubar .pane-block ul.menu li a {
