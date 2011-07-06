@@ -426,8 +426,12 @@ ul.links li {
   font-size: 25%;
 }
 
-.small {
+.smaller {
   font-size: 50%;
+}
+
+.small {
+  font-size: 75%;
 }
 
 .normal {
@@ -440,6 +444,10 @@ ul.links li {
 
 .largest {
   font-size: 175%;
+}
+
+.gray {
+  font-color: #9a9a9a;
 }
 
 
