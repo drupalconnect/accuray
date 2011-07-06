@@ -82,10 +82,11 @@ div.panel-pane, div.node {
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
   list-style: outside none;
+  font-size: 75%;
 }
 
-.pane-menu-secondary-links ul.menu li a {
-  border-right: 1px solid #E2E9E8; /* fake a pipe */
+.pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
+  border-right: 1px solid #E2E9E8;
   margin-right: 0.5em;
   padding-right: 0.5em;
 }
