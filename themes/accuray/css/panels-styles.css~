@@ -54,8 +54,6 @@ div.panel-pane, div.node {
   margin-right: 1em;
 }
 
-
-
 /**
  * "Footer" minipanel
  */
