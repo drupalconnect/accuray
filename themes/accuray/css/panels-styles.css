@@ -82,12 +82,12 @@ div.panel-pane, div.node {
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
   list-style: outside none;
-  margin-right: 0.5em;
-  padding-right: 0.5em;
 }
 
-.pane-menu-secondary-links ul.menu li a {
+.pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
   border-right: 1px solid #E2E9E8;
+  margin-right: 0.5em;
+  padding-right: 0.5em;
 }
 
 .panels-row-menubar .pane-block ul.menu li a {
@@ -119,13 +119,6 @@ div.panel-pane, div.node {
 #panel-page-home .panels-region-last .panels-flexible-region-inside {
   margin-right: 0;
 }
-
-//#panel-page-home .panels-flexible-row-1-main-row .panels-flexible-region-inside /* The top region holds the slideshow and shouldn't get any additional styling */ {
-//  margin: 0;
-//  padding: 0;
-//  background: transparent none;
-//  height: auto;
-//}
 
 /* Styles for specific content within the "Home" panel page */
 
