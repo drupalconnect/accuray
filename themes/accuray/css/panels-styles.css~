@@ -83,6 +83,7 @@ div.panel-pane, div.node {
   float: left;
   list-style: outside none;
   font-size: 75%;
+  padding-top: 0.5em;
 }
 
 .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {

@@ -79,6 +79,14 @@ div.panel-pane, div.node {
   margin: 0;
 }
 
+.panels-row-menubar .panels-flexible-region-first .pane-block {
+  float: left;
+}
+
+.panels-row-menubar .panels-flexible-region-last .pane-block {
+  float: right;
+}
+
 .panels-row-menubar .pane-block ul.menu li {
   float: left;
   list-style: outside none;
