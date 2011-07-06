@@ -100,7 +100,7 @@ div.panel-pane, div.node {
   padding-right: 0.5em;
 }
 
-.panel-menu-secondary-links ul.menu li.last a {
+.pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
 }
 
