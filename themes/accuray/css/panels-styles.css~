@@ -64,6 +64,11 @@ div.panel-pane, div.node {
   -webkit-border-radius: 5px;
 }
 
+.panels-row-menubar .inside {
+  margin: 0;
+  padding: 0;
+}
+
 .panels-row-menubar .panels-flexible-region .inside {
   margin: 0;
   padding: 0;
