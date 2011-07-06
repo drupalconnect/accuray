@@ -1,0 +1,305 @@
+<?php
+// $Id: menu_icons.module,v 1.10 2010/05/05 12:48:26 skilip Exp $
+
+/**
+ * @file
+ * Module to associate icons with menu items
+ *
+ * @author dylan@opensourcery.com
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function menu_icons_menu() {
+  $items['admin/settings/menu_icons'] = array(
+    'title' => 'Menu Icon settings',
+    'description' =>  'Associates icons with menu items',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('menu_icons_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'menu_name' => 'menu_icons',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function menu_icons_form_alter(&$form, $form_state, $form_id) {
+
+  if ($form_id == 'menu_edit_item') {
+    $options = unserialize(db_result(db_query('SELECT options FROM {menu_links} WHERE mlid = %d', $form['menu']['mlid']['#value'])));
+
+    $form['icon'] = array(
+      '#type' => 'fieldset',
+      '#weight' => 5,
+      '#title' => t('Menu icon settings'),
+      '#description' => t('If checked, the following icon will be used as background image for this menu item.'),
+      '#attributes' => array('class' => 'theme-settings-bottom'),
+    );
+    $form['icon']["use_icon_logo"] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use an icon'),
+      '#default_value' => $options['menu_icon']['enable'],
+      '#tree' => FALSE,
+      '#description' => t('Check this if you want this icon to be used.')
+    );
+
+    if (module_exists('imagecache')) {
+      $preset_options = array(t('- Menu Icons default -'));
+      foreach (imagecache_presets() as $pid => $preset) {
+        $preset_options[$preset['presetname']] = $preset['presetname'];
+      }
+
+      $form['icon']['imagecache_preset'] = array(
+        '#type' => 'select',
+        '#title' => t('Imagecache preset'),
+        '#default_value' => $options['menu_icon']['imagecache_preset'],
+        '#description' => t('Choose an !link to be used for this menu item.', array('!link' => l(t('Imagecache preset'), 'admin/build/imagecache'))),
+        '#required' => FALSE,
+        '#options' => $preset_options,
+      );
+    }
+
+    $form['icon']['icon_path'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Path to the icon'),
+      '#default_value' => (isset($options['menu_icon']['path']) ? $options['menu_icon']['path'] : variable_get('menu_icons_default_icon', drupal_get_path('module', 'menu_icons') .'/images/default_icon.png')),
+      '#description' => t('The path to the image you would like to use as a background image for this menu item.')
+    );
+    $form['icon']['icon_upload'] = array(
+      '#type' => 'file',
+      '#title' => t('Upload a new icon image'),
+      '#maxlength' => 40,
+      '#description' => t("If you don't have direct file access to the server, use this field to upload your icon.")
+    );
+
+    $form['submit']['#weight'] = 9;
+    $form['delete']['#weight'] = 10;
+
+    $form['#attributes']['enctype'] = 'multipart/form-data';
+    $form['#submit'][] = 'menu_icons_form_submit';
+  }
+  // Add a custom submit callback for imagecache forms.
+  if (in_array($form_id, array('imagecache_ui_preset_form', 'imagecache_ui_action_form', 'imagecache_ui_preset_flush_form', 'imagecache_ui_preset_delete_form', 'menu_icons_admin_settings'))) {
+    $form['#submit'][] = 'menu_icons_css_generate';
+  }
+}
+
+/**
+ * Process the submitted form
+ *
+ */
+function menu_icons_form_submit($form, &$form_state) {
+
+  // Get the global setings
+  $file_validate_image_resolution = (module_exists('imagecache') ? '0x0' : variable_get('menu_icons_file_validate_image_resolution', '45x45'));
+
+  // Check the destination folder, attempt to create it if it does't exist
+  $directory_path = menu_icons_directory_path();
+  file_check_directory($directory_path, FILE_CREATE_DIRECTORY);
+
+  // Store the current icon path
+  $path = $form_state['values']['icon_path'];
+
+  // Define the validation settings
+  if ($file_validate_image_resolution != '0x0') {
+    $validate = array('file_validate_is_image' => array(), 'file_validate_image_resolution' => array($file_validate_image_resolution));
+  }
+  else {
+    $validate = array('file_validate_is_image' => array());
+  }
+
+  // Check for a new uploaded logo, and use that instead.
+  if ($file = file_save_upload('icon_upload', $validate)) {
+    $parts = pathinfo($file->filename);
+    $filename = "$directory_path/menu_icon_". $form_state['values']['menu']['mlid'] .'.'. $parts['extension'];
+
+    // The image was saved using file_save_upload() and was added to the
+    // files table as a temporary file. We'll make a copy and let the garbage
+    // collector delete the original upload.
+    file_copy($file, $filename, FILE_EXISTS_REPLACE);
+    $path = $filename;
+  }
+  
+  $options = unserialize(db_result(db_query('SELECT options FROM {menu_links} WHERE mlid = %d', $form_state['values']['menu']['mlid'])));
+  $options['menu_icon'] = array('enable' => $form_state['values']['use_icon_logo'], 'path' => $path);
+
+  if ($form_state['values']['imagecache_preset']) {
+    $options['menu_icon']['imagecache_preset'] = $form_state['values']['imagecache_preset'];
+  }
+
+  $class = "menu_icon menu-". $form_state['values']['menu']['mlid'];
+  if ($options['menu_icon']['enable'] && !empty($options['menu_icon']['path']) && file_exists($options['menu_icon']['path'])) {
+    if (!strstr($options['attributes']['class'], $class)) {
+      $options['attributes']['class'] = (empty($options['attributes']['class']) ? $class : $options['attributes']['class'] . " $class");
+    }
+  }
+  else {
+    $options['attributes']['class'] = str_replace($class, '', $options['attributes']['class']);
+  }
+
+  if (empty($options['attributes']['class'])) {
+    unset($options['attributes']['class']);
+  }
+
+  db_query('UPDATE {menu_links} SET options = "%s" WHERE mlid = %d', serialize($options), $form_state['values']['menu']['mlid']);
+
+  // Regenerate the css file
+  menu_icons_css_generate();
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function menu_icons_init() {
+  drupal_add_css(menu_icons_directory_path() .'/menu_icons.css');
+}
+
+/**
+ * Build the menu_icon's settings form
+ *
+ * @return a form array
+ */
+function menu_icons_admin_settings() {
+  $form['menu_icons_default_icon'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Icon path'),
+    '#default_value' => variable_get('menu_icons_default_icon', drupal_get_path('module', 'menu_icons') .'/images/default_icon.png'),
+    '#description' => t('A Drupal path to the icon or image to use as a default.'),
+    '#required' => FALSE,
+  );
+
+  if (module_exists('imagecache')) {
+    $options = array();
+    foreach (imagecache_presets() as $pid => $preset) {
+      $options[$preset['presetname']] = $preset['presetname'];
+    }
+
+    if (!empty($options)) {
+      $form['menu_icons_imagecache_default'] = array(
+        '#type' => 'select',
+        '#title' => t('Imagecache default preset'),
+        '#default_value' => variable_get('menu_icons_imagecache_default', 'menu_icon'),
+        '#description' => t('Choose a default !link to be used for menu icons. This setting can be overwritten per menu item.', array('!link' => l(t('Imagecache preset'), 'admin/build/imagecache'))),
+        '#required' => FALSE,
+        '#options' => $options,
+      );
+    }
+  }
+  else {
+    $form['menu_icons_file_validate_image_resolution'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Max image resolution'),
+      '#default_value' => variable_get('menu_icons_file_validate_image_resolution', '45x45'),
+      '#description' => t('The maximum image resolution for the menu-icons. If an uploaded image exceeds this size, the image is resized automatically.'),
+      '#required' => FALSE,
+    );
+  }
+  $form['menu_icons_image_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Icon folder'),
+    '#default_value' => variable_get('menu_icons_image_folder', 'menu_icons'),
+    '#description' => t('The name of the files directory in which the new uploaded icons will be stored. This folder will be created in the files directory'),
+    '#required' => FALSE,
+  );
+  $form['menu_icons_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Position'),
+    '#default_value' => variable_get('menu_icons_position', 'left'),
+    '#options' => array(
+      'right' => t('right'),
+      'left' => t('left'),
+    ),
+    '#required' => FALSE,
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * Build CSS based on menu IDs
+ *
+ * @return A string with the CSS
+ */
+function menu_icons_css_generate() {
+  $result = db_query("SELECT mlid, options FROM {menu_links}");
+  $pos = variable_get('menu_icons_position', 'left');
+
+  while ($item = db_fetch_array($result)) {
+
+    $options = unserialize($item['options']);
+
+    if ($options['menu_icon']['enable'] && !empty($options['menu_icon']['path']) && file_exists($options['menu_icon']['path'])) {
+
+      if (module_exists('imagecache')) {
+        $preset = imagecache_preset_by_name(($options['menu_icon']['imagecache_preset'] ? $options['menu_icon']['imagecache_preset'] : variable_get('menu_icons_imagecache_default', 'menu_icon')));
+        $path = imagecache_create_path($preset['presetname'], $options['menu_icon']['path']);
+        imagecache_build_derivative($preset['actions'], $options['menu_icon']['path'], $path);
+        $options['menu_icon']['path'] = $path;
+      }
+      // Retrieve the image dimensions
+      $info = image_get_info($options['menu_icon']['path']);
+
+      // Support private filesystem
+      if (strpos($options['menu_icon']['path'], menu_icons_directory_path()) === 0) {
+        $image_url = file_create_url($options['menu_icon']['path']);
+      }
+      else {
+        $image_url = base_path() . $options['menu_icon']['path'];
+      }
+      $css .= theme('menu_icons_css_item', $item['mlid'], $image_url, $info['width'], $pos);
+    }
+  }
+  file_save_data($css, menu_icons_directory_path(FALSE) .'/menu_icons.css', FILE_EXISTS_REPLACE);
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function menu_icons_theme() {
+  return array(
+    'menu_icons_css_item' => array(
+      'arguments' => array('mlid' => NULL, 'path' => NULL, 'size' => NULL, 'pos' => NULL),
+      'template' => 'menu_icons_css_item',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_flush_caches().
+ */
+function menu_icons_flush_caches() {
+  menu_icons_css_generate();
+}
+
+/**
+ * Returns the file directory path in which both the CSS file and the icons are stored.
+ */
+function menu_icons_directory_path($full = TRUE) {
+  $path = variable_get('menu_icons_image_folder', 'menu_icons');
+  $path_full = file_directory_path() ."/$path";
+  return ($full ? $path_full : $path);
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function menu_icons_imagecache_default_presets() {
+  $presets = array();
+  $presets['menu_icon'] = array (
+    'presetname' => 'menu_icon',
+    'actions' => array (
+      0 => array (
+        'weight' => '0',
+        'module' => 'imagecache',
+        'action' => 'imagecache_scale',
+        'data' => array (
+          'width' => '45',
+          'height' => '45',
+        ),
+      ),
+    ),
+  );
+  return $presets;
+}
