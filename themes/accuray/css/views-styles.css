@@ -21,6 +21,8 @@
 .view-id-LineageNestedList h3 {
   float: left;
   clear: both;
+  margin: 0;
+  font-size: 100%;
 }
 
 .view-id-LineageNestedList .item-list .item-list h3 {
@@ -29,6 +31,8 @@
 
 .view-id-LineageNestedList .item-list ul {
   padding: 0;
+}
+.view-id-LineageNestedList .view-content div {
 }
 
 .view-id-LineageNestedList .item-list ul li {
