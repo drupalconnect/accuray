@@ -76,10 +76,6 @@ li a.active {
 #secondary-menu {
 }
 
-.secondary-links {
-  margin: 0;
-}
-
 /*
  * Menu blocks
  */
