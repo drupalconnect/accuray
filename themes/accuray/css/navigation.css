@@ -92,6 +92,8 @@ li a.active {
  * "Stay in touch" menu
  */
 ul.menu li a.menu_icon {
-  text-indent: -1000;
+  display: block;
+  text-indent: -10000px;
+  margin-right: 0.5em;
 }
 
