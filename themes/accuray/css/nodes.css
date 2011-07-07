@@ -99,6 +99,11 @@
   padding: 0 10px;
 }
 
+.buildmode-teaser .nd-region-left {
+  overflow: hidden;
+  padding: 15px;
+}
+
 .buildmode-teaser .field-field-file-info ul {
   padding: 0;
 }
