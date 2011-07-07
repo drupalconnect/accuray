@@ -58,6 +58,10 @@ div.panel-pane, div.node {
   margin-left: -7em;
 }
 
+.pane-menu-menu-stay-in-touch .pane-content {
+  float: left;
+}
+
 #mini-panel-header ul.menu {
   padding: 0;
   margin: 0;
