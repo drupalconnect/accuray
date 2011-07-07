@@ -87,3 +87,11 @@ li a.active {
  */
 .block-menu_block {
 }
+
+/**
+ * "Stay in touch" menu
+ */
+ul.menu li a.menu_icon {
+  text-indent: -1000;
+}
+
