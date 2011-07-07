@@ -45,6 +45,7 @@
 
 .view-id-LineageNestedList .item-list ul li .buildmode-teaser {
   margin-top: 1em;
+  clear: left;
 }
 
 .view-id-Slideshow .view-content {
