@@ -30,6 +30,12 @@ div.panel-pane, div.node {
 /**
  * "Header" minipanel
  */
+#mini-panel-header .inside {
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+}
+
 #mini-panel-header .pane-block {
   float: right;
 }
@@ -42,16 +48,26 @@ div.panel-pane, div.node {
   font-size: 100%;
 }
 
+/**
+ * The "Stay in touch" copy should be about 7em. We need to set this width 
+ * so we can send the h2 left without causing the LIs to wrap.
+ */
+.pane-menu-menu-stay-in-touch h2.pane-title {
+  width: 7em;
+  margin-right: -100%;
+  margin-left: -7em;
+}
 
-#mini-panel-header .pane-menu-menu-stay-in-touch ul.menu {
+#mini-panel-header ul.menu {
   padding: 0;
   margin: 0;
 }
 
-#mini-panel-header .pane-menu-menu-stay-in-touch ul.menu li {
+#mini-panel-header ul.menu li {
   float: left;
   list-style: outside none;
-  margin-right: 1em;
+  margin-right: 0.5em;
+  margin-left: 0;
 }
 
 /**
@@ -75,7 +91,7 @@ div.panel-pane, div.node {
 
 #mini-panel-footer .panels-flexible-region .inside {
   margin: 0;
-  padding: 0 5px;
+  padding: 5px;
 }
 
 .panels-row-menubar {
@@ -132,38 +148,3 @@ div.panel-pane, div.node {
   -webkit-border-radius: 3px;
 }
 
-/**
- * "Home" panel page
- */
-
-#panel-page-home .panels-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
-  background: #e1edf9;
-  margin-left: 0;
-}
-
-#panel-page-home .panels-region-last .panels-flexible-region-inside {
-  margin-right: 0;
-}
-
-/* Styles for specific content within the "Home" panel page */
-
-#panel-page-home .pane-content ul li {
-  list-style-image: url(../images/bullet-square.png);
-}
-
-.pane-page-site-name {
-  margin: 0;
-  font-size: 2em;
-  line-height: 1.3em;
-  text-transform: uppercase;
-  font-weight: normal;
-  text-indent: -10000px;
-  background: url(../images/bg-site-name.png) 12px 30px no-repeat;
-  width: 250px;
-  height: 65px;
-  display: block;
-}
-
-.pane-page-secondary-links ul.links {
-  margin: 0;
-}
