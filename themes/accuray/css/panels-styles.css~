@@ -48,6 +48,7 @@ div.panel-pane, div.node {
 
 #mini-panel-header .pane-block {
   float: right;
+  margin-right: 1em;
 }
 
 #mini-panel-header h2.pane-title {
@@ -56,6 +57,18 @@ div.panel-pane, div.node {
   font-weight: normal;
   text-transform: none;
   font-size: 100%;
+}
+
+#mini-panel-header ul.menu {
+  padding: 0;
+  margin: 0;
+}
+
+#mini-panel-header ul.menu li {
+  float: left;
+  list-style: outside none;
+  margin-right: 0.5em;
+  margin-left: 0;
 }
 
 /**
@@ -72,16 +85,14 @@ div.panel-pane, div.node {
   float: left;
 }
 
-#mini-panel-header ul.menu {
-  padding: 0;
-  margin: 0;
+#mini-panel-header .pane-menu-secondary-links ul.menu li /* fake a pipe */ {
+  border-right: 1px solid #000;
+  margin-right: 0.5em;
+  padding-right: 0.5em;
 }
 
-#mini-panel-header ul.menu li {
-  float: left;
-  list-style: outside none;
-  margin-right: 0.5em;
-  margin-left: 0;
+.pane-menu-secondary-links ul.menu li.last {
+  border-right: 0 none;
 }
 
 /**
@@ -135,13 +146,13 @@ div.panel-pane, div.node {
   padding-top: 0.5em;
 }
 
-.pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
+#mini-panel-footer .pane-menu-secondary-links ul.menu li /* fake a pipe */ {
   border-right: 1px solid #E2E9E8;
   margin-right: 0.5em;
   padding-right: 0.5em;
 }
 
-.pane-menu-secondary-links ul.menu li.last a {
+.pane-menu-secondary-links ul.menu li.last {
   border-right: 0 none;
 }
 
@@ -170,7 +181,7 @@ div.panel-pane, div.node {
   height: 250px;
 }
 
-#panel-page-home .panels-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
+#panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
 

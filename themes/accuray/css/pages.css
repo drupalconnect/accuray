@@ -123,6 +123,7 @@ div#site-name /* The name of the website */ {
 }
 
 #main {
+  margin-bottom: 8px;
 }
 
 /*
@@ -132,36 +133,36 @@ div#site-name /* The name of the website */ {
 }
 
 #content .section {
-  padding: 10px 20px;
+  padding: 8px 8px;
   border: 1px solid #bebebe;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
 .sidebar-first #content .section {
-  margin-left: 10px;
-  margin-right: 20px; /* extra 10px moves the region inside the 10px shadow. */
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .sidebar-second #content .section {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .two-sidebars #content .section {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .no-sidebars #content .section {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 
 #navigation /* the navigation region */ {
 }
 
 #navigation .section {
-  margin: 0 10px; /* this clears the drop shadow */
+  margin: 0 8px; /* this clears the drop shadow */
   padding: 0 10px;
 }
 
@@ -190,8 +191,8 @@ h1.title {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 18px;
+  margin-right: 18px;
   padding-left: 10px;
 }
 
@@ -295,13 +296,12 @@ ul.links li {
 }
 
 .region-sidebar-first .section {
-  margin: 0;
-  margin-left: 20px;
   padding: 10px;
   background: #e1edf9;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  margin-left: 18px;
 }
 
 /*
