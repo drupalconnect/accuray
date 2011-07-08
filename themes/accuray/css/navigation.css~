@@ -5,7 +5,12 @@
  * Default menu styling (ul.menu) is defined in system-menus.css.
  */
 
-ul.menu          { list-style-type: none; list-style-image: url(../images/bullet-square.png); }
+ul.menu li,
+ul.menu li.expanded { 
+  list-style-type: none; 
+  list-style-image: url(../images/bullet-square.png); 
+}
+
 ul.menu ul       { list-style-type: none; }
 ul.menu ul ul    { list-style-type: none; }
 ul.menu ul ul ul { list-style-type: none; }
