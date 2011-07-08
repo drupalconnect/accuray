@@ -60,6 +60,7 @@ li a.active {
   margin-bottom: 0.909em;
   font-weight: normal;
   text-transform: uppercase;
+  font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 }
 
 #navigation #main-menu li a:hover {

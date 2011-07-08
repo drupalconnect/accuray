@@ -74,11 +74,11 @@ fieldset {
   font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
 
   font-family: "Courier New", "DejaVu Sans Mono", monospace;
-
-   */
-
-  /* font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;*/
+  
   font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+   */
+   
+  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
 }
 
 
@@ -114,6 +114,7 @@ code {
  */
  
 h1 {
+  font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
   font-size: 1.5em;
   font-weight: normal;
   line-height: 1.3em;
@@ -123,6 +124,7 @@ h1 {
 }
 
 h2 {
+  font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
   font-size: 1.1em;
   font-weight: normal;
   line-height: 1.3em;

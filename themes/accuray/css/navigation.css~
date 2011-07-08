@@ -13,7 +13,7 @@ ul.menu li.expanded {
 ul.menu li li,
 ul.menu li li.expanded {
   list-style-type: none;
-  list-style-image: url(../images/bullet-double-square.png);
+  list-style-image: url(../images/bullet-square.png);
 }
 
 ul.menu ul       { list-style-type: none; }
