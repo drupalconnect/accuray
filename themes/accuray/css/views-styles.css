@@ -23,6 +23,7 @@
   clear: both;
   margin: 0 1ex 0 0;
   font-size: 100%;
+  font-weight: bold;
 }
 
 .view-id-LineageNestedList .item-list .item-list h3 {

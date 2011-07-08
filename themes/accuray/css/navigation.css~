@@ -94,5 +94,6 @@ li a.active {
 ul.menu li a.menu_icon {
   display: block;
   text-indent: -10000px;
+  margin-right: 0.5em;
 }
 

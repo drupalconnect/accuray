@@ -87,6 +87,7 @@ fieldset {
 	  src: url('../fonts/MyriadPro-Regular.ttf') format('truetype'),
 	  src: url('../fonts/MyriadPro-Regular.woff') format('woff');
 	  font-weight: normal;
+	  font-style: normal;
 }
 
 @font-face {
