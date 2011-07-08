@@ -11,20 +11,31 @@ div.panel-pane, div.node {
     padding: inherit;
 }
 
-.panels-flexible-row .inside {
-  padding: 5px;
-  margin: 5px;
+.panels-flexible-row {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
 
-.no-padding .inside {
+.panels-flexible-row .inside {
   padding: 0;
+  margin: 0;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
-.no-margin .inside {
-  margin: 0;
+.panels-flexible-region .inside {
+  padding: 4px;
+  margin: 4px;
+}
+
+.panels-flexible-region-first .inside {
+  margin-left: 0;
+}
+
+.panels-flexible-region-last .inside {
+  margin-right: 0;
 }
 
 /**
@@ -33,7 +44,6 @@ div.panel-pane, div.node {
 #mini-panel-header .inside {
   padding: 0;
   margin: 0;
-  border: 1px solid black;
 }
 
 #mini-panel-header .pane-block {
@@ -152,3 +162,20 @@ div.panel-pane, div.node {
   -webkit-border-radius: 3px;
 }
 
+/**
+ * "Home" panel page
+ */
+#panel-page-home .panels-flexible-region-inside {
+  background: #e5e5e5;
+  height: 250px;
+}
+
+#panel-page-home .panels-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
+  background: #e1edf9;
+}
+
+#panel-page-home .panels-flexible-row-first .panels-flexible-region-inside {
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
