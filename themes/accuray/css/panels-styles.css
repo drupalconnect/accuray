@@ -71,6 +71,19 @@ div.panel-pane, div.node {
   margin-left: 0;
 }
 
+.pane-page-site-name {
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-indent: -10000px;
+  background: url(../images/bg-site-name.png) 12px 30px no-repeat;
+  width: 250px;
+  height: 65px;
+  display: block;
+}
+
 /**
  * The "Stay in touch" copy should be about 7em. We need to set this width 
  * so we can send the h2 left without causing the LIs to wrap.
@@ -85,13 +98,17 @@ div.panel-pane, div.node {
   float: left;
 }
 
-#mini-panel-header .pane-menu-secondary-links ul.menu li /* fake a pipe */ {
-  border-right: 1px solid #000;
+#mini-panel-header .pane-menu-secondary-links ul.menu li {
+  margin-right: 0;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
+  border-right: 1px solid #4d4d4d;
   margin-right: 0.5em;
   padding-right: 0.5em;
 }
 
-#mini-panel-header .pane-menu-secondary-links ul.menu li.last {
+#mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
 }
 
@@ -119,11 +136,16 @@ div.panel-pane, div.node {
   padding: 5px;
 }
 
-.panels-row-menubar {
+#mini-panel-footer .panels-row-menubar {
   background:  #113b6d;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+}
+
+#mini-panel-footer .panels-row-menubar .panels-flexible-region .inside {
+  padding: 0;
+  margin: 0;
 }
 
 .panels-row-menubar .pane-block ul {
@@ -146,13 +168,13 @@ div.panel-pane, div.node {
   padding-top: 0.5em;
 }
 
-#mini-panel-footer .pane-menu-secondary-links ul.menu li /* fake a pipe */ {
+#mini-panel-footer .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
   border-right: 1px solid #E2E9E8;
   margin-right: 0.5em;
   padding-right: 0.5em;
 }
 
-.pane-menu-secondary-links ul.menu li.last {
+.pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
 }
 
