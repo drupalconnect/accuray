@@ -178,4 +178,5 @@ div.panel-pane, div.node {
   height: auto;
   padding: 0;
   margin: 0;
+  background: transparent none;
 }

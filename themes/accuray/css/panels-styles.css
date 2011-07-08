@@ -170,7 +170,7 @@ div.panel-pane, div.node {
   height: 250px;
 }
 
-#panel-page-home .panels-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
+#panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
 
