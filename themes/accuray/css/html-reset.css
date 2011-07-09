@@ -176,7 +176,12 @@ ol {
 .block ul,
 .item-list ul /* Drupal overrides */ {
   margin: 1em 0;
-  padding: 0 0 0 1em; /* LTR */
+  padding: 0 0 0 1.5em; /* LTR */
+}
+
+.block ul ul,
+.item-list ul ul {
+  padding: 0 0 0 1em;
 }
 
 ul ul, ul ol,
