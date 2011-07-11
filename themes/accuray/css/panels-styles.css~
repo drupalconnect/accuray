@@ -44,7 +44,7 @@ div.panel-pane, div.node {
 #mini-panel-header a,
 #mini-panel-header li,
 #mini-panel-header h2 {
-  font-szie: 95%;
+  font-size: 95%;
   line-height: 2em;
   color: #4d4d4d;
 } 
