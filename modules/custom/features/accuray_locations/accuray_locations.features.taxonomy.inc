@@ -17,10 +17,8 @@ function accuray_locations_taxonomy_default_vocabularies() {
       'module' => 'features_region',
       'weight' => '0',
       'language' => '',
-      'nodes' => array(
-        'location' => 'location',
-        'event' => 'event',
-      ),
+      'type' => NULL,
+      'nodes' => array(),
     ),
   );
 }

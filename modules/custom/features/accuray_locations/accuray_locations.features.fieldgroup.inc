@@ -6,13 +6,13 @@
 function accuray_locations_fieldgroup_default_groups() {
   $groups = array();
 
-  // Exported group: group_contact
-  $groups['location-group_contact'] = array(
+  // Exported group: group_location
+  $groups['location-group_location'] = array(
     'group_type' => 'standard',
     'type_name' => 'location',
-    'group_name' => 'group_contact',
+    'group_name' => 'group_location',
     'parent' => '',
-    'label' => 'Contact',
+    'label' => 'Location',
     'settings' => array(
       'form' => array(
         'style' => 'fieldset',
@@ -41,7 +41,7 @@ function accuray_locations_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 0,
         ),
-        'sticky' => array(
+        'bubble' => array(
           'format' => 'fieldset',
           'exclude' => 0,
         ),
@@ -51,12 +51,17 @@ function accuray_locations_fieldgroup_default_groups() {
         ),
       ),
     ),
-    'weight' => '7',
+    'weight' => '33',
     'fields' => array(
-      '0' => 'field_email',
-      '1' => 'field_phone',
-      '2' => 'field_fax',
-      '3' => 'field_link',
+      '0' => 'field_address_1',
+      '1' => 'field_address_3',
+      '2' => 'field_address_2',
+      '3' => 'field_city',
+      '4' => 'field_province',
+      '5' => 'field_postcode',
+      '6' => 'field_country',
+      '7' => 'field_lat',
+      '8' => 'field_lon',
     ),
     'depth' => 0,
     'parents' => array(
@@ -66,7 +71,7 @@ function accuray_locations_fieldgroup_default_groups() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Contact');
+  t('Location');
 
   return $groups;
 }
