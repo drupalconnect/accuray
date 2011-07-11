@@ -41,6 +41,14 @@ div.panel-pane, div.node {
 /**
  * "Header" minipanel
  */
+#mini-panel-header a,
+#mini-panel-header li,
+#mini-panel-header h2 {
+  font-size: 95%;
+  line-height: 2em;
+  color: #4d4d4d;
+} 
+ 
 #mini-panel-header .inside {
   padding: 0;
   margin: 0;
@@ -48,7 +56,6 @@ div.panel-pane, div.node {
 
 #mini-panel-header .pane-block {
   float: right;
-  margin-right: 1em;
 }
 
 #mini-panel-header h2.pane-title {
