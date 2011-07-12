@@ -6,6 +6,421 @@
 function accuray_events_content_default_fields() {
   $fields = array();
 
+  // Exported field: field_address_1
+  $fields['event-field_address_1'] = array(
+    'field_name' => 'field_address_1',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-94',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_address_1',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-94',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_address_1][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'rows' => 5,
+      'size' => '60',
+      'label' => 'Address line 1',
+      'weight' => '10',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_address_2
+  $fields['event-field_address_2'] = array(
+    'field_name' => 'field_address_2',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-93',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_address_2',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-93',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_address_2][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Address line 2',
+      'weight' => '11',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_address_3
+  $fields['event-field_address_3'] = array(
+    'field_name' => 'field_address_3',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-92',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_address_3',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-92',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_address_3][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Address line 3',
+      'weight' => '12',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_city
+  $fields['event-field_city'] = array(
+    'field_name' => 'field_city',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-91',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_city',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-91',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => 'All',
+          '_error_element' => 'default_value_widget][field_city][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'City',
+      'weight' => '14',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_country
+  $fields['event-field_country'] = array(
+    'field_name' => 'field_country',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-66',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'disabled',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_country',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-66',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => 'USA',
+          '_error_element' => 'default_value_widget][field_country][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Country',
+      'weight' => '16',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
   // Exported field: field_date
   $fields['event-field_date'] = array(
     'field_name' => 'field_date',
@@ -98,7 +513,7 @@ function accuray_events_content_default_fields() {
       'year_range' => '-3:+3',
       'label_position' => 'above',
       'label' => 'Event date',
-      'weight' => '13',
+      'weight' => '3',
       'description' => '',
       'type' => 'date_popup',
       'module' => 'date',
@@ -204,6 +619,172 @@ function accuray_events_content_default_fields() {
     ),
   );
 
+  // Exported field: field_postcode
+  $fields['event-field_postcode'] = array(
+    'field_name' => 'field_postcode',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-89',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_postcode',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-89',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_postcode][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Post code',
+      'weight' => '15',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_province
+  $fields['event-field_province'] = array(
+    'field_name' => 'field_province',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-90',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_province',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-90',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => 'All',
+          '_error_element' => 'default_value_widget][field_province][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Province',
+      'weight' => '13',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
   // Exported field: field_thumbnail
   $fields['event-field_thumbnail'] = array(
     'field_name' => 'field_thumbnail',
@@ -299,11 +880,110 @@ function accuray_events_content_default_fields() {
     ),
   );
 
+  // Exported field: field_wkt
+  $fields['event-field_wkt'] = array(
+    'field_name' => 'field_wkt',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-69',
+      'teaser' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => array(),
+        'region' => 'disabled',
+        'type' => 'openlayers_wkt',
+        'parent_id' => '',
+        'field_id' => 'field_wkt',
+        'label_value' => '',
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'sticky' => array(
+        'css-class' => '',
+        'exclude' => 0,
+        'weight' => '-69',
+        'format' => 'default',
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'openlayers_wkt',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'openlayers_cck',
+    'active' => '1',
+    'openlayers_cck_feature_types' => array(
+      'point' => 'point',
+      'path' => 'path',
+      'polygon' => 'polygon',
+    ),
+    'widget' => array(
+      'openlayers_cck_preset_map' => 'default',
+      'openlayers_behaviors' => array(
+        'openlayers_behavior_zoomtolayer' => array(
+          'enabled' => 0,
+          'options' => array(
+            'zoomtolayer' => 'openlayers_cck_vector_layer',
+            'point_zoom_level' => '5',
+          ),
+        ),
+      ),
+      'default_value' => array(
+        '0' => array(
+          'openlayers_wkt' => '',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'WKT',
+      'weight' => '16',
+      'description' => '',
+      'type' => 'rules_geocoder_widget',
+      'module' => 'rules_geocoder',
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
+  t('Address line 1');
+  t('Address line 2');
+  t('Address line 3');
+  t('City');
+  t('Country');
   t('Event date');
   t('Link');
+  t('Post code');
+  t('Province');
   t('Thumbnail');
+  t('WKT');
 
   return $fields;
 }

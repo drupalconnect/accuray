@@ -6,13 +6,13 @@
 function accuray_events_fieldgroup_default_groups() {
   $groups = array();
 
-  // Exported group: group_date
-  $groups['event-group_date'] = array(
+  // Exported group: group_location
+  $groups['event-group_location'] = array(
     'group_type' => 'standard',
     'type_name' => 'event',
-    'group_name' => 'group_date',
+    'group_name' => 'group_location',
     'parent' => '',
-    'label' => 'Date information',
+    'label' => 'Location',
     'settings' => array(
       'form' => array(
         'style' => 'fieldset',
@@ -41,7 +41,7 @@ function accuray_events_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 0,
         ),
-        'sticky' => array(
+        'bubble' => array(
           'format' => 'fieldset',
           'exclude' => 0,
         ),
@@ -51,9 +51,15 @@ function accuray_events_fieldgroup_default_groups() {
         ),
       ),
     ),
-    'weight' => '7',
+    'weight' => '9',
     'fields' => array(
-      '0' => 'field_date',
+      '0' => 'field_address_1',
+      '1' => 'field_address_2',
+      '2' => 'field_address_3',
+      '3' => 'field_province',
+      '4' => 'field_city',
+      '5' => 'field_postcode',
+      '6' => 'field_country',
     ),
     'depth' => 0,
     'parents' => array(
@@ -63,7 +69,7 @@ function accuray_events_fieldgroup_default_groups() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Date information');
+  t('Location');
 
   return $groups;
 }
