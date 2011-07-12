@@ -1,0 +1,12 @@
+name = Rules Geocoder
+description = This module lets you add geocoding to your Rules
+dependencies[] = rules
+dependencies[] = openlayers_cck
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-02-28
+version = "6.x-1.0"
+core = "6.x"
+project = "rules_geocoder"
+datestamp = "1298911270"
+

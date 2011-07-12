@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * The Rules Geocoder module.
+ *
+ * This module provides a geocoding action for Rules using Google's Maps
+ * API (v3). The action can combine one or more CCK text fields
+ * that the file can be displayed nicely in default-sized consoles.
+ */
+
+/**
+ * Geocode an address using Google
+ *
+ * @param input
+ *   A string or array containing the address text that should be geocoded.
+ * @return
+ *   A string containing the position in WKT format or FALSE.
+ */
+function _rules_geocoder_geocode($input) {
+  if (is_array($input)) $input = join(',', $input);
+  $url = 'http://maps.google.com/maps/api/geocode/json?address='. urlencode($input). '&sensor=false';
+  $ret = drupal_http_request($url);
+  $result = json_decode($ret->data);
+  
+  if ($result->status == 'OK') {
+    return 'POINT('. $result->results[0]->geometry->location->lng.' '. $result->results[0]->geometry->location->lat .')';
+  }
+  return FALSE;
+}
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function rules_geocoder_widget_info() {
+  return array(
+    'rules_geocoder_widget' => array(
+      'label' => t('OpenLayers Hidden Value'),
+      'field types' => array('openlayers_wkt'),
+      'multiple values' => CONTENT_HANDLE_MODULE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_widget_settings().
+ */
+function rules_geocoder_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = module_invoke('openlayers_cck', 'widget_settings', 'form', $widget);
+      return $form;
+    case 'save':
+      $elements = module_invoke('openlayers_cck', 'widget_settings', 'save', $widget);
+      return $elements;
+  }
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function rules_geocoder_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = openlayers_cck_widget($form, $form_state, $field, $items, $delta);
+  $field = NULL;
+  $element['#type'] = 'value';
+  return $element;
+}
+
+
+
