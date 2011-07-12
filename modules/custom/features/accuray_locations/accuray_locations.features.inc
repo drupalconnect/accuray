@@ -83,6 +83,88 @@ function accuray_locations_node_info() {
 }
 
 /**
+ * Implementation of hook_rules_defaults().
+ */
+function accuray_locations_rules_defaults() {
+  return array(
+    'rules' => array(
+      'rules_geocode_location_addresses' => array(
+        '#type' => 'rule',
+        '#set' => 'event_node_presave',
+        '#label' => 'Geocode location addresses',
+        '#active' => 1,
+        '#weight' => '0',
+        '#categories' => array(
+          '0' => 'Geocoding',
+          'accuray_locations' => 'accuray_locations',
+        ),
+        '#status' => 'default',
+        '#conditions' => array(
+          '0' => array(
+            '#weight' => 0,
+            '#info' => array(
+              'label' => 'Saved content is Location',
+              'arguments' => array(
+                'node' => array(
+                  'type' => 'node',
+                  'label' => 'Content',
+                ),
+              ),
+              'module' => 'Node',
+            ),
+            '#name' => 'rules_condition_content_is_type',
+            '#settings' => array(
+              'type' => array(
+                'location' => 'location',
+              ),
+              '#argument map' => array(
+                'node' => 'node',
+              ),
+            ),
+            '#type' => 'condition',
+          ),
+        ),
+        '#actions' => array(
+          '0' => array(
+            '#type' => 'action',
+            '#settings' => array(
+              'sources' => array(
+                'field_address_1' => 'field_address_1',
+                'field_address_3' => 'field_address_3',
+                'field_address_2' => 'field_address_2',
+                'field_city' => 'field_city',
+                'field_province' => 'field_province',
+                'field_postcode' => 'field_postcode',
+                'field_country' => 'field_country',
+              ),
+              'destination' => 'field_wkt',
+              'prefix' => '',
+              'suffix' => '',
+              '#argument map' => array(
+                'node' => 'node',
+              ),
+            ),
+            '#name' => 'rules_geocoder_action_geocode_fields',
+            '#info' => array(
+              'label' => 'Geocode a field or a combination of fields',
+              'arguments' => array(
+                'node' => array(
+                  'type' => 'node',
+                  'label' => 'Content',
+                ),
+              ),
+              'module' => 'Rules Geocoder',
+            ),
+            '#weight' => 0,
+          ),
+        ),
+        '#version' => 6003,
+      ),
+    ),
+  );
+}
+
+/**
  * Implementation of hook_views_api().
  */
 function accuray_locations_views_api() {
