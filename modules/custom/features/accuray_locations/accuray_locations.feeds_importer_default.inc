@@ -41,6 +41,7 @@ function accuray_locations_feeds_importer_default() {
           'xpathparser:14' => 'City',
           'xpathparser:15' => 'State',
           'xpathparser:16' => 'ZipCode',
+          'xpathparser:17' => 'Country',
         ),
         'rawXML' => array(
           'xpathparser:0' => 0,
@@ -60,6 +61,7 @@ function accuray_locations_feeds_importer_default() {
           'xpathparser:14' => 0,
           'xpathparser:15' => 0,
           'xpathparser:16' => 0,
+          'xpathparser:17' => 0,
         ),
         'context' => '//rows/sites/CKSite',
         'exp' => array(
@@ -83,6 +85,7 @@ function accuray_locations_feeds_importer_default() {
             'xpathparser:14' => 0,
             'xpathparser:15' => 0,
             'xpathparser:16' => 0,
+            'xpathparser:17' => 0,
           ),
         ),
       ),
