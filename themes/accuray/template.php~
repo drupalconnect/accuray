@@ -98,6 +98,9 @@ function accuray_preprocess(&$vars, $hook) {
  */
 
 function accuray_preprocess_page(&$vars, $hook) {
+  
+  $trail = menu_get_active_trail();
+  dpm($trail);
   $vars['sample_variable'] = t('Lorem ipsum.');
 
   // To remove a class from $classes_array, use array_diff().
@@ -163,8 +166,7 @@ function accuray_preprocess_block(&$vars, $hook) {
 // */
 
 function accuray_breadcrumb($breadcrumb) {
-  dsm('doing accuray breadcrumb');
-
+  // Make sure we always have at least the 'Home' breadcrumb
   if (!count($breadcrumb)) {
     $breadcrumb[] = l('Home', '<front>');
   }

@@ -191,8 +191,8 @@ h1.title {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 18px;
+  margin-right: 18px;
   padding-left: 10px;
 }
 
@@ -450,4 +450,13 @@ ul.links li {
   color: #9a9a9a;
 }
 
-
+/**
+ * Open layers styles
+ */
+.openlayers-popup-feature {
+  background: #FFF;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid #CCC;
+}

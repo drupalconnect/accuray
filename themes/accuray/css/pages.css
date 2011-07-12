@@ -450,4 +450,14 @@ ul.links li {
   color: #9a9a9a;
 }
 
-
+/**
+ * Open layers styles
+ */
+.openlayers-popup-feature {
+  background: #FFF;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid #CCC;
+  padding: 3px;
+}
