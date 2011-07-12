@@ -136,6 +136,14 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
 ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+  /* Sort criterion: Content: Country (field_country) */
+  $handler->display->display_options['sorts']['field_country_value']['id'] = 'field_country_value';
+  $handler->display->display_options['sorts']['field_country_value']['table'] = 'node_data_field_country';
+  $handler->display->display_options['sorts']['field_country_value']['field'] = 'field_country_value';
+  /* Sort criterion: Content: Province (field_province) */
+  $handler->display->display_options['sorts']['field_province_value']['id'] = 'field_province_value';
+  $handler->display->display_options['sorts']['field_province_value']['table'] = 'node_data_field_province';
+  $handler->display->display_options['sorts']['field_province_value']['field'] = 'field_province_value';
   /* Filter: Global: PHP */
   $handler->display->display_options['filters']['php']['id'] = 'php';
   $handler->display->display_options['filters']['php']['table'] = 'views';
@@ -154,6 +162,11 @@ return FALSE;
   $handler->display->display_options['filters']['type']['value'] = array(
     'location' => 'location',
   );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
 
   /* Display: Countries */
   $handler = $view->new_display('page', 'Countries', 'page_locations');
@@ -322,6 +335,11 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
   $handler->display->display_options['filters']['type']['value'] = array(
     'location' => 'location',
   );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['argument_input'] = array(
     'field_country_value' => array(
       'type' => 'panel',
@@ -615,6 +633,11 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
   $handler->display->display_options['filters']['type']['value'] = array(
     'location' => 'location',
   );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
 
   /* Display: Locations map (pane) */
   $handler = $view->new_display('panel_pane', 'Locations map (pane)', 'panel_pane_map');
