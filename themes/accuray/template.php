@@ -99,7 +99,7 @@ function accuray_preprocess(&$vars, $hook) {
 
 function accuray_preprocess_page(&$vars, $hook) {
   
-  $trail = array_shift(menu_get_active_breadcrumb());
+  //$trail = array_shift(menu_get_active_breadcrumb());
   dpm($trail);
   $vars['section_title'] = $trail[0]['title'];
 
