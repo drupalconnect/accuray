@@ -29,13 +29,7 @@ function accuray_locations_openlayers_presets() {
       ),
     ),
     'behaviors' => array(
-      'openlayers_behavior_attribution' => array(),
       'openlayers_behavior_popup' => array(
-        'layers' => array(
-          'Locations_openlayers_1' => 'Locations_openlayers_1',
-        ),
-      ),
-      'openlayers_behavior_tooltip' => array(
         'layers' => array(
           'Locations_openlayers_1' => 'Locations_openlayers_1',
         ),
@@ -44,6 +38,8 @@ function accuray_locations_openlayers_presets() {
       'openlayers_behavior_navigation' => array(
         'zoomWheelEnabled' => 1,
       ),
+      'openlayers_behavior_dragpan' => array(),
+      'openlayers_behavior_panzoom' => array(),
       'openlayers_behavior_panzoombar' => array(),
       'openlayers_behavior_zoomtolayer' => array(
         'zoomtolayer' => 'Locations_openlayers_1',

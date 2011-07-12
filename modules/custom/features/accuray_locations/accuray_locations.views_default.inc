@@ -349,42 +349,22 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
   $handler->display->display_options['style_plugin'] = 'openlayers_data';
   $handler->display->display_options['style_options']['data_source'] = array(
     'value' => 'openlayers_wkt',
-    'other_lat' => 'body',
-    'other_lon' => 'body',
+    'other_lat' => 'title',
+    'other_lon' => 'title',
     'openlayers_wkt' => 'field_wkt_openlayers_wkt',
-    'other_top' => 'body',
-    'other_right' => 'body',
-    'other_bottom' => 'body',
-    'other_left' => 'body',
+    'other_top' => 'title',
+    'other_right' => 'title',
+    'other_bottom' => 'title',
+    'other_left' => 'title',
     'name_field' => 'title',
     'keep_orig_name_field' => 0,
-    'description_field' => 'body',
+    'description_field' => 'nothing',
     'keep_orig_desc_field' => 0,
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Node: Body */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'node_revisions';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['body']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['body']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['body']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['body']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['body']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['body']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['body']['empty_zero'] = 0;
   /* Field: Node: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -428,6 +408,175 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
   $handler->display->display_options['fields']['field_wkt_openlayers_wkt']['link_to_node'] = 0;
   $handler->display->display_options['fields']['field_wkt_openlayers_wkt']['label_type'] = 'none';
   $handler->display->display_options['fields']['field_wkt_openlayers_wkt']['format'] = 'openlayers_wkt';
+  /* Field: Content: Address line 1 (field_address_1) */
+  $handler->display->display_options['fields']['field_address_1_value']['id'] = 'field_address_1_value';
+  $handler->display->display_options['fields']['field_address_1_value']['table'] = 'apachesolr_node_node_data_field_address_1';
+  $handler->display->display_options['fields']['field_address_1_value']['field'] = 'field_address_1_value';
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_address_1_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_address_1_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_address_1_value']['label_type'] = 'none';
+  /* Field: Content: Address line 2 (field_address_2) */
+  $handler->display->display_options['fields']['field_address_2_value']['id'] = 'field_address_2_value';
+  $handler->display->display_options['fields']['field_address_2_value']['table'] = 'node_data_field_address_2';
+  $handler->display->display_options['fields']['field_address_2_value']['field'] = 'field_address_2_value';
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_address_2_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_address_2_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_address_2_value']['label_type'] = 'none';
+  /* Field: Content: Address line 3 (field_address_3) */
+  $handler->display->display_options['fields']['field_address_3_value']['id'] = 'field_address_3_value';
+  $handler->display->display_options['fields']['field_address_3_value']['table'] = 'node_data_field_address_3';
+  $handler->display->display_options['fields']['field_address_3_value']['field'] = 'field_address_3_value';
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_address_3_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_address_3_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_address_3_value']['label_type'] = 'none';
+  /* Field: Content: City (field_city) */
+  $handler->display->display_options['fields']['field_city_value']['id'] = 'field_city_value';
+  $handler->display->display_options['fields']['field_city_value']['table'] = 'node_data_field_city';
+  $handler->display->display_options['fields']['field_city_value']['field'] = 'field_city_value';
+  $handler->display->display_options['fields']['field_city_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_city_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_city_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_city_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_city_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_city_value']['label_type'] = 'none';
+  /* Field: Content: Province (field_province) */
+  $handler->display->display_options['fields']['field_province_value']['id'] = 'field_province_value';
+  $handler->display->display_options['fields']['field_province_value']['table'] = 'node_data_field_province';
+  $handler->display->display_options['fields']['field_province_value']['field'] = 'field_province_value';
+  $handler->display->display_options['fields']['field_province_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_province_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_province_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_province_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_province_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_province_value']['label_type'] = 'none';
+  /* Field: Content: Post code (field_postcode) */
+  $handler->display->display_options['fields']['field_postcode_value']['id'] = 'field_postcode_value';
+  $handler->display->display_options['fields']['field_postcode_value']['table'] = 'node_data_field_postcode';
+  $handler->display->display_options['fields']['field_postcode_value']['field'] = 'field_postcode_value';
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_postcode_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_postcode_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_postcode_value']['label_type'] = 'none';
+  /* Field: Content: Country (field_country) */
+  $handler->display->display_options['fields']['field_country_value']['id'] = 'field_country_value';
+  $handler->display->display_options['fields']['field_country_value']['table'] = 'apachesolr_node_node_data_field_country';
+  $handler->display->display_options['fields']['field_country_value']['field'] = 'field_country_value';
+  $handler->display->display_options['fields']['field_country_value']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_country_value']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_country_value']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_country_value']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_country_value']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['link_to_node'] = 0;
+  $handler->display->display_options['fields']['field_country_value']['label_type'] = 'none';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_address_1_value] [field_address_2_value] [field_address_3_value]</br>
+[field_city_value], [field_province_value] [field_postcode_value]
+';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Argument: Content: Country (field_country) */
   $handler->display->display_options['arguments']['field_country_value']['id'] = 'field_country_value';
@@ -493,6 +642,9 @@ print l(t($value), \'locations/\' . $row->php . \'/\' . $value);
     t('All'),
     t('View panes'),
     t('OpenLayers Data'),
+    t('[field_address_1_value] [field_address_2_value] [field_address_3_value]</br>
+[field_city_value], [field_province_value] [field_postcode_value]
+'),
     t('Locations map (pane)'),
     t('Locations by region (pane)'),
   );
