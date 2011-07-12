@@ -100,7 +100,7 @@ function accuray_preprocess(&$vars, $hook) {
 function accuray_preprocess_page(&$vars, $hook) {
   
   $trail = menu_get_active_trail();
-  dpm($trail);
+
   if (count($trail) && 1 < count($trail)) {
     $vars['section_title'] = $trail[1]['title'];
   }
