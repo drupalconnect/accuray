@@ -84,7 +84,7 @@ div.panel-pane, div.node {
   text-transform: uppercase;
   font-weight: normal;
   text-indent: -10000px;
-  background: url(../images/bg-site-name.png) 12px 30px no-repeat;
+  background: url(../images/bg-site-name.png) left top no-repeat;
   width: 250px;
   height: 32px;
   display: block;
