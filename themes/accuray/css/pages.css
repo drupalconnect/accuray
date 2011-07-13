@@ -201,6 +201,10 @@ h2.title {
   text-transform: uppercase;
 }
 
+table {
+  width: 100%;
+}
+
 tr.even /* Some tables have rows marked even or odd. */ {
   /* background-color: #eee; */ /* Drupal core uses a #eee background */
 }
