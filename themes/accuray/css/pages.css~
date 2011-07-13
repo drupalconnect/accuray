@@ -459,4 +459,5 @@ ul.links li {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border: 1px solid #CCC;
+  padding: 3px;
 }
