@@ -1,0 +1,171 @@
+<?php
+
+/**
+ * @file css3pie.module
+ * a very simple Drupal module to implement the css3pie.com javascript to your drupal and
+ * make the css selectors configurable over ui. This module creates a real css file on drupal
+ * files folder and add them via drupal_add_css.
+ */
+
+/**
+ * Implements hook_perm()
+ * only users with "administer css3pie" permission can edit
+ * the settings form.
+ *
+ * @see hook_perm();
+ * @return <array> permissions array
+ */
+function css3pie_perm() {
+  return array('administer css3pie');
+}
+
+/**
+ * Implements hook_menu()
+ * admin settings page under themes page
+ *
+ * @see hook_menu();
+ * @return string
+ */
+function css3pie_menu() {
+  $items = array();
+
+  $items['admin/build/themes/css3pie'] = array(
+    'title' => 'CSS3PIE',
+    'description' => 'Adds css3pie support to Drupal',
+    'access arguments' => array('administer css3pie'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('css3pie_admin'),
+    'file' => 'css3pie.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements of hook_menu_alter().
+ */
+function css3pie_menu_alter(&$items) {
+  $items['admin/build/themes/css3pie']['type'] = MENU_LOCAL_TASK;
+}
+
+/**
+ * Implements own hook_css3pie()
+ * returns a array with selectors
+ * that will be added to css3pie css file on next cache clear
+ *
+ * @return <array> multiarray with selectors use modulname as key for namespace
+ */
+function css3pie_css3pie() {
+  $css3pie_selectors = variable_get('css3pie_css_selectors', '');
+  $css3pie_namespace = 'css3pie';
+  
+  if ($css3pie_selectors) {
+    $css3pie_selectors = explode("\n", $css3pie_selectors);
+    $css3pie_selectors = array_filter(array_map('trim', $css3pie_selectors));
+
+    return array($css3pie_namespace => $css3pie_selectors);
+  }
+}
+
+
+function css3pie_init() {
+  // get the path of css3pie file
+  $path_to_css3pie_css_file = _css3pie_get_css3pie_css();
+  
+  // add to drupal´ css only if we have a cssfile
+  if ($path_to_css3pie_css_file) {
+    drupal_add_css($path_to_css3pie_css_file);
+  }
+}
+/**
+ * helper function returns the path to the generated css file
+ */
+function _css3pie_get_css3pie_css() {
+  return file_directory_path() . '/css3pie/css3pie.css';
+}
+
+/**
+ * helper function get all selectors and generates content for css file
+ * @param <type> $css
+ * @return <type> path to new created file
+ */
+function _css3pie_build_css3pie_css() {
+  $output = '';
+
+  // invoke hook_css3pie in all modules to get the selectors
+  $css3pie_selectors = module_invoke_all('css3pie');
+
+  $show_namespaces_as_comments = variable_get('css3pie_css_comment', TRUE);
+  $cnt_namespaces = count($css3pie_selectors);
+  $i = 0;
+
+  foreach ($css3pie_selectors as $namespace => $selectors) {
+    $i++;
+
+    if($show_namespaces_as_comments) {
+      $output .= '/* ' . $namespace . ' */' . "\n";
+    }
+    $output .= implode(', ', $selectors);
+
+    if($i < $cnt_namespaces) {
+      $output .= ',' . "\n";
+    }
+  }
+
+  $output .= "\n" . '{' . "\n" . '  behavior: url('. base_path() . _css3pie_get_css3pie_library() .');' . "\n" . '}';
+
+  return _css3pie_create_css3pie_css($output);
+}
+
+/**
+ * helper function creates a real css file within files directory
+ * that be can added via drupal_add_css();
+ *
+ * @param <type> $css - the css markup
+ * @return <type>
+ */
+function _css3pie_create_css3pie_css($css = NULL) {
+  if (!$css) {
+    drupal_set_message(t('no css content given.'),'error');
+    return FALSE;
+  }
+  
+  $css3pie_css_path = file_create_path('css3pie');
+
+  // check again for error message
+  if(!file_check_directory($css3pie_css_path, FILE_CREATE_DIRECTORY)) {
+    drupal_set_message(t('Unable to create CSS3PIE CSS Cache directory. Check permissions on your files directory.'), 'error');
+    return;
+  }
+
+  $filename = $css3pie_css_path . '/css3pie.css';
+  $filename = file_save_data($css, $filename, FILE_EXISTS_REPLACE);
+
+  return $filename;
+}
+
+/**
+ * helper function to get the path of CSS3PIE library
+ * it uses the library api.
+ *
+ * @return <string> the path to the CSS3PIE library
+ */
+function _css3pie_get_css3pie_library() {
+  static $path_to_css3pie;
+
+  // only search for library file
+  if(!isset($path_to_css3pie)) {
+  
+    $path_to_css3pie = libraries_get_path('PIE');
+
+    // Use php wrapper to set the correct header on old servers...
+    if (!variable_get('css3pie_css_use_php_wrapper', FALSE)) {
+      $path_to_css3pie = $path_to_css3pie . '/PIE.htc';
+    }
+    else {
+      $path_to_css3pie = $path_to_css3pie . '/PIE.php';
+    }
+  }
+  return $path_to_css3pie;
+}
