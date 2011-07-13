@@ -184,6 +184,10 @@ div.panel-pane, div.node {
   border-right: 0 none;
 }
 
+.panels-row-menubar .pane-content {
+  padding: 0 7px;
+}
+
 .panels-row-menubar .pane-block ul.menu li a {
   color: #E2E9E8;
   text-transform: uppercase;
