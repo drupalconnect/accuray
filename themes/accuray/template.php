@@ -103,8 +103,8 @@ function accuray_preprocess_page(&$vars, $hook) {
 
   if (count($trail) && 1 < count($trail)) {
     $vars['section_title'] = $trail[1]['title'];
-  }
-  
+  }  
+    
   // To remove a class from $classes_array, use array_diff().
   //$vars['classes_array'] = array_diff($vars['classes_array'], array('class-to-remove'));
   //$vars['title'] = drupal_get_title();

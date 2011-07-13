@@ -162,6 +162,7 @@
       <?php if($title || $section_title): ?>
         <div id="page-title">      
           <h1 class="title"><?php print ($section_title ? $section_title : $title); ?></h1>
+          <?php dsm('Title: ' . $title); dsm('Section: ' . $section_title); ?>
         </div>
       <?php endif; ?>
       
