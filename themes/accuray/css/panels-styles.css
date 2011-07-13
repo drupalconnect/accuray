@@ -211,6 +211,7 @@ div.panel-pane, div.node {
 #panel-page-home .panels-flexible-region-inside {
   background: #e5e5e5;
   height: 250px;
+  overflow: auto;
 }
 
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
