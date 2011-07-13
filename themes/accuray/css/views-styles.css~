@@ -23,11 +23,11 @@
   clear: both;
   margin: 0 1ex 0 0;
   font-size: 100%;
+  font-weight: bold;
 }
 
 .view-id-LineageNestedList .item-list .item-list h3 {
   float: none;
-  font-weight: bold;
 }
 
 .view-id-LineageNestedList .item-list ul {
@@ -49,8 +49,8 @@
   clear: left;
 }
 
-.view-id-Slideshow .view-content {
-  position: relative;
+.views_slideshow_singleframe_slide {
+  position: relative !important;
 }
 
 .views_slideshow_singleframe_pager {

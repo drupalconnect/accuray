@@ -23,6 +23,9 @@ div.panel-pane, div.node {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  position: relative;
+  overflow: auto;
+  
 }
 
 .panels-flexible-region .inside {
@@ -211,6 +214,7 @@ div.panel-pane, div.node {
 #panel-page-home .panels-flexible-region-inside {
   background: #e5e5e5;
   height: 250px;
+  overflow: auto;
 }
 
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
