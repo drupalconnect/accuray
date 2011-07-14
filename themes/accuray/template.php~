@@ -107,8 +107,8 @@ function accuray_preprocess_page(&$vars, $hook) {
    */
 
   if (drupal_match_path($_GET['q'], 'taxonomy/term/*')) {
-    dsm($_GET['q']);
-    $vocab = taxonomy_get_term(arg(2));
+    $term = taxonomy_get_term(arg(2));
+    dpm($term);
     
     $vars['section_title'] = $vocab->name;
   }
