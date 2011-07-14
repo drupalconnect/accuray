@@ -49,6 +49,10 @@
   clear: left;
 }
 
+.view-Slideshow .view-content {
+  position: relative;
+}
+
 .views_slideshow_singleframe_slide {
   position: relative !important; /* in IE, the absolute positioning provided by the module caused containing divs to collapse */
 }
