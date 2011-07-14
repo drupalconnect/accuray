@@ -23,9 +23,6 @@ div.panel-pane, div.node {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  position: relative;
-  overflow: auto;
-  
 }
 
 .panels-flexible-region .inside {
