@@ -66,6 +66,10 @@
   display: none;
 }
 
+#search-theme-form, 
+#search-block-form {
+}
+
 #search-theme-form .container-inline,
 #search-block-form .container-inline {
   float: left;

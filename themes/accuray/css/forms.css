@@ -88,6 +88,7 @@
 #search-theme-form .form-submit,
 #search-block-form .form-submit {
   text-indent: -10000px;
+  padding-top: 50px; /* because text-indent doesnt appear to work in IE */
   background: url(../images/search.png) center center no-repeat;
   width: 1.5em;
   height: 1.5em;
