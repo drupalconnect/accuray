@@ -11,7 +11,12 @@
   margin-right: 20px;
 }
 
-/* Remove border on home page - issue #754 */
+/* Remove border on home page and adjust horizontal spacing - issue #754 */
 .front #content .section {
   border: none;
+}
+
+.front .panels-ipe-display-container .panels-flexible-row-last .panels-flexible-region {
+  float: left;
+  width: 33.2%;
 }
