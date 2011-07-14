@@ -106,12 +106,11 @@ function accuray_preprocess_page(&$vars, $hook) {
    * (panels, context, views, ...). 
    */
 
-  if (drupal_match_path('taxonomy/term/*', $_GET['q'])) {
+  if (drupal_match_path($_GET['q'], 'taxonomy/term/*')) {
     $vocab = taxonomy_term_load(arg(2));
     $vars['section_title'] = $vocab->title;
   }
   else {   
-   
     $trail = menu_get_active_trail();
   
     if (count($trail) && 1 < count($trail)) {

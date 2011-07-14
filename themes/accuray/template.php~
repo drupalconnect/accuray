@@ -105,12 +105,18 @@ function accuray_preprocess_page(&$vars, $hook) {
    * vocabularies appears extraordinarily lacking in all the relevant modules
    * (panels, context, views, ...). 
    */
+
+  if (drupal_match_path('taxonomy/term/*', $_GET['q'])) {
+    $vocab = taxonomy_term_load(arg(2));
+    $vars['section_title'] = $vocab->title;
+  }
+  else {   
    
-  $trail = menu_get_active_trail();
-  $page = $_GET['q'];
+    $trail = menu_get_active_trail();
   
-  if (count($trail) && 1 < count($trail)) {
-    $vars['section_title'] = $trail[1]['title'];
+    if (count($trail) && 1 < count($trail)) {
+      $vars['section_title'] = $trail[1]['title'];
+    }
   }  
     
   // To remove a class from $classes_array, use array_diff().
