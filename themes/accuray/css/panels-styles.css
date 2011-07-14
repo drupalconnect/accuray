@@ -45,7 +45,7 @@ div.panel-pane, div.node {
 #mini-panel-header li,
 #mini-panel-header h2 {
   font-size: 95%;
-  line-height: 2em;
+  /*line-height: 2em;*/
   color: #4d4d4d;
 } 
  
@@ -112,6 +112,7 @@ div.panel-pane, div.node {
   border-right: 1px solid #4d4d4d;
   margin-right: 0.5em;
   padding-right: 0.5em;
+  text-transform: uppercase;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
