@@ -205,6 +205,10 @@ div.panel-pane, div.node {
   -webkit-border-radius: 3px;
 }
 
+.panels-row-contentbox p {
+  margin: 0; /* Unfortunately, this means that -all- Ps are going to run together. But we're counting pixels, so gotta do it */
+}
+
 /**
  * "Home" panel page
  */
