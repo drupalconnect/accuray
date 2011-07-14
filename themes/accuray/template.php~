@@ -99,12 +99,20 @@ function accuray_preprocess(&$vars, $hook) {
 
 function accuray_preprocess_page(&$vars, $hook) {
   
+  /**
+   * Conditionally set title and section_title. I know that context.module
+   * would be the better way to do this, but support for doing things with 
+   * vocabularies appears extraordinarily lacking in all the relevant modules
+   * (panels, context, views, ...). 
+   */
+   
   $trail = menu_get_active_trail();
-
+  $page = $_GET['q'];
+  
   if (count($trail) && 1 < count($trail)) {
     $vars['section_title'] = $trail[1]['title'];
-  }
-  
+  }  
+    
   // To remove a class from $classes_array, use array_diff().
   //$vars['classes_array'] = array_diff($vars['classes_array'], array('class-to-remove'));
   //$vars['title'] = drupal_get_title();

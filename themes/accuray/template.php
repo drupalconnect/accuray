@@ -99,10 +99,24 @@ function accuray_preprocess(&$vars, $hook) {
 
 function accuray_preprocess_page(&$vars, $hook) {
   
-  $trail = menu_get_active_trail();
+  /**
+   * Conditionally set title and section_title. I know that context.module
+   * would be the better way to do this, but support for doing things with 
+   * vocabularies appears extraordinarily lacking in all the relevant modules
+   * (panels, context, views, ...). 
+   */
 
-  if (count($trail) && 1 < count($trail)) {
-    $vars['section_title'] = $trail[1]['title'];
+  if (drupal_match_path('taxonomy/term/*', $_GET['q'])) {
+    $vocab = taxonomy_term_load(arg(2));
+    $vars['section_title'] = $vocab->title;
+  }
+  else {   
+   
+    $trail = menu_get_active_trail();
+  
+    if (count($trail) && 1 < count($trail)) {
+      $vars['section_title'] = $trail[1]['title'];
+    }
   }  
     
   // To remove a class from $classes_array, use array_diff().
