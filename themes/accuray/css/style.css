@@ -10,3 +10,8 @@
 #mini-panel-header ul.menu li.leaf.last {
   margin-right: 20px;
 }
+
+/* Remove border on home page - issue #754 */
+.front #content .section {
+  border: none;
+}
