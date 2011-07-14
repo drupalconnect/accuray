@@ -107,8 +107,9 @@ function accuray_preprocess_page(&$vars, $hook) {
    */
 
   if (drupal_match_path($_GET['q'], 'taxonomy/term/*')) {
-    $vocab = taxonomy_term_load(arg(2));
-    $vars['section_title'] = $vocab->title;
+    $vocab = taxonomy_get_term(arg(2));
+    
+    $vars['section_title'] = $vocab->name;
   }
   else {   
     $trail = menu_get_active_trail();
