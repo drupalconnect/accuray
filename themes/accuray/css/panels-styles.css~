@@ -198,6 +198,11 @@ div.panel-pane, div.node {
   color: #FFF;
 }
 
+
+.panels-row-copytext {
+  padding: 0;
+}
+
 .panels-row-copytext .inside {
   padding: 0;
 }
