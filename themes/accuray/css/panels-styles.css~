@@ -239,6 +239,22 @@ div.panel-pane, div.node {
   overflow: auto;
 }
 
+#panel-page-home .panels-flexible-region-inside .panel-pane {
+  padding: 11px; /* 11 + 4 = 15px */
+}
+
+#panel-page-home ul li,
+#panel-page-home ul li.expanded { 
+  list-style-type: none; 
+  list-style-image: url(../images/bullet-double-square.png); 
+}
+#panel-page-home ul li li,
+#panel-page-home ul li li.expanded {
+  list-style-type: none;
+  list-style-image: url(../images/bullet-square.png);
+}
+
+
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
