@@ -45,7 +45,7 @@ div.panel-pane, div.node {
 #mini-panel-header li,
 #mini-panel-header h2 {
   font-size: 95%;
-  line-height: 2em;
+  /*line-height: 2em;*/
   color: #4d4d4d;
 } 
  
@@ -112,6 +112,7 @@ div.panel-pane, div.node {
   border-right: 1px solid #4d4d4d;
   margin-right: 0.5em;
   padding-right: 0.5em;
+  text-transform: uppercase;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
@@ -233,8 +234,13 @@ div.panel-pane, div.node {
  */
 #panel-page-home .panels-flexible-region-inside {
   background: #e5e5e5;
-  height: 250px;
+<<<<<<< HEAD
+  height: 320px;
   overflow: auto;
+=======
+  height: 250px;
+  /*overflow: auto;*/
+>>>>>>> f66811f6a636ae7291930b472ac037f4d76ba0de
 }
 
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
