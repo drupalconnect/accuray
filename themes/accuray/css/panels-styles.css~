@@ -6,6 +6,10 @@
 /**
  * Generic styles
  */ 
+h2.pane-title {
+  margin-top: 0;
+} 
+ 
 div.panel-pane, div.node {
     margin: inherit;
     padding: inherit;
