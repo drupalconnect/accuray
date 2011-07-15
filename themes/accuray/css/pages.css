@@ -286,6 +286,13 @@ ul.links li {
   text-align: right; /* LTR */
 }
 
+.more-link a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-size: 1.1em;
+}
+
 .region-content-bottom /* Wrapper for any blocks placed in the "content bottom" region */ {
 }
 
