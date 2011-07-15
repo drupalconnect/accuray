@@ -237,6 +237,7 @@ div.panel-pane, div.node {
   height: 320px;
   height: 250px;
   overflow: auto;
+  padding: 15px;
 }
 
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
