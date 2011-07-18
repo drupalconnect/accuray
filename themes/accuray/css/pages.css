@@ -351,6 +351,7 @@ ul.links li {
 
 #footer-message /* Wrapper for the footer message from Drupal's "Site information"
                    and for any blocks placed in the footer region */ {
+  clear: both;
 }
 
 .region-footer {
@@ -360,6 +361,18 @@ ul.links li {
  * Closure
  */
 .region-page-closure /* Wrapper for any blocks placed in the closure region */ {
+}
+
+/*
+ * Secondary navigation
+ */
+#secondary-navigation .section {
+  background: none repeat scroll 0 0 #113B6D;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin: 0 18px;
+  padding: 0 10px;
 }
 
 /*
