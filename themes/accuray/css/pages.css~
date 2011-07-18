@@ -103,6 +103,7 @@ div#site-name /* The name of the website */ {
 #site-name a:visited {
   color: #000;
   text-decoration: none;
+  visibility: hidden;
 }
 
 #site-name a:hover,
@@ -290,6 +291,7 @@ ul.links li {
   text-transform: uppercase;
   text-decoration: none;
   color: #000;
+  font-size: 1.1em;
 }
 
 .region-content-bottom /* Wrapper for any blocks placed in the "content bottom" region */ {

@@ -130,7 +130,7 @@
         <a href="<?php print $front_page; ?>" ="<?php print t('Home'); ?>" rel="home" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></a>
       <?php endif; ?>
 
-      <?php if (($site_name || $site_slogan) && 0): ?> <!-- turned off because we're showing it in a mini panel instead -->
+      <?php if (($site_name || $site_slogan)): ?> 
         <div id="name-and-slogan">
           <?php if ($site_name): ?>
             <?php if ($title): ?>

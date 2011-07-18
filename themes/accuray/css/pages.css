@@ -103,6 +103,7 @@ div#site-name /* The name of the website */ {
 #site-name a:visited {
   color: #000;
   text-decoration: none;
+  text-indent: -1000;
 }
 
 #site-name a:hover,
