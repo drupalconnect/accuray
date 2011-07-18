@@ -106,6 +106,7 @@ div#site-name /* The name of the website */ {
   display: block;
   width: 250px;
   height: 32px;
+  padding-right: 250px; /* because IE doesn't like text-indent */
   text-indent: -10000px;
   overflow:hidden;
   background: url(../images/bg-site-name.png) left top no-repeat;
