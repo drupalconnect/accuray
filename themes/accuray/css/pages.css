@@ -103,7 +103,13 @@ div#site-name /* The name of the website */ {
 #site-name a:visited {
   color: #000;
   text-decoration: none;
-  text-indent: -1000;
+  display: block;
+  width: 250px;
+  height: 32px;
+  padding-top: 32px;
+  text-indent: -10000px;
+  overflow:hidden;
+  background: url(../images/bg-site-name.png) left top no-repeat;
 }
 
 #site-name a:hover,
@@ -115,6 +121,7 @@ div#site-name /* The name of the website */ {
 }
 
 .region-header /* Wrapper for any blocks placed in the header region */ {
+  padding-left: 250px; /* width of site name */
 }
 
 /*
