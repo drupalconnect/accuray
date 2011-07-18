@@ -119,6 +119,9 @@ function accuray_preprocess_page(&$vars, $hook) {
       $vars['section_title'] = $trail[1]['title'];
     }
   }  
+  
+  // Prevent titles from becoming too long
+  $vars['title'] = truncate_utf8($vars['title'], 80, TRUE);
     
   // To remove a class from $classes_array, use array_diff().
   //$vars['classes_array'] = array_diff($vars['classes_array'], array('class-to-remove'));
