@@ -149,6 +149,8 @@ div#site-name /* The name of the website */ {
 .sidebar-first #content .section {
   margin-left: 8px;
   margin-right: 8px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 .sidebar-second #content .section {
