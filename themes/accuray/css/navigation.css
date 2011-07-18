@@ -48,6 +48,11 @@ li a.active {
   -webkit-border-radius: 5px 5px 0 0;
 }
 
+/* testing css3pie */
+#navigation #main-menu {
+  behavior: url(../../../libraries/PIE/PIE.htc);
+}
+
 #navigation #main-menu li a {
   color: #e2e9e8;
   text-decoration: none;
