@@ -48,6 +48,11 @@ li a.active {
   -webkit-border-radius: 5px 5px 0 0;
 }
 
+/* testing css3pie */
+#navigation #main-menu {
+  behavior: url(../../../libraries/PIE/PIE.htc);
+}
+
 #navigation #main-menu li a {
   color: #e2e9e8;
   text-decoration: none;
@@ -114,14 +119,16 @@ ul.menu li a.menu_icon {
 
 #secondary-navigation #block-menu-menu-stay-in-touch {
   float: left;
+  margin-bottom: 0;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch h2 {
   float: left;
   color: #FFF;
   font-weight: normal;
-  text-transform: none;
-  font-size: 1em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  line-height: 16px;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch .content {
@@ -140,6 +147,7 @@ ul.menu li a.menu_icon {
 
 #secondary-navigation #block-menu-menu-footer-links-right {
   float: right;
+  margin-bottom: 0;
 }
 
 #secondary-navigation #block-menu-menu-footer-links-right ul {
@@ -156,7 +164,7 @@ ul.menu li a.menu_icon {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 1em;
+  font-size: 0.75em;
 }
 
 
