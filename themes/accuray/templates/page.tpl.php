@@ -224,9 +224,13 @@
 
     </div></div><!-- /#main, /#main-wrapper -->
 
-    <?php if ($footer || $footer_message || $secondary_links): ?>
-      <div id="footer"><div class="section">
-
+    <?php if ($secondary_navigation || $secondary_links): ?>
+      <div id="secondary-navigation"><div class="section clearfix">
+        
+        <?php if ($secondary_navigation): ?>
+          <?php print $secondary_navigation; ?>
+        <?php endif; ?>            
+        
         <?php print theme(array('links__system_secondary_menu', 'links'), $secondary_links,
           array(
             'id' => 'secondary-menu',
@@ -238,7 +242,12 @@
             'class' => 'element-invisible',
           ));
         ?>
+        
+      </div></div> <!-- /#secondary-navigation -->
+    <?php endif; ?>
 
+    <?php if ($footer || $footer_message || $secondary_links): ?>
+      <div id="footer"><div class="section">
         <?php if ($footer_message): ?>
           <div id="footer-message"><?php print $footer_message; ?></div>
         <?php endif; ?>

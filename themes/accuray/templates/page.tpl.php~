@@ -130,7 +130,7 @@
         <a href="<?php print $front_page; ?>" ="<?php print t('Home'); ?>" rel="home" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></a>
       <?php endif; ?>
 
-      <?php if (($site_name || $site_slogan)): ?> <!-- turned off because we're showing it in a mini panel instead -->
+      <?php if (($site_name || $site_slogan)): ?> 
         <div id="name-and-slogan">
           <?php if ($site_name): ?>
             <?php if ($title): ?>
@@ -224,9 +224,13 @@
 
     </div></div><!-- /#main, /#main-wrapper -->
 
-    <?php if ($footer || $footer_message || $secondary_links): ?>
-      <div id="footer"><div class="section">
-
+    <?php if ($secondary_navigation || $secondary_links): ?>
+      <div id="secondary-navigation"><div class="section clearfix">
+        
+        <?php if ($secondary_navigation): ?>
+          <?php print $secondary_navigation; ?>
+        <?php endif; ?>            
+        
         <?php print theme(array('links__system_secondary_menu', 'links'), $secondary_links,
           array(
             'id' => 'secondary-menu',
@@ -238,7 +242,15 @@
             'class' => 'element-invisible',
           ));
         ?>
+        
+      </div></div> <!-- /#secondary-navigation -->
+    <?php endif; ?>
 
+    <?php if ($footer || $footer_message || $secondary_links): ?>
+      <div id="footer"><div class="section">
+        
+        
+        
         <?php if ($footer_message): ?>
           <div id="footer-message"><?php print $footer_message; ?></div>
         <?php endif; ?>

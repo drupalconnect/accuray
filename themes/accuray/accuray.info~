@@ -1,6 +1,6 @@
   ; The name and description of the theme used on the admin/build/themes page.
-name        = Zen Sub-theme Starter Kit
-description = Read the <a href="http://drupal.org/node/629510">online docs</a> or the included README.txt on how to create a Zen sub-theme.
+name        = Zen Sub-theme Accuray
+description = Zen Sub-theme Accuray by Christopher M. Jones, DrupalConnect
 
   ; The screenshot used on the admin/build/themes page.
 screenshot = screenshot.png
@@ -38,6 +38,9 @@ stylesheets[all][]   = css/nodes.css
 stylesheets[all][]   = css/comments.css
 stylesheets[all][]   = css/forms.css
 stylesheets[all][]   = css/fields.css
+stylesheets[all][]   = css/nd.css
+stylesheets[all][]   = css/typography.css
+stylesheets[all][]   = css/style.css
 stylesheets[print][] = css/print.css
 ; stylesheets[handheld][] = css/mobile.css
 ; stylesheets[only screen and (max-device-width: 480px)][] = css/iphone.css

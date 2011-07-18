@@ -60,6 +60,7 @@ li a.active {
   margin-bottom: 0.909em;
   font-weight: normal;
   text-transform: uppercase;
+  font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 }
 
 #navigation #main-menu li a:hover {
@@ -110,4 +111,52 @@ ul.menu li a.menu_icon {
   text-indent: -10000px;
   margin-right: 0.5em;
 }
+
+#secondary-navigation #block-menu-menu-stay-in-touch {
+  float: left;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch h2 {
+  float: left;
+  color: #FFF;
+  font-weight: normal;
+  text-transform: none;
+  font-size: 1em;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch .content {
+  float: left;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul {
+  padding: 0;
+  margin: 0;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul li {
+  float: left;
+  list-style: inside none;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right {
+  float: right;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul {
+  margin: 0;
+  padding: 0;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li {
+  float: left;
+  list-style: inside none;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li a {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1em;
+}
+
 
