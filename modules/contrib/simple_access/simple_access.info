@@ -1,0 +1,12 @@
+; $Id: simple_access.info,v 1.5 2008/09/08 07:22:24 gordon Exp $
+name = Simple Access
+description = Provides simple hide/view access for nodes.
+core = 6.x
+package = Node Access
+
+; Information added by drupal.org packaging script on 2009-12-14
+version = "6.x-2.0"
+core = "6.x"
+project = "simple_access"
+datestamp = "1260789370"
+
