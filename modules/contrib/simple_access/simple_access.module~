@@ -137,7 +137,7 @@ function simple_access_nodeapi(&$node, $op) {
   switch ($op) {
     case 'prepare':
       // Only use the defaults if this is a new node.
-      if (empty($node->nid)) {
+      if (empty($node->nid || !empty($node->nid))) {
         $defaults = variable_get('simple_access_'. $node->type, array('simple_access' => array(), 'simple_access_profiles' => array(), 'simple_access_owner' => array()));
       }
       else {
