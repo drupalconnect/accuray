@@ -256,3 +256,7 @@ div.panel-pane, div.node {
   background: transparent none;
   overflow: hidden;
 }
+
+#panel-page-home .panels-flexible-row-first .panel-pane {
+  padding: 0;
+}
