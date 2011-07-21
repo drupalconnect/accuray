@@ -33,6 +33,7 @@
 }
 
 .block h2.title /* Block title */ {
+  font-weight: bold;
 }
 
 .block .content /* Block's content wrapper */ {

@@ -16,7 +16,10 @@
 /**
  * Styling for hierarchical browsing
  */ 
- 
+.view-id-VocabularyOverview .views-row {
+  margin-bottom: 1em;
+}
+
 .view-id-VocabularyOverview h3,
 .view-id-LineageNestedList h3 {
   float: left;
