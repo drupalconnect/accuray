@@ -22,7 +22,6 @@
 
 .view-id-VocabularyOverview h3,
 .view-id-LineageNestedList h3 {
-  float: left;
   clear: both;
   margin: 0 1ex 1em 0;
   font-size: 100%;
