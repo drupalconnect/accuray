@@ -219,6 +219,7 @@ h2.content-title {
   font-size: 1.25em;
   font-weight: bold;
   text-transform: uppercase;
+  margin-top: 0;
 }
 
 table {

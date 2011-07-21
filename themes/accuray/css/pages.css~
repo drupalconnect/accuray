@@ -216,7 +216,7 @@ h2.title {
 
 h2.content-title {
   color: #555555;
-  font-size: 1.3em;
+  font-size: 1.25em;
   font-weight: bold;
   text-transform: uppercase;
 }
