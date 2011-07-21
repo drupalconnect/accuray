@@ -114,7 +114,7 @@
 }
 
 .buildmode-teaser .nd-two-sidebars .nd-region-middle,
-.buildmode-teaser .nd-left-sidebar .nd-region-middle {
+.buildmode-teaser .nd-no-sidebars .nd-region-middle {
   margin-left: 180px;
   padding: 0 10px;
 }
