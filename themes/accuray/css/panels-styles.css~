@@ -8,6 +8,7 @@
  */ 
 h2.pane-title {
   margin-top: 0;
+  font-weight: bold;
 } 
  
 div.panel-pane, div.node {
