@@ -11,12 +11,9 @@ h2.pane-title {
   font-weight: bold;
 } 
 
- div.panel-pane, div.node {
+ div.panel-pane div.node {
     margin: inherit;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: inherit;
  }
 
 .panels-flexible-row {
