@@ -138,3 +138,7 @@
   background: url(../images/icon-download.png) center center no-repeat;
   text-indent: -10000px;
 }
+
+.node-type-event .buildmode-teaser .field-date {
+  float: right;
+}
