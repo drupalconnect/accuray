@@ -173,9 +173,6 @@
 
         <?php print $highlight; ?>
 
-        <?php if ($title): ?>
-          <!--<h1 class="title"><?php print $title; ?></h1>-->
-        <?php endif; ?>
         <?php print $messages; ?>
         <?php if ($tabs): ?>
           <div class="tabs"><?php print $tabs; ?></div>
@@ -183,6 +180,10 @@
         <?php print $help; ?>
 
         <?php print $content_top; ?>
+
+        <?php if ($title): ?>
+          <h2 class="content-title"><?php print $title; ?></h1>
+        <?php endif; ?>
 
         <div id="content-area">
           <?php print $content; ?>
