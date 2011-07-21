@@ -491,7 +491,7 @@ ul.links li {
 }
 
 .content h2 {
-  color: #9a9a9a;
+  color: #555;
   text-transform: smallcaps;
   font-weight: bold;
   margin-top: 0;
