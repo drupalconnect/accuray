@@ -78,7 +78,6 @@ li a.active {
   border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
-  color: #e2e9e8;
   font-size: 0.7em; 
 }
 
