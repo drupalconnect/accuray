@@ -499,6 +499,11 @@ ul.links li {
   margin-bottom: 0.2em;
 }
 
+.content ul {
+  margin-top: 0;
+  margn-bottom: 0.2em;
+}
+
 /**
  * Open layers styles
  */
