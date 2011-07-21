@@ -23,13 +23,13 @@
 .view-id-VocabularyOverview h3,
 .view-id-LineageNestedList h3 {
   clear: both;
-  margin: 0 1ex 1em 0;
+  margin: 0 0 0.25em 0;
   font-size: 100%;
   font-weight: bold;
 }
 
 .view-id-VocabularyOverview p {
-  
+  display: inline;
 }
 
 .view-id-VocabularyOverview .item-list .item-list h3,
