@@ -81,18 +81,6 @@ div.panel-pane, div.node {
   margin-left: 0;
 }
 
-//.pane-page-site-name {
-//  margin: 0;
-//  font-size: 2em;
-//  line-height: 1.3em;
-//  text-transform: uppercase;
-//  font-weight: normal;
-//  text-indent: -10000px;
-//  background: url(../images/bg-site-name.png) left top no-repeat;
-//  width: 250px;
-//  height: 32px;
-//  display: block;
-//}
 
 /**
  * The "Stay in touch" copy should be about 7em. We need to set this width 
@@ -256,7 +244,6 @@ div.panel-pane, div.node {
   list-style-type: none;
   list-style-image: url(../images/bullet-square.png);
 }
-
 
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;

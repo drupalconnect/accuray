@@ -245,7 +245,6 @@ div.panel-pane, div.node {
   list-style-image: url(../images/bullet-square.png);
 }
 
-
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
@@ -256,4 +255,8 @@ div.panel-pane, div.node {
   margin: 0;
   background: transparent none;
   overflow: hidden;
+}
+
+#panel-page-home .panels-flexible-row-first .panel-pane {
+  padding: 0;
 }
