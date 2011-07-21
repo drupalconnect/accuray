@@ -13,7 +13,7 @@ h2.pane-title {
 
  div.panel-pane, div.node {
     margin: inherit;
-    padding: inherit;
+    padding: 10px;
  }
 
 .panels-flexible-row {
