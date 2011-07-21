@@ -7,6 +7,7 @@
 
 
 .node /* Node wrapper */ {
+  padding-bottom: 1em;
 }
 
 .node-sticky /* A sticky node (displayed before others in a list) */ {
@@ -101,7 +102,17 @@
 
 .buildmode-teaser .nd-region-left {
   overflow: hidden;
-  padding: 15px;
+  padding: 10px;
+  width: 180px; /** 
+                 * Normally, we're using the left region to display a thumbnail at 160px. 
+                 * 180px makes sure the image doesn't spill into the middle region when
+                 * content is compressed
+                 */ 
+}
+
+.buildmode-teaser .nd-two-sidebars .nd-region-middle,
+.buildmode-teaser .nd-left-sidebar .nd-region-middle {
+  margin-left: 180px;
 }
 
 .buildmode-teaser .field-field-file-info ul {
