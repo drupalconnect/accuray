@@ -79,14 +79,15 @@ li a.active {
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
   color: #e2e9e8;
+  font-size: 0.7em;
+  text-decoration: none;
+  text-transform: uppercase; 
+
 }
 
 .breadcrumb,
 .breadcrumb a {
-  font-size: 0.7em;
-  color: #e2e9e8;
-  text-decoration: none;
-  text-transform: uppercase; 
+  
 }
 
 .breadcrumb a:hover {

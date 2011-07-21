@@ -81,6 +81,7 @@ li a.active {
   color: #e2e9e8;
 }
 
+.breadcrumb,
 .breadcrumb a {
   font-size: 0.7em;
   color: #e2e9e8;
