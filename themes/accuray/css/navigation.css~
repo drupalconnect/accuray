@@ -129,6 +129,7 @@ ul.menu li a.menu_icon {
   text-transform: uppercase;
   font-size: 0.75em;
   line-height: 16px;
+  margin-right: 1ex;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch .content {
