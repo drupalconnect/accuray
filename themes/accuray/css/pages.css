@@ -170,6 +170,11 @@ div#site-name /* The name of the website */ {
   padding-right: 7px;
 }
 
+.front #content .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 #navigation /* the navigation region */ {
 }
 
