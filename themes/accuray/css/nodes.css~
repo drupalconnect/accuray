@@ -139,6 +139,6 @@
   text-indent: -10000px;
 }
 
-.node-type-event .buildmode-teaser .field-date {
+.buildmode-teaser .node-type-event .field-date {
   float: right;
 }
