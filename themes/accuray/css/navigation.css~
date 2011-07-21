@@ -85,7 +85,7 @@ li a.active {
 .breadcrumb a {
   text-transform: uppercase;  
   text-decoration: none;
-  color: #e2e9e8;
+  color: #B5D4F0;
 }
 
 .breadcrumb a:hover {
