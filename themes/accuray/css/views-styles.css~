@@ -17,7 +17,7 @@
  * Styling for hierarchical browsing
  */ 
  
- 
+.view-id-VocabularyOverview h3,
 .view-id-LineageNestedList h3 {
   float: left;
   clear: both;
@@ -26,24 +26,34 @@
   font-weight: bold;
 }
 
+.view-id-VocabularyOverview p {
+  display: inline;
+}
+
+.view-id-VocabularyOverview .item-list .item-list h3,
 .view-id-LineageNestedList .item-list .item-list h3 {
   float: none;
 }
 
+.view-id-VocabularyOverview .item-list ul,
 .view-id-LineageNestedList .item-list ul {
   padding: 0;
 }
 
+.view-id-VocabularyOverview .item-list ul li,
 .view-id-LineageNestedList .item-list ul li {
   list-style: outside none;
 }
 
+.view-id-VocabularyOverview .item-list .item-list,
 .view-id-LineageNestedList .item-list .item-list {
 }
 
+.view-id-VocabularyOverview .item-list ul li li,
 .view-id-LineageNestedList .item-list ul li li {
 }
 
+.view-id-VocabularyOverview .item-list ul li .buildmode-teaser,
 .view-id-LineageNestedList .item-list ul li .buildmode-teaser {
   margin-top: 1em;
   clear: left;
