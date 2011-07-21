@@ -490,8 +490,13 @@ ul.links li {
 .content h2 {
   text-transform: none;
   font-weight: bold;
+  margin-top: 0;
   margin-bottom: 0.2em;
-  margin-top: 0.2em;
+}
+
+.content p {
+  margin-top: 0;
+  margin-bottom: 0.2em;
 }
 
 /**
