@@ -12,10 +12,10 @@ h2.pane-title {
 } 
 
 /** 
-div.panel-pane, div.node {
-    margin: inherit;
-    padding: inherit;
-}
+ *div.panel-pane, div.node {
+ *   margin: inherit;
+ *   padding: inherit;
+ *}
 */
 
 .panels-flexible-row {
