@@ -56,3 +56,8 @@
   margin-bottom: 0.909em;
   color: #407fbc; 
 }
+
+.field-date {
+  font-weight: bold;
+  margin-top: 0.2em;
+}
