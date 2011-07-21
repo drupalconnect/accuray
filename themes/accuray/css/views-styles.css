@@ -29,7 +29,7 @@
 }
 
 .view-id-VocabularyOverview p {
-  
+  display: inline;
 }
 
 .view-id-VocabularyOverview .item-list .item-list h3,
