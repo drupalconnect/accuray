@@ -166,6 +166,8 @@ div#site-name /* The name of the website */ {
 .no-sidebars #content .section {
   margin-left: 18px;
   margin-right: 18px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 #navigation /* the navigation region */ {
