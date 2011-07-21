@@ -116,6 +116,7 @@
 .buildmode-teaser .nd-two-sidebars .nd-region-middle,
 .buildmode-teaser .nd-left-sidebar .nd-region-middle {
   margin-left: 180px;
+  padding: 0 10px;
 }
 
 .buildmode-teaser .field-field-file-info ul {
