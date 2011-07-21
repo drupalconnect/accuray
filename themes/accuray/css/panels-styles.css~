@@ -250,6 +250,10 @@ h2.pane-title {
   background: #e1edf9;
 }
 
+#panel-page-home .panels-flexible-row-first {
+  margin: 0;
+}
+
 #panel-page-home .panels-flexible-row-first .panels-flexible-region {
   width: 100%;
 }
