@@ -29,10 +29,6 @@
   font-weight: bold;
 }
 
-.view-id-VocabularyOverview p {
-  display: inline;
-}
-
 .view-id-VocabularyOverview .item-list .item-list h3,
 .view-id-LineageNestedList .item-list .item-list h3 {
   float: none;
