@@ -208,6 +208,7 @@ h1.title {
 h2.title {
   font-weight: normal;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 table {
@@ -372,7 +373,7 @@ ul.links li {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   margin: 0 18px;
-  padding: 0 10px;
+  padding: 5px 10px;
 }
 
 /*
@@ -430,9 +431,9 @@ ul.links li {
 }
 
 
-/*****************************************************
- * styles for use in setting and layout out body text
- *****************************************************/
+/**********************************************************
+ * styles for use in setting and laying out out body text
+ **********************************************************/
 
 .background-content {
   float: left;
@@ -454,6 +455,9 @@ ul.links li {
   float: right;
 }
 
+.float-left {
+  float: left;
+}
 
 .smallest {
   font-size: 25%;
@@ -481,6 +485,13 @@ ul.links li {
 
 .gray {
   color: #9a9a9a;
+}
+
+.content h2 {
+  text-transform: none;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
 }
 
 /**
