@@ -152,7 +152,8 @@
   text-indent: -10000px;
 }
 
-.buildmode-teaser .node-type-event .field-title {
+.buildmode-teaser .node-type-event .field-title,
+.buildmode-teaser .node-type-event .field-link-as-title {
   margin-bottom: 2.5em;
 }
 
