@@ -227,6 +227,15 @@ h2.content-title {
   margin-top: 0;
 }
 
+h3.title {
+  font-size: 1.1em;
+  font-weight: normal;
+  line-height: 1.3em;
+  margin-top: 0.909em; /* Equivalent to 1em in the page's base font: 1 / 1.1 = 0.909 */
+  margin-bottom: 0.909em;
+  color: #407fbc; 
+}
+
 table {
   width: 100%;
 }
