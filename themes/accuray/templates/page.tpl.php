@@ -161,7 +161,8 @@
     <div id="main-wrapper"><div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
       <?php if($title || $section_title): ?>
         <div id="page-title">      
-          <h1 class="title"><?php print ($section_title ? $section_title : $title); ?></h1>
+          <!-- Using a shortened form of the title here, since some nodes' titles can be -very- long -->
+          <h1 class="title"><?php print ($section_title ? $section_title : $title_short); ?></h1>
         </div>
       <?php endif; ?>
       

@@ -121,7 +121,7 @@ function accuray_preprocess_page(&$vars, $hook) {
   }  
   
   // Prevent titles from becoming too long
-  $vars['title'] = truncate_utf8($vars['title'], $len=80, $wordsave=TRUE, $dots=TRUE);
+  $vars['title_sort'] = truncate_utf8($vars['title'], $len=80, $wordsave=TRUE, $dots=TRUE);
   $vars['section_title'] = truncate_utf8($vars['section_title'], $len=80, $wordsave=TRUE, $dots=TRUE);
       
   // To remove a class from $classes_array, use array_diff().
