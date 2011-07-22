@@ -1,6 +1,7 @@
-name = Custom Breadcrumbs
+name = Custom Breadcrumbs for Paths
 package = Custom Breadcrumbs
-description = Allows administrators to define custom breadcrumb trails for node types.
+dependencies[] = custom_breadcrumbs
+description = Provides Custom Breadcrumbs for specific paths.
 core = 6.x
 
 

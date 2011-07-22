@@ -1,6 +1,7 @@
-name = Custom Breadcrumbs
+name = Custom Breadcrumbs API
 package = Custom Breadcrumbs
-description = Allows administrators to define custom breadcrumb trails for node types.
+dependencies[] = custom_breadcrumbs
+description = Provides a simple API to set breadcrumbs on module pages not served by other custom breadcrumbs submodules.
 core = 6.x
 
 

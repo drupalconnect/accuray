@@ -1,6 +1,8 @@
-name = Custom Breadcrumbs
+name = Custom Breadcrumbs for Views
 package = Custom Breadcrumbs
-description = Allows administrators to define custom breadcrumb trails for node types.
+dependencies[] = custom_breadcrumbs
+dependencies[] = views
+description = Provides Custom Breadcrumbs for views pages.
 core = 6.x
 
 

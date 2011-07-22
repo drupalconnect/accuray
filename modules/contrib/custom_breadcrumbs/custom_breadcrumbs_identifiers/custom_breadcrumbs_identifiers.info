@@ -1,10 +1,8 @@
-name = Custom Breadcrumbs
+name = Custom Breadcrumbs Identifiers
 package = Custom Breadcrumbs
-description = Allows administrators to define custom breadcrumb trails for node types.
+description = Provides special identifiers for custom breadcrumbs.
+dependencies[] = custom_breadcrumbs
 core = 6.x
-
-
-
 
 ; Information added by drupal.org packaging script on 2011-07-16
 version = "6.x-2.x-dev"

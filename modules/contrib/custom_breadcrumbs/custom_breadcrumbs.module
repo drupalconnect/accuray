@@ -1,5 +1,4 @@
 <?php
-// $Id: custom_breadcrumbs.module,v 1.6.2.5.2.48 2011/01/02 20:51:22 mgn Exp $
 
 /**
  * @file
@@ -142,9 +141,7 @@ function custom_breadcrumbs_preprocess_page(&$variables) {
 function custom_breadcrumbs_init() {
   if (variable_get('custom_breadcrumbs_set_menu_breadcrumb', FALSE)) {
     // Use selected menu structure to set the breadcrumb.
-    if (custom_breadcrumbs_set_menu_breadcrumb()) {
-      $variables['breadcrumb'] = theme('breadcrumb', drupal_get_breadcrumb());
-    }
+    custom_breadcrumbs_set_menu_breadcrumb();
   }
 }
 
@@ -161,7 +158,7 @@ function custom_breadcrumbs_perm() {
 function custom_breadcrumbs_help($path, $arg) {
   switch ($path) {
     case 'admin/help#custom_breadcrumbs':
-     $output = '<p>' . t("Custom Breadcrumbs allows you to create and modify your own breadcrumbs based on node type. After enabling the module, click on Administer > Site building > Custom breadcrumbs. Select <em>Node Type</em> at the top of the page to create breadcrumbs according to node type. Other types (such as views, paths, and taxonomy) may also be present, depending on what modules have been installed.") . '</p>';
+      $output = '<p>' . t("Custom Breadcrumbs allows you to create and modify your own breadcrumbs based on node type. After enabling the module, click on Administer > Site building > Custom breadcrumbs. Select <em>Node Type</em> at the top of the page to create breadcrumbs according to node type. Other types (such as views, paths, nd taxonomy) may also be present, depending on what modules have been installed.") . '</p>';
       $output .= '<p>' . t("On the <em>Node Type</em> page, select the node type the breadcrumb will apply to. There are two text fields below-- 'Titles' and 'Paths.' When creating  a breadcrumb, you are simply creating a link. In the custom breadcrumbs interface 'Titles' describes the text of the breadcrumb while 'Paths' describes the Drupal path the breadcrumb links to. Each Title must have a corresponding Path.") . '</p>';
       $output .= '<p>' . t("To give a very simple example of how to use this module, let's say I have a blog on my web site called 'Deep Thoughts.' To create this, I use the Views module to create a page at /blog that displays all the node types 'blog post.' Whenever a user views a blog post I want the breadcrumb to show Home > Deep Thoughts instead of simply Home. To do this I would simply type 'Deep Thoughts' in the 'Titles' field and and 'blog' in the 'Paths' field and save my breadcrumb.") . '</p>';
       $output .= '<p>' . t("Using the Tokens module, the Custom breadcrumbs module becomes much more flexible because breadcrumbs can become dynamic. You can create a breadcrumb like Home > Deep Thoughts > [Month of Blog Post] [Year of Blog Post], where 'Deep Thoughts' links to my main blog page and '[Month of Blog Post] [Year of Blog Post]' links to a view that shows only blog posts from the month and year the blog post was created (e.g. June 2007). For this, you would do the following:") . '</p>';
@@ -259,7 +256,7 @@ function custom_breadcrumbs_form_alter(&$form, $form_state, $form_id) {
       '#type'          => 'checkbox',
       '#title'         => t('Display defined custom breadcrumbs on node edit form'),
       '#description'   => t('Access is limited to users with administer custom breadcrumbs permission.'),
-      '#default_value' => variable_get('custom_breadcrumbs_show_form_table_' . $form['#node_type']->type, CUSTOM_BREADCRUMBS_TYPE_SHOW_FORM_TABLE),
+      '#default_value' => variable_get('custom_breadcrumbs_show_form_table_' . $form['#node_type']->type, CUSTOM_BREADCRUMBS_SHOW_FORM_TABLE_DEFAULT),
     );
   }
 }
@@ -314,6 +311,7 @@ function custom_breadcrumbs_set_breadcrumb($breadcrumb, $objs = array()) {
     drupal_set_breadcrumb($trail);
     // Optionally save the unique breadcrumb id of the last set breadcrumb.
     custom_breadcrumbs_unique_breadcrumb_id($breadcrumb->breadcrumb_type, $breadcrumb->bid);
+    return TRUE;
   }
 }
 
@@ -374,6 +372,18 @@ function _custom_breadcrumbs_get_breadcrumb($breadcrumb, $objs, &$locations) {
     $titles = token_replace_multiple($titles, $types);
     $paths = token_replace_multiple($paths, $types);
   }
+
+  // Optionally append the page title
+  if (variable_get('custom_breadcrumbs_append_page_title', FALSE) && !drupal_is_front_page()) {
+    $titles[] =  drupal_get_title();
+    if (variable_get('custom_breadcrumbs_append_page_title_no_link', FALSE)) {
+      $paths[] = '<none>';
+    }
+    else {
+      $paths[] = $_GET['q'];
+    }
+  }
+
   $items = _custom_breadcrumbs_get_trail_items($breadcrumb, $titles, $paths);
 
   // Use the returned items to set the trail.
@@ -532,11 +542,11 @@ function custom_breadcrumbs_home_crumb() {
     // Decode title to properly handle special characters.
     $original_title = decode_entities($hometext);
     // Extract title attribute, if present.
-    list($title, $title_attr) = explode("|", $original_title, 2);
-    if (isset($title_attr)) {
-      $options['attributes']['title'] = $title_attr;
+    $title_parts = explode("|", $original_title, 2);
+    if (isset($title_parts[1])) {
+      $options['attributes']['title'] = $title_parts[1];
     }
-    $trail = array(l($title, '<front>', $options));
+    $trail = array(l($title_parts[0], '<front>', $options));
   }
   else {
     $trail = array();
@@ -565,18 +575,21 @@ function _custom_breadcrumbs_create_crumb_items($title, $original_path, $attribu
   // Decode title to properly handle special characters.
   $original_title = decode_entities($title);
   // Extract title attribute, if present.
-  list($title, $title_attr) = explode("|", $original_title, 2);
-  if (isset($title_attr)) {
-    $attributes['attributes']['title'] = $title_attr;
+  $title_parts = explode("|", $original_title, 2);
+  $title = $title_parts[0];
+  if (isset($title_parts[1])) {
+    $attributes['attributes']['title'] = $title_parts[1];
   }
   // Collapse double slashes to one.
   $original_path = preg_replace('/\/+/', '/', $original_path);
   // Removing leading and trailing slashes.
   $original_path = preg_replace('/^\/|\/+$/', '', $original_path);
-  list($identifier, $path) = explode("|", $original_path, 2);
-  $identifier = trim($identifier);
-  // Replace identifiers provided by modules implementing hook_cb_identifier_values.
+  $path_parts =  explode("|", $original_path, 2);
   $values = NULL;
+  // Assume an identifier is present since there are some identifiers that don't use the pipe operator.
+  $identifier = trim($path_parts[0]);
+  $path = isset($path_parts[1]) ? $path_parts[1] : NULL;
+  // Replace identifiers provided by modules implementing hook_cb_identifier_values.
   $obj = array('title' => $title, 'path' => $path, 'attributes' => $attributes);
   foreach (module_implements('cb_identifier_values') as $module) {
     $values = module_invoke($module, 'cb_identifier_values', $identifier, $obj);
@@ -599,13 +612,21 @@ function _custom_breadcrumbs_create_crumb_items($title, $original_path, $attribu
     if (!isset($path)) {
       $path = $original_path;
     }
-    $options = parse_url($path);
-    $options = array_merge($options, $attributes);
-    $crumbs[] = array(
-      'crumb' => l($title, $options['path'], $options),
-      'title' => $title,
-      'href'  => $options['path'],
-    );
+    if ($path != '<none>') {
+      $options = parse_url($path);
+      $options = array_merge($options, $attributes);
+      $crumbs[] = array(
+        'crumb' => l($title, $options['path'], $options),
+        'title' => $title,
+        'href'  => $options['path'],
+      );
+    }
+    else {
+      $crumbs[] = array(
+        'crumb' => $title,
+        'title' => $title,
+      );
+    }
   }
 
   return $crumbs;
@@ -773,10 +794,20 @@ function custom_breadcrumbs_set_menu_breadcrumb() {
   }
   $menu_links = $menu_id_cache[$ckey];
   $use_menus = variable_get('custom_breadcrumbs_menu_list', array());
-
   foreach ($menu_links as $mlid => $menu_name) {
     if (in_array($menu_name, $use_menus)) {
       menu_set_active_menu_name($menu_name);
+      $breadcrumb = menu_get_active_breadcrumb();
+      if (variable_get('custom_breadcrumbs_append_page_title', FALSE) && !drupal_is_front_page()) {
+        $title = drupal_get_title();
+        if (variable_get('custom_breadcrumbs_append_page_title_no_link', FALSE)) {
+          $breadcrumb[] = $title;
+        }
+        else {
+          $breadcrumb[] = l($title, $_GET['q'], array('html' => TRUE));
+        }
+      }
+      drupal_set_breadcrumb($breadcrumb);
       return TRUE;
     }
   }

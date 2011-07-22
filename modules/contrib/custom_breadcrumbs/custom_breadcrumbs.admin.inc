@@ -1,5 +1,4 @@
 <?php
-// $Id: custom_breadcrumbs.admin.inc,v 1.1.2.3.2.33 2011/01/08 03:32:24 mgn Exp $
 /**
  * @file
  * Admin page callback file for the custom_breadcrumbs module.
@@ -385,6 +384,27 @@ function custom_breadcrumbs_admin_settings() {
     '#title'         => t('Home breadcrumb text'),
     '#default_value' => variable_get('custom_breadcrumb_home', t('Home')),
     '#description'   => t('This text will be displayed as the first item of the breadcrumb trail. Typically Home or your site name. Leave blank to have no home breadcrumb. You can also specify a title attribute (tooltip text) to add to the link. Just separate the crumb text and the title attribute text with a pipe (|) symbol (i.e. Home crumb text|attribute title text).'),
+  );
+
+  $form['settings']['custom_breadcrumbs_append_page_title_fieldset'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Page Title'),
+    '#collapsible'   => TRUE,
+    '#collapsed'     => FALSE,
+  );
+
+  $form['settings']['custom_breadcrumbs_append_page_title_fieldset']['custom_breadcrumbs_append_page_title'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Append page title'),
+    '#default_value' => variable_get('custom_breadcrumbs_append_page_title', FALSE),
+    '#description'   => t('Append the page title at the end of every breadcrumb.'),
+  );
+
+  $form['settings']['custom_breadcrumbs_append_page_title_fieldset']['custom_breadcrumbs_append_page_title_no_link'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Use plain text page title crumb'),
+    '#default_value' => variable_get('custom_breadcrumbs_append_page_title_no_link', FALSE),
+    '#description'   => t('Enable this option to remove the link from the appended page title crumb.'),
   );
 
   $form['settings']['custom_breadcrumbs_menu_structure'] = array(

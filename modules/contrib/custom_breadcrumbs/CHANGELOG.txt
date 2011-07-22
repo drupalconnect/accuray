@@ -1,0 +1,176 @@
+Issue #871564 by MGN: Added missing instructions on the use of php tags.
+Issue #846948 by james.williams and MGN: New feature adds panel variant support.
+Issue #1130618 by luigisa: Fixes bug in stripping out language prefix on path breadcrumbs.
+Issue #1119910 by stella: Fixes bug resulting in stale menu breadcrumb.
+Issue #1054830 by rv0 and MGN: Removed incorrect line from hook_init.
+Issue #1071978 by MGN: New feature to append page title on all custom breadcrumbs.
+Issue #480774 (revisited) by roderik and MGN: Fixes bug in failing to include
+the custom_breadcrumbs.admin.inc to provide the simple_breadcrumb_table in
+custom_breadcrumbs_taxonomy module.
+Issue #839222 by roderik: Fixes bug in setting the correct weight of
+the custom_breadcrumbs_taxonomy module.
+Issue #1049558 by AlexisWilke: Fixes E_NOTICE error.
+Issue #1058290 by fivefrank: Do not show Custom Breadcrumbs for Taxonomy form
+when adding a taxonomy term or vocabulary.
+Issue #1089844 by MGN: Make the use of most recent term optional for cb_taxonomy.
+Issue #1022632 by MGN: Make use of session variables optional for anonymous users.
+Issue #1021238 by MGN: Fix problems with breadcrumb caching for anonymous users.
+#1020808 by MGN: Fixes E_NOTICE because of list() usage.
+#901366 by MGN: New feature allows a title attribute (tooltip text) to be
+specified for each crumb.
+* by MGN: Fixing minor formatting inconsistencies and deleting persistent 
+variables when uninstalling.
+#1002568 by awolfey and MGN: New feature provides option to Wrap <none> in span 
+tags in custom_breadcrumbs_identifier.
+#872898 by MGN: Fix custom_breadcrumbs_unique_breadcrumb_id() so it does not 
+return a value even when a custom breadcrumb has not been set.
+#864534 by MGN: Allow for more than one taxonomy term page.
+#797470 by Sohodojo Jim and MGN: Use depth of first wildcard to determine best 
+matching path.
+#796668 by mrfelton: Fix to allow the use menu structure option to work 
+correctly when a node is placed into multiple menus.
+#944756 by MGN: Use variables array to provide objects for token substituion in 
+hook_preprocess functions.
+#934316 by MGN: Use hook_preprocess_page instead of hook_preprocess when 
+providing global home and paths-based breadcrumbs.
+#898750 by MGN: Allow custom breadcrumbs taxonomy to work with taxonomy term 
+pages that have overriden by panels.
+#932716 by wapnik: Fixes E_NOTICE warning.
+#884370 by murraybiscuit and MGN: Fixed pathauto special identifier code to 
+work the latest version of the pathauto_cleanstring function.
+#872926 by MGN: Added documentation on the use of php tags in breadcrumb 
+visibility field.
+#882010 by MGN: Fixed bug in breadcrumb caching that prevented custom 
+breadcrumbs from being set for module pages.
+#661346 by MGN: New feature implements hook_content_extra_field to manage and 
+edit the custom breadcrumbs fieldset on node pages.
+#839222 by MGN: Ensure that custom_breadcrumbs_taxonomy has a greater weight 
+than i18ntaxonomy.
+#792460 by kndr: Fixes incorrect default value of 
+custom_breadcrumbs_taxonomy_show_current_term_term.
+* by MGN: Reduce database queries when finding module weights.
+#820686 by MGN: Provide custom breadcrumbs for panel pages stored in code.
+#697674 by MGN: Fixes custom_breadcrumbs_panels to work with panel node
+templates.
+* by MGN: sanitize user input for and avoid fatal errors due to non existant 
+files in taxonomy breadcrumbs.
+#734758 by andyceo and MGN: Fix typos on module pages and README.txt file.
+Improve documentation.
+#643796 by heyyo, Danny_Joris, and MGN: New feature adds css classes to custom
+breadcrumb items.
+#739600 by andyceo and MGN: Integration with Image Gallery module.
+#721708 by dereine and MGN: Use display_plugin name to identify allowed
+displays for custom breadcrumbs.
+#714450 by marrch_caat and MGN: Node data can be corrupted by PHP snippet
+evaluation.
+#723704 by MGN: Fix assignment of template breadcrumb variable.
+#701902 by MGN: Do not attempt to validate form if php is used in titles and
+paths.
+#680026 by MGN: Fix to properly process default arguments in views.
+#627792 by MGN: Move hook_init code into hook_preprocess.
+#658586 by jcmarco and Dave Reid: Add support for vertical tabs.
+#667132 by MGN: Fix bug in custom_breadcrumbs_taxonomy breadcrumb with
+non-default language.
+* by MGN: cleanup custom_breadcrumbs_taxonomy code.
+#658296 by MGN: New feature to provide an option to show the current taxonomy
+term in the breadcrumb trail.
+#664538 by maijs: Add support for free tags.
+#678208 by MGN: Provide views object when defining breadcrumb titles and paths
+using php.
+* by MGN: Strip php tags in titles and paths if user doesn't have appropriate
+permission to use php.
+* by MGN: Updating README.txt
+* by MGN: Code, comment, and translatable strings cleanup.
+#644512 by MGN: Changing module weights can break CB settings form.
+#623274 by guix: Fix processing of multiple views arguments.
+#616976 by MGN: Correctly identify taxonomy term page for taxonomy type
+breadcrumbs.
+#540766 by MGN: New feature to provide custom breadcrumbs according to theme 
+template.
+#594394 by MGN: Require php code tags when using php for titles and paths.
+* by MGN: Allow strings used for page titles to be translated.
+* by MGN: Code and UI cleanup.
+* by MGN: New feature to prevent custom breadrumbs from modifying the
+breadcrumbs for some pages by path.
+#595066 by MGN: New feature to select menus to be used to provide custom
+breadcrumbs based on menu structure.
+* by MGN: Delete all custom breadcrumbs variables when the module is
+uninstalled.
+#533784 by MGN: New feature provides an option that allows the use of php in
+titles and paths.
+#583550 by MGN: New feature allows the admin to name breadcrumbs to make them
+easier to find.
+#584246 by MGN: Improved handling of custom breadcrumbs for views with explicit
+arguments and multiple displays.
+#582636 by MGN: Permit blank breadcrumbs when title is set to <none>.
+#581550 by MGN: Fixed a bug that prevented default views from being listed on
+the add custom breadcrumb for view form.
+#543536 by MGN and gapple. Remove double, leading, and trailing slashes from 
+paths.
+#574844 by MGN: Fixed incorrect uses of t().
+* by MGN: Added custom_breadcrumbsapi submodule. This module provides a simple
+          api to allow custom breadcrumbs to be defined for specified module 
+          pages. To implement this, module developers need to implement a
+          hook_custom_breadcrumbsapi function and add a single line of code in
+          each page callback function. Details are specified in README.txt.
+* by MGN: Fixed a bug in custom_breadcrumbs_path_cb_node_form_table to allow 
+path breadcrumbs with wildcards to be listed in the custom breadcrumbs fieldset
+ on the node edit page.
+#513702 by MGN: Improve selection of path breadcrumb when wildcards are present.
+* by MGN: Improved token replacement for views with arguments.
+* by MGN: New feature to use most recent term (instead of lightest term) for 
+better breadcrumbs for nodes that have several taxonomy terms.
+#554918 by MGN: rewrite get lightest term function to account for weights of 
+parent terms.
+#543968 by MGN: New feature to support breadcrumbs with query strings.
+#539416 by MGN: Fix coding errors producing php warnings.
+#538180 by MGN: Taxonomy Breadcrumb should not show current term on term page 
+by default.
+#407052 by MGN and vthirteen: Added documentation to amplify what can be done 
+using the advanced option to set the home breadcrumb sitewide (or remove it 
+entirely).
+#516704 by MGN: Breadcrumb support for delegated (panel) pages.
+#519608 by MGN and realityloop: Do not provide a view breadcrumb if the view is
+embeded in a panel page.
+* by MGN: Do not rebuild theme registry unless force active trail option is
+changed.
+* by MGN: New feature to optionally adjust custom breadcrumb module weights via 
+dragable table on the custom breadcrumbs settings form.
+#532618 by dan3h and MGN: Wrong vocabulary-name shown for term (using
+multiple-vocabularies).
+#530638 by MGN: Fatal error when running update.php.
+* by MGN: corrected various coding problems leading to E_NOTICE warnings.
+* by MGN: consolidate some common functions used by submodules into new file 
+custom_breadcrumbs_common.inc
+#523678 by MGN: New feature to provide option for Home breadcrumb text to
+replace "Home" on all pages.
+#521000 by MGN: Title and path for custom vocabulary and term breadcrumbs
+doesn't work well.
+#519524 by MGN: Name not displayed correctly with 3 level deep taxonomy terms.
+#517010 by MGN: Wrong custom breadcrumb on view with multiple pages.
+#510716 by pinkradical: Path strings are case sensitive.
+* by MGN: corrected various coding problems leading to E_NOTICE warnings.
+* by MGN: modified custom_breadcrumbs_token_types to accept multiple objects as
+an array for improved token replacement.
+#516060 by MGN: Malformed Taxonomy Breadcrumb.
+#501308 by MGN: New feature to allow the taxonomy breadcrumb to be appended to
+the existing breadcrumb and work with views.
+#513652 by nicholasThompson: Update_6001 has invalid use of db_add_field.
+* by MGN: corrected hook_theme omission for custom breadcrumbs help identifiers.
+* by MGN: corrected various coding problems leading to E_ALL warnings.
+* by MGN: corrected inappropriate use of t().
+* by MGN: fixed typo in module_load_include statements.
+#485062 by MGN: New feature to provide breadcrumb for views based on menu tree.
+#493966 by MGN: Allow custom breadcrumbs to be defined for calendar view pages.
+#490532 by MGN: New feature to use hook_init to provide breadcrumbs for menu 
+items (module pages).
+#491326 by MGN: Fix to ensure that pathauto.inc is loaded if pathauto is
+enabled and prevent breadcrumb from being set without a defined custom breadcrumb.
+* by MGN: Load the first node of a view for token replacement.
+* by MGN: Use hook_views_pre_render() instead of hook_menu_alter() in
+custom_breadcrumbs_views().
+#481730 by MGN: Description about wildcard matching is incorrect and misleading.
+#484496 by MGN: Custom_breadcrumbs.install should not use t() in hook_schema().
+#483060 by MGN: New feature to allow for named anchors in breadcrumbs paths.
+#472068 by Xano and MGN: Improve hook_menu_alter override for modules claiming
+taxonomy/term/tid pages.
