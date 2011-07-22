@@ -155,3 +155,12 @@
 .buildmode-teaser .node-type-event .field-date {
   float: right;
 }
+
+.buildmode-teaser .node-type-event .field-short-address {
+  float: right;
+  clear: right;
+}
+
+.buildmode-teaser .node-type-event .field-body {
+  clear: both;
+}

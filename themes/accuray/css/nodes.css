@@ -152,6 +152,10 @@
   text-indent: -10000px;
 }
 
+.buildmode-teaser .node-type-event .field-title {
+  margin-bottom: 2.5em;
+}
+
 .buildmode-teaser .node-type-event .field-date {
   float: right;
 }
