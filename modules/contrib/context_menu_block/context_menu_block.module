@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ * Provides support for Context within the Menu Block module.
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function context_menu_block_help($section) {
+  switch ($section) {
+    case 'admin/help#context_menu_block':
+      $readme = '<p>' . t('Context: Menu Block allows the Menu Block module to be aware of contexts provided by the Context module by informing menu blocks of active menu context reactions.') . '</p>';
+      $readme .= '<p>' . t('For a full description of the module, visit <a href="@url">the project page</a>.',
+        array(
+          '@url' => url('http://drupal.org/project/context_menu_block'),
+        )) . '</p>';
+      $readme .= '<p>' . t('To submit bug reports and feature suggestions, or to track changes, visit <a href="@url">the issue queue</a>.',
+        array(
+          '@url' => url('http://drupal.org/project/issues/context_menu_block'),
+        )) . '</p>';
+
+      $readme .= '<h2>' . t('Requirements') . '</h2>';
+      $readme .= '<ul>';
+      $readme .= '<li>' . t('Drupal 6') . '</li>';
+      $readme .= '<li>' . t('<a href="@url">Menu Block</a> 2',
+        array(
+          '@url' => url('http://http://drupal.org/project/menu_block'),
+        )) . '</li>';
+      $readme .= '<li>' . t('<a href="@url">Context</a> 3',
+        array(
+          '@url' => url('http://http://drupal.org/project/context'),
+        )) . '</li>';
+      $readme .= '</ul>';
+
+      $readme .= '<h2>' . t('Installation and Configuration') . '</h2>';
+      $readme .= '<p>' . t('Install as usual. See the <a href="@url">handbook page on installing contributed modules</a> for further information.',
+        array(
+          '@url' => url('http://drupal.org/getting-started/install-contrib/modules'),
+        )) . '</p>';
+      $readme .= '<p>' . t('If your context reaction uses a second or higher level menu item, the menu block for the menu must have <em>Expand all children of this tree</em> selected in its block configuration.') . '</p>';
+
+      $readme .= '<h2>' . t('Contact') . '</h2>';
+      $readme .= '<p>' . t('The current maintainer is Mark Trapp. You can contact him through his <a href="@url">Drupal user page</a>.',
+        array(
+          '@url' => url('http://drupal.org/user/212019'),
+        )) . '</p>';
+
+      $readme .= '<h2>' . t('Acknowledgements') . '</h2>';
+      $readme .= '<p>' . t('Context Menu Block is borne from the module created by <a href="@url-nauthiz693">Luke Berg</a> and <a href="@url-niklp">Nik LePage</a> in <a href="@url-issue">issue #751700</a>. It contains additonal bug fixes and provides Context 3 support.',
+        array(
+          '@url-nauthiz693' => url('http://drupal.org/user/728256'),
+          '@url-niklp' => url('http://drupal.org/user/71221'),
+          '@url-issue' => url('http://drupal.org/node/751700'),
+        )) . '</p>';
+
+      return $readme;
+  }
+}
+
+/**
+ * Implementation of hook_menu_block_tree_alter().
+ */
+function context_menu_block_menu_block_tree_alter(&$tree, $config) {
+  // Only modify menu block if the right version of Context is enabled and the
+  // active trail hasn't already been set.
+  if (variable_get('context_menu_block_validate', TRUE) && !_context_menu_block_has_active_trail($tree)) {
+    $active_paths = _context_menu_block_active_values('menu');
+    context_menu_tree_add_active_path($tree, $active_paths);
+  }
+}
+
+/**
+ * Check to see if a menu tree already has an active trail.
+ *
+ * @param $tree
+ *   array The unrendered menu tree.
+ * @return
+ *   bool True if the menu tree has an active trail, false if otherwise.
+ */
+function _context_menu_block_has_active_trail($tree) {
+  foreach ($tree as $item) {
+    if ($item['link']['in_active_trail']) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Return the active values for a given context.
+ *
+ * @param $context_name
+ *   string The name of the context.
+ * @return
+ *   array The active values for the context.
+ */
+function _context_menu_block_active_values($context_name) {
+  $contexts = context_get();
+  $active_values = array();
+
+  // If there aren't any contexts available, then there aren't any active values.
+  if (empty($contexts['context'])) {
+    return $active_values;
+  }
+
+  foreach ($contexts['context'] as $context) {
+    if ($context->reactions && array_key_exists($context_name, $context->reactions)) {
+      $active_values[] = $context->reactions[$context_name];
+    }
+  }
+
+  return $active_values;
+}
+
+/**
+ * Add the active trail indicators into the tree based on context.
+ *
+ * @param $tree
+ *   array The menu tree.
+ * @param $active_paths
+ *   array The active paths defined by Context.
+ * @return
+ *   bool True if an active trail match has been found, false if otherwise.
+ */
+function context_menu_tree_add_active_path(&$tree, $active_paths) {
+
+  foreach (array_keys($tree) as $key) {
+    if (!empty($tree[$key]['link']['href']) && in_array($tree[$key]['link']['href'], $active_paths)) {
+      // Set the active trail.
+      $tree[$key]['link']['in_active_trail'] = TRUE;
+
+      // The Drupal Way is to only set the active menu when the page is actually
+      // the active page. However, the context reaction is supposed to set the
+      // active menu. So, we need to "fake" the active menu by styling the link
+      // as active.
+      if (isset($tree[$key]['link']['localized_options']['attributes']['class'])) {
+        $tree[$key]['link']['localized_options']['attributes']['class'] .= ' active';
+      }
+      else {
+        $tree[$key]['link']['localized_options']['attributes']['class'] = 'active';
+      }
+
+      // Found a match, so break the recursion.
+      return TRUE;
+    }
+    elseif (!empty($tree[$key]['below'])) {
+      // Check the child menu to see if the active path can be matched.
+      $tree[$key]['link']['in_active_trail'] = context_menu_tree_add_active_path($tree[$key]['below'], $active_paths);
+
+      // If a match has been found, break the recursion.
+      if ($tree[$key]['link']['in_active_trail']) {
+        return TRUE;
+      }
+    }
+  }
+
+  // If we didn't find an active item, return FALSE.
+  return FALSE;
+}

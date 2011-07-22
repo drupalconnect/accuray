@@ -1,0 +1,31 @@
+Context: Menu Block Module 6.x
+
+Context: Menu Block 6.x-3.0
+---------------------------
+Final 3.0 release.
+
+Context: Menu Block 6.x-3.0-rc2
+-------------------------------
+#1065802 by silloyd, Mark Trapp: Drupal install fails if Context: Menu Block is present
+
+Context: Menu Block 6.x-3.0-rc1
+-------------------------------
+#1060078 by Mark Trapp: Provide better documentation
+#1059560 by Mark Trapp: Remove support for Context 6.x-2.x
+
+Context: Menu Block 6.x-3.0-beta3
+---------------------------
+#850902 by NikLP: .cvsignore should not be in Drupal repository
+#945068 by amorfati: Context Menu Block assumes Menu reactions are not empty
+
+Context: Menu Block 6.x-3.0-beta2
+---------------------------
+#832684 by amorfati: Branches should test for Context API features.
+
+Context: Menu Block 6.x-3.0-beta1
+---------------------------------
+Initial release for Context 3.
+
+Context: Menu Block 6.x-2.0-beta1
+---------------------------------
+Initial release for Context 2.
