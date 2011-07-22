@@ -46,8 +46,7 @@
 
 /*
  * ND / DS fields
- */
-.field-title h3, 
+ */ 
 .field-title /* make paragraph titles like h3s */ {
   font-size: 1.1em;
   font-weight: normal;
