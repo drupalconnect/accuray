@@ -11,8 +11,3 @@
 .front #content .section {
   border: none;
 }
-
-.front .panels-ipe-display-container .panels-flexible-row-last .panels-flexible-region {
-  float: left;
-  width: 33.2%;
-}

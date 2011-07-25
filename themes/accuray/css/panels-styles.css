@@ -129,6 +129,8 @@ h2.pane-title {
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
+  margin-right: 0;
+  padding-right: 0;
 }
 
 #mini-panel-header .addthis_toolbox {

@@ -132,7 +132,7 @@ h2.pane-title {
 }
 
 #mini-panel-header .addthis_toolbox {
-  margin-right:23px;
+  margin-right: 23px;
 }
 
 /**
