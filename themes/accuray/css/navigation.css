@@ -82,7 +82,8 @@ li a.active {
   border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
-  font-size: 0.8em; 
+  font-size: 0.8em;
+  word-wrap: normal; /* fixes wrapping in IE */ 
 }
 
 .breadcrumb,
