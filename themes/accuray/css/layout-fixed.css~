@@ -145,7 +145,7 @@ body {
 .with-navigation-and-title .region-sidebar-first,
 .with-navigation-and-title .region-sidebar-second {
   /*margin-top: 2.3em; /* Set this to the same value as the navigation height + page-title height above. */
-  margin-top: 6.7em;
+  margin-top: 6.966em; /* height of navigation and title, plus 14px */
 }
 
 #navigation .section {

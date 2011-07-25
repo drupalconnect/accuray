@@ -96,10 +96,15 @@ h2.pane-title {
 
 .pane-menu-menu-stay-in-touch {
   margin-right:23px;
+  padding-top: 0.4em; /* brings it down to the same horizontal as the form text */
 }
 
 .pane-menu-menu-stay-in-touch .pane-content {
   float: left;
+}
+
+#pane-block-addthis {
+  padding-top: 0.4em;
 }
 
 #mini-panel-header ul.menu li, 

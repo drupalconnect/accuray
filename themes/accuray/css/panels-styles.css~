@@ -93,6 +93,12 @@ h2.pane-title {
   margin-left: -7em;
 }
 
+
+.pane-menu-menu-stay-in-touch {
+  margin-right:23px;
+  padding-top: 0.4em; /* brings it down to the same horizontal as the form text */
+}
+
 .pane-menu-menu-stay-in-touch .pane-content {
   float: left;
 }
@@ -119,6 +125,10 @@ h2.pane-title {
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
+}
+
+#mini-panel-header .addthis_toolbox {
+  margin-right:23px;
 }
 
 /**
