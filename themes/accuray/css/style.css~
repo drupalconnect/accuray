@@ -7,6 +7,10 @@
   margin-right: 0;
 }
 
+#mini-panel-header ul.menu li.leaf.last {
+  margin-right: 20px;
+}
+
 /* Remove border on home page and adjust horizontal spacing - issue #754 */
 .front #content .section {
   border: none;

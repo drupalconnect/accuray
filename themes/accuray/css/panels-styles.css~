@@ -116,15 +116,15 @@ h2.pane-title {
   margin-right: 0;
 }
 
-#mini-panel-header ul.menu li.leaf.last {
-  margin-right:-12px;
-}
-
 #mini-panel-header .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
   border-right: 1px solid #4d4d4d;
   margin-right: 0.5em;
   padding-right: 0.5em;
   text-transform: uppercase;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li.last {
+  margin-right: 0;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
