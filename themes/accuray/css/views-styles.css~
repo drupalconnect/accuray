@@ -40,6 +40,7 @@
 .view-id-VocabularyOverview .item-list ul,
 .view-id-LineageNestedList .item-list ul {
   padding: 0;
+  margin-top: 0;
 }
 
 .view-id-VocabularyOverview .item-list ul li,
@@ -62,7 +63,7 @@
 }
 
 .view-Slideshow .view-content {
-  position: relative;
+  //position: relative;
 }
 
 .views_slideshow_singleframe_slide {
