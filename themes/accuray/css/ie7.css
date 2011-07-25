@@ -1,0 +1,12 @@
+/*fixes distance between top of slides and bottom of navigation */
+#content-area  #panel-page-home {margin-top: -11px;}
+
+/*fixes distance betweent bottom of slides and top of triptych */
+#content-area #panel-page-home .panels-flexible-row-inside.panels-flexible-row-inside-last .panels-flexible-region {margin-top:3px; }
+
+/*fixes problem of text appearing on submit button in header area*/
+#header #search-block-form input#edit-submit {overflow: hidden;text-indent: -999px;line-height: 0;margin-right:-7px;}
+
+/*fixing problem of background image appearing where it shouldn't*/
+#header {margin-top:0px;}
+#page-wrapper {margin-top:20px;}
