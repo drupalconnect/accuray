@@ -72,6 +72,10 @@ li a.active {
   color: #FFF;
 }
 
+#navigation #main-menu li.last {
+  float: right; /* no kidding. This was really important to them, to get that last item separated from the others */
+}
+
 .breadcrumb /* moved here since now it's part of navigation (which it is, semantically, anyway) */ {
   padding-left: 10px;
   background: #023064 url(../images/navigation-gradient-short.png) left top repeat-x;

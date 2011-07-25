@@ -93,12 +93,26 @@ h2.pane-title {
   margin-left: -7em;
 }
 
+
+.pane-menu-menu-stay-in-touch {
+  margin-right:23px;
+}
+
 .pane-menu-menu-stay-in-touch .pane-content {
   float: left;
 }
 
+#mini-panel-header ul.menu li, 
+#mini-panel-header #secondary-navigation li {
+  list-style-image:none;
+}
+
 #mini-panel-header .pane-menu-secondary-links ul.menu li {
   margin-right: 0;
+}
+
+#mini-panel-header ul.menu li.leaf.last {
+  margin-right:-12px;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
@@ -110,6 +124,10 @@ h2.pane-title {
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
   border-right: 0 none;
+}
+
+#mini-panel-header .addthis_toolbox {
+  margin-right:23px;
 }
 
 /**
@@ -268,4 +286,8 @@ h2.pane-title {
 
 #panel-page-home .panels-flexible-row-first .panel-pane {
   padding: 0;
+}
+
+#panel-page-home .panels-flexible-row-inside-last .panels-flexible-region {
+  width:308px; 
 }

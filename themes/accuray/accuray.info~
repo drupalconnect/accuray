@@ -48,6 +48,7 @@ stylesheets[print][] = css/print.css
   ; Set the conditional stylesheets that are processed by IE.
 conditional-stylesheets[if IE][all][]       = css/ie.css
 conditional-stylesheets[if lte IE 6][all][] = css/ie6.css
+conditional-stylesheets[if lte IE 7][all][] = css/ie7.css
 
   ; Optionally add some JavaScripts to your theme.
 ; scripts[] = js/script.js
@@ -70,6 +71,7 @@ regions[content_bottom] = Content bottom
 regions[header]         = Header
 regions[footer]         = Footer
 regions[page_closure]   = Page closure
+regions[secondary_navigation] = Secondary navigation
 
   ; Various page elements output by the theme can be toggled on and off. The
   ; "features" control which of these check boxes display on the

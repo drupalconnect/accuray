@@ -59,6 +59,7 @@ body {
  * Header
  */
 #header {
+  margin-top: 20px;
 }
 
 #header .section {
@@ -272,6 +273,7 @@ tr.error /* High priority messages. See also the .error declaration below. */ {
 }
 
 div.tabs /* See also the tabs.css file. */ {
+  margin-bottom: 0;
 }
 
 .help /* Help text on a page */ {

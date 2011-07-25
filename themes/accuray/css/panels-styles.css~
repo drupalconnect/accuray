@@ -97,8 +97,17 @@ h2.pane-title {
   float: left;
 }
 
+#mini-panel-header ul.menu li, 
+#mini-panel-header #secondary-navigation li {
+  list-style-image:none;
+}
+
 #mini-panel-header .pane-menu-secondary-links ul.menu li {
   margin-right: 0;
+}
+
+#mini-panel-header ul.menu li.leaf.last {
+  margin-right:-12px;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
@@ -251,7 +260,7 @@ h2.pane-title {
 }
 
 #panel-page-home .panels-flexible-row-first {
-  margin: 0;
+  padding: 0;
 }
 
 #panel-page-home .panels-flexible-row-first .panels-flexible-region {
@@ -268,4 +277,8 @@ h2.pane-title {
 
 #panel-page-home .panels-flexible-row-first .panel-pane {
   padding: 0;
+}
+
+#panel-page-home .panels-flexible-row-inside-last .panels-flexible-region {
+  width:308px; 
 }

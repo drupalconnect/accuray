@@ -163,7 +163,12 @@ ul.menu li a.menu_icon {
 #secondary-navigation #block-menu-menu-footer-links-right ul li {
   float: left;
   list-style: inside none;
+  padding-right:8px;
 }
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li.last {
+  padding-right:0px;
+} 
 
 #secondary-navigation #block-menu-menu-footer-links-right ul li a {
   color: #fff;
