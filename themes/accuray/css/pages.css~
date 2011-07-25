@@ -273,7 +273,7 @@ tr.error /* High priority messages. See also the .error declaration below. */ {
 }
 
 div.tabs /* See also the tabs.css file. */ {
-  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .help /* Help text on a page */ {
