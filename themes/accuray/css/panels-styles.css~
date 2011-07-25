@@ -103,6 +103,10 @@ h2.pane-title {
   float: left;
 }
 
+#pane-block-addthis {
+  padding-top: 0.4em;
+}
+
 #mini-panel-header ul.menu li, 
 #mini-panel-header #secondary-navigation li {
   list-style-image:none;
