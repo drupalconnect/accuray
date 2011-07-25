@@ -462,21 +462,7 @@ ul.links li {
  * styles for use in setting and laying out out body text
  **********************************************************/
 
-.background-content {
-  float: left;
-  width: 100%;
-  margin-right: -100%;
-  overflow: auto;
-}
 
-.background-content img {
-  width: 100%;
-}
-
-.foreground-content {
-  float: left;
-  width: 100%;
-}
  
 .float-right {
   float: right;

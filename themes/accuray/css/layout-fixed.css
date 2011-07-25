@@ -125,28 +125,27 @@ body {
 }
 
 .with-navigation #page-title {
-  margin-top: 3.8em;
+  margin-top: 4.238em; /* 3.8 (height of navigation) + 0.438 (for 7px additional space) = 4.238 */
 }
 
 .with-navigation #content,
 .with-navigation .region-sidebar-first,
 .with-navigation .region-sidebar-second {
-  /*margin-top: 2.3em; /* Set this to the same value as the navigation height above. */
-  margin-top: 3.8em;
+
+  margin-top: 4.238em; /* 3.8 (height of navigation) + 0.438 (for 7px additional space) = 4.238 */
 } 
 
 .with-title #content,
 .with-title .region-sidebar-first,
 .with-title .region-sidebar-second {
-  /*margin-top: 2.3em; /* Set this to the same value as the navigation height above. */
-  margin-top: 4.3em;
+  margin-top: 2.738em; /* 2.3 (height of title) + 0.438 (for 7px additional space) = 2.738) */
 }
 
 .with-navigation-and-title #content,
 .with-navigation-and-title .region-sidebar-first,
 .with-navigation-and-title .region-sidebar-second {
   /*margin-top: 2.3em; /* Set this to the same value as the navigation height + page-title height above. */
-  margin-top: 6.7em;
+  margin-top: 6.966em; /* height of navigation and title, plus 14px */
 }
 
 #navigation .section {
