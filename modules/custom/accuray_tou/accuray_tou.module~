@@ -117,9 +117,6 @@ function accuray_tou_nodeapi(&$node, $op) {
  */
 function accuray_tou_aggreement_form($form_state, $vid=0) {
   $form = array();    
-  
-  $accepted_vid = $_SESSION['accuray_tou_accepted'];
-  dpm($accepted_vid);
 
   if ($vid) {  
     $form['tou_agreement_vid'] = array(
