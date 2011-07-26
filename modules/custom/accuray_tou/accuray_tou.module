@@ -1,0 +1,174 @@
+<?php
+/**
+ * Very loose implementation of Terms of Use security on vocabularies, for use with toolkits.
+ * The ToU is session based, so whenever the user starts a new session they will be required
+ * to renew their agreement. Agreement to the ToU is not connected with any access control.
+ */
+
+
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function accuray_tou_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+/**
+ * Implementation of hook_form_alter
+ * 
+ * Put ToU options on the content type settings form.
+ */
+function accuray_tou_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'node_type_form') {
+    $form['accuray_tou'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Accuray terms of use settings',
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      );
+      
+    $form['accuray_tou']['accuray_tou_enable'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Enable this type for use as terms of use node',
+      '#default_value' => variable_get('accuray_tou_enabled_'. $form['#node_type']->type, FALSE),
+      );
+    $form['#submit'][] = 'accuray_tou_form_type_settings_submit';
+  }
+  
+  // Add settings into the vocabulary settings form
+  if (!strcmp('taxonomy_form_vocabulary', $form_id)) {
+    $form['accuray_tou_settings'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Accuray terms of use settings',
+      '#collapsible' => TRUE,
+      '#collpased' => FALSE,
+      );
+    
+    // Get types enabled for use as tou
+    $types = content_types();
+    
+    foreach ($types as $type => $info) {
+      if (variable_get('accuray_tou_enabled_' . $type)) {
+        $enabled[] = $type;
+      }
+    }
+
+    // Find all nodes of the enabled types
+    $result = db_query("SELECT nid, title FROM {node} WHERE type IN (" . db_placeholders($enabled, 'varchar') . ") ORDER BY title", $enabled);
+
+    // Build an options array
+    $options[0] = t('No selection');
+    
+    while ($row = db_fetch_object($result)) {
+      $options[$row->nid] = $row->title . ' [nid: ' . $row->nid . ']';
+    }
+
+    $form['accuray_tou_settings']['tou_nid'] = array(
+      '#type' => 'select',
+      '#title' => 'TOU Node',
+      '#description' => 'Select the node to use for terms of use on this vocabulary and its terms',
+      '#options' => $options,
+      '#default_value' => variable_get('accuray_tou_' . $form['vid']['#value'], 0),
+      );
+    
+    $form['#submit'][] = 'accuray_tou_form_vocab_settings_submit';  
+  }
+  
+}
+
+function accuray_tou_form_type_settings_submit($form, $form_state) {
+  if ($form_state['values']['accuray_tou_enable']) {
+    variable_set('accuray_tou_enabled_' . $form_state['values']['type'], TRUE);
+  } else {
+    variable_del('accuray_tou_enabled_' . $form_state['values']['type']);
+  }
+}
+
+
+function accuray_tou_form_vocab_settings_submit($form, $form_state) {
+  if ($form_state['values']['tou_nid']) {
+    variable_set('accuray_tou_' . $form_state['vid'], $form_state['values']['tou_nid']);
+  } else {
+    variable_del('accuray_tou_' . $form_state['vid']);
+  }
+}
+
+
+/**
+ * Implementation of hook_node_view()
+ *
+ * Put the agreement form on the tou node.
+ */
+function accuray_tou_nodeapi(&$node, $op) {
+  if (!strcmp('view', $op)) {
+    $node->content['accuray_tou'] = array(
+      '#value' => drupal_get_form('accuray_tou_aggreement_form'),
+      '#weight' => 1,
+    );
+  }
+  
+  return $node;
+}
+ 
+/**
+ * Form builder for ToU agreement form 
+ */
+function accuray_tou_aggreement_form($form_state, $vid=0) {
+  $form = array();    
+
+  if ($vid) {  
+    $form['tou_agreement_vid'] = array(
+      '#type' => 'value',
+      '#value' => $vid,
+      );
+      
+    $nid = variable_get('accuray_tou_' . $vid, FALSE);
+    
+    $form['tou_agreement_nid'] = array(
+      '#type' => 'value',
+      '#value' => $nid,
+      );  
+  }
+  
+  if ($nid) {
+    $node = node_load(array('nid' => $nid));
+    $form['tou_agreement'] = array(
+      '#type' => 'textarea',
+      '#title' => 'Terms of Use',
+      '#default_value' => $node->body,
+      '#disabled' => TRUE,
+      '#description' => t('Please read and accept the above terms and conditions before continuing.'),
+      );
+  }
+  
+  $form['tou_agreement_agree'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the terms and conditions.'),
+    '#default_value' => FALSE,
+    );
+  
+  $form['tou_agreement_submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+    );
+   
+  return $form;
+}
+
+function accuray_tou_aggreement_form_submit($form, &$form_state) {
+  dpm($form_state);
+  if ($form_state['values']['tou_agreement_agree'] && $form_state['values']['tou_agreement_vid']) {
+    dpm('setting sess');
+    $_SESSION['accuray_tou_accepted'] = $form_state['values']['tou_agreement_vid'];
+  }
+}
+ 
+/**
+ * Determine whether or not to show the ToU. This functions 
+ * by redirect.
+ */
+function accuray_tou_init() {
+}
+?>

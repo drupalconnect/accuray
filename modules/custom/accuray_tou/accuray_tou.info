@@ -1,0 +1,5 @@
+; $Id: accuray_tou.info,v 1.1.2.1 2008/02/01 16:00:24 fago Exp $
+name = "Accuray terms of use"
+description = "Use content types for terms of use agreements."
+package = "Accuray"
+core = 6.x
