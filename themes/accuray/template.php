@@ -107,19 +107,25 @@ function accuray_preprocess_page(&$vars, $hook) {
    */
 
   if (drupal_match_path($_GET['q'], 'taxonomy/term/*')) {
+    dsm('Using vocabulary for title');
+    
     $term = taxonomy_get_term(arg(2));
     $vocab = taxonomy_vocabulary_load($term->vid);
     
     $vars['section_title'] = $vocab->name;
   }
   else 
-  if (!$vars['section_title'] && !drupal_match_path($_GET['q'], 'user')) {   
+  if (!$vars['section_title'] && !drupal_match_path($_GET['q'], 'user')) {
+    dsm('Using active trail for title');
+       
     $trail = menu_get_active_trail();
   
     if (count($trail) && 1 < count($trail)) {
       $vars['section_title'] = $trail[1]['title'];
     }
-  }  
+  } 
+  dsm('Title: ' . $vars['title']);
+  dsm('Section title ' . $vars['section_title']); 
   
   // Prevent titles from becoming too long
   $vars['title_sort'] = truncate_utf8($vars['title'], $len=80, $wordsave=TRUE, $dots=TRUE);
