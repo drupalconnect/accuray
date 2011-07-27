@@ -35,7 +35,6 @@ function zen_theme(&$existing, $type, $theme, $path) {
  *   A string containing the breadcrumb output.
  */
 function zen_breadcrumb($breadcrumb) {
-  dsm('doing breadcrumb');
   // Determine if we are to display the breadcrumb.
   $show_breadcrumb = theme_get_setting('zen_breadcrumb');
   if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {

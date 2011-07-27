@@ -115,7 +115,7 @@ function accuray_preprocess_page(&$vars, $hook) {
     $vars['section_title'] = $vocab->name;
   }
   else 
-  if (!$vars['section_title'] && !drupal_match_path($_GET['q'], 'user')) {
+  if (!$vars['section_title']) {
     dsm('Using active trail for title');
        
     $trail = menu_get_active_trail();
@@ -134,7 +134,7 @@ function accuray_preprocess_page(&$vars, $hook) {
   // To remove a class from $classes_array, use array_diff().
   //$vars['classes_array'] = array_diff($vars['classes_array'], array('class-to-remove'));
   //$vars['title'] = drupal_get_title();
-  if (!empty($vars['title']) || !empty($vars['section_title'])) {
+  if ($vars['title'] || $vars['section_title']) {
     $vars['classes_array'][] = 'with-title';
   }
   
