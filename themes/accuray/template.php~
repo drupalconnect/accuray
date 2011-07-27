@@ -114,8 +114,8 @@ function accuray_preprocess_page(&$vars, $hook) {
     
     $vars['section_title'] = $vocab->name;
   }
-  else 
-  if (!$vars['section_title']) {
+  
+  else if (!$vars['section_title']) {
     dsm('Using active trail for title');
        
     $trail = menu_get_active_trail();
@@ -193,38 +193,3 @@ function accuray_preprocess_block(&$vars, $hook) {
 }
 // */
 
-function accuray_breadcrumb($breadcrumb) {
-  // Make sure we always have at least the 'Home' breadcrumb
-  if (!count($breadcrumb)) {
-    $breadcrumb[] = l('Home', '<front>');
-  }
-  
-  // Determine if we are to display the breadcrumb.
-  $show_breadcrumb = theme_get_setting('zen_breadcrumb');
-  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
-
-    // Optionally get rid of the homepage link.
-    $show_breadcrumb_home = theme_get_setting('zen_breadcrumb_home');
-    if (!$show_breadcrumb_home) {
-      array_shift($breadcrumb);
-    }
-
-    // Return the breadcrumb with separators.
-    if (!empty($breadcrumb)) {
-      $breadcrumb_separator = theme_get_setting('zen_breadcrumb_separator');
-      $trailing_separator = $title = '';
-      if (theme_get_setting('zen_breadcrumb_title')) {
-        if ($title = drupal_get_title()) {
-          dsm('Zen: adding title ' . drupal_get_title());
-          $trailing_separator = $breadcrumb_separator;
-        }
-      }
-      elseif (theme_get_setting('zen_breadcrumb_trailing')) {
-        $trailing_separator = $breadcrumb_separator;
-      }
-      return '<div class="breadcrumb">' . implode($breadcrumb_separator, $breadcrumb) . "$trailing_separator$title</div>";
-    }
-  }
-  // Otherwise, return an empty string.
-  return '';
-}
