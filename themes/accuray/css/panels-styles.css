@@ -32,7 +32,7 @@ h2.pane-title {
 
 .panels-flexible-region .inside {
   padding: 4px;
-  margin: 4px;
+  margin: 0 4px;
 }
 
 .panels-flexible-region-first .inside {
