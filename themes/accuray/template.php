@@ -215,6 +215,7 @@ function accuray_breadcrumb($breadcrumb) {
       $trailing_separator = $title = '';
       if (theme_get_setting('zen_breadcrumb_title')) {
         if ($title = drupal_get_title()) {
+          dsm('Zen: adding title ' . drupal_get_title());
           $trailing_separator = $breadcrumb_separator;
         }
       }

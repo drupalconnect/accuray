@@ -115,7 +115,7 @@ function accuray_preprocess_page(&$vars, $hook) {
     $vars['section_title'] = $vocab->name;
   }
   else 
-  if (!$vars['section_title'] && !drupal_match_path($_GET['q'], 'user')) {
+  if (!$vars['section_title']) {
     dsm('Using active trail for title');
        
     $trail = menu_get_active_trail();

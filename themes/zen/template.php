@@ -50,7 +50,6 @@ function zen_breadcrumb($breadcrumb) {
       $breadcrumb_separator = theme_get_setting('zen_breadcrumb_separator');
       $trailing_separator = $title = '';
       if (theme_get_setting('zen_breadcrumb_title')) {
-        dsm('Zen: adding title ' . drupal_get_title());
         if ($title = drupal_get_title()) {
           $trailing_separator = $breadcrumb_separator;
         }
