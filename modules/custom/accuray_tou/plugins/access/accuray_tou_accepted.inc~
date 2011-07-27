@@ -43,7 +43,7 @@ function accuray_tou_accepted_access_check($conf, $context) {
     return FALSE;
   }
   
-  $nid = variable_get('accuray_tou_' . $context_data_vid, FALSE);
+  $nid = variable_get('accuray_tou_' . $context->data->vid, FALSE);
   
   // No nid is set on this vid, so there's no tou to accept. Which is equivalent to its being accepted.
   if (!$nid) {
