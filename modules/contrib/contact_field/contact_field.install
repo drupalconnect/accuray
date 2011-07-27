@@ -1,0 +1,105 @@
+<?php
+//$Id: contact_field.install,v 1.1.2.1.2.3 2010/08/03 12:54:57 beautifulmind Exp $
+
+/**
+ * @file
+ *
+ * Create tables for contact fields
+ *
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+
+
+/**
+ * Implementation of hook_install
+ *
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_install() {
+  drupal_install_schema('contact_field');
+}
+
+
+/**
+ * Implementation of hook_uninstall
+ *
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_uninstall() {
+  drupal_uninstall_schema('contact_field');
+}
+
+
+
+function contact_field_schema() {
+  $schema = array();
+  $schema['contact_fields'] = array(
+    'description' => t("Store contact fields information"),
+    'fields' => array(
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+
+      'field_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+
+      'settings' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+
+      'required' => array(
+        'type' => 'int',
+        'length' => 11,
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+
+      'enabled' => array(
+        'type' => 'int',
+        'length' => 11,
+        'default' => 1,
+        'not null' => TRUE,
+      ),
+
+      'weight' => array(
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'length' => 11,
+      ),
+      
+      'core' => array(
+        'type' => 'int',
+        'length' => 1,
+        'default' => 0,
+      ),
+      
+      'field_group' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'primary key' => array('field_name'),
+  );
+  return $schema;
+}
+
+
+
+/**
+ * Implementation of hook_update
+ */
+function contact_field_update_6020() {
+  db_query("ALTER TABLE {contact_fields} ADD core int(1) default 0");
+}
+
+/**
+ * Implementation of hook_update
+ */
+function contact_field_update_6021() {
+  db_query("ALTER TABLE {contact_fields} ADD field_group varchar(255), MODIFY weight int(11) signed default 0");
+}

@@ -1,0 +1,12 @@
+;$Id: contact_listfield.info,v 1.1.2.2 2010/03/30 06:10:24 beautifulmind Exp $
+name = Contact form list field
+description = Add select boxes on contact form
+package = Contact fields
+core = 6.x
+dependencies[] = contact_field
+; Information added by drupal.org packaging script on 2010-08-28
+version = "6.x-2.2"
+core = "6.x"
+project = "contact_field"
+datestamp = "1282972306"
+

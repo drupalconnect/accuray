@@ -1,0 +1,230 @@
+<?php
+//$Id: contact_option.module,v 1.1.2.7.2.1 2010/07/03 06:47:58 beautifulmind Exp $
+
+/**
+ * @file
+ * 
+ * Add radios and checkboxes on contact form
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+
+
+/**
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_option_info() {
+	return array(
+	  'option' => array(
+	    'type' => 'option',
+	    'title' => t("Radio/Checkbox"),
+	    'description' => t("Add opiton field on contact form"),
+	  ),
+	);
+}
+
+
+
+/**
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_add_field_option_form($form_state, $ss__field_name = NULL, $om__field_details = NULL) {
+	drupal_set_title(t("Configure option field"));
+	$form = array();
+	if (arg(3) != 'add') {
+    $om__field_details = (object) _get_field_values($om__field_details);
+    if (!empty($om__field_details->options)) {
+      foreach ($om__field_details->options as $key => $value) {
+        $ss__option .= $key ."|". $value;
+      }
+    }
+    
+    $form['#submit'] = array('contact_field_option_update');
+  }
+  else {
+    $form['#submit'] = array('contact_field_option_submit');
+    $form['#validate'] = array('contact_field_validate');
+  }
+  
+  $form['name'] = array(
+    '#type' => 'item',
+    '#title' => t("Field name"),
+    '#value' => $om__field_details->name,
+    '#description' => t("Field name can not be changed."),
+    '#weight' => -50,
+  );
+  
+  $form['contact_field_name'] = array(
+    '#type' => 'hidden',
+    '#value' => $om__field_details->name,
+  );
+  
+  
+  $form['contact_field_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Field title"),
+    '#description' => t("Provide the title of the field"),
+    '#default_value' => $om__field_details->title,
+    '#required' => TRUE,
+    '#weight' => -49,
+  );
+  
+  $form['contact_field_num_value'] = array(
+    '#type' => 'select',
+    '#title' => t("Number of value"),
+    '#description' => t("Number of values allowed to enter. If 'Single' 
+      is selected, radio buttons will appear, otherwise checkboxes will appear"),
+    '#options' => array(
+      0 => t("Single"),
+      1 => t("Multiple"),
+    ),
+    '#default_value' => $om__field_details->num_value ? $om__field_details->num_value : 0,
+    '#required' => TRUE,
+    '#weight' => -48,
+  );
+  
+  $form['contact_field_prefix'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Prefix"),
+    '#description' => t("Add prefix to add style to the field."),
+    '#default_value' => $om__field_details->prefix,
+    '#weight' => -47,
+  );
+  
+  $form['contact_field_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Suffix"),
+    '#description' => t("Add suffix to add style to the field."),
+    '#default_value' => $om__field_details->suffix ? $om__field_details->suffix : "",
+    '#weight' => -46,
+  );
+  
+  $form['contact_field_require'] = array(
+    '#type' => 'radios',
+    '#title' => t("Required?"),
+    '#description' => t("Whether this field is mandatory."),
+    '#options' => array(
+      0 => t("No"),
+      1 => t("Yes"),
+    ),
+    '#default_value' => $om__field_details->required ? $om__field_details->required : 1,
+    '#required' => TRUE,
+    '#weight' => -45,
+  );
+
+  $form['contact_field_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Display this field"),
+    '#description' => t("Check this box to make this field available on 
+      contact form."),
+    '#default_value' => $om__field_details->enabled ? $om__field_details->enabled : 1,
+    '#weight' => -44,
+  );
+
+  $form['contact_field_weight'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Weight"),
+    '#size' => 10,
+    '#description' => t("Fields with positive weight will sink. 
+      Negative weight will make the field pop up."),
+    '#default_value' => $om__field_details->weight ? $om__field_details->weight : 0,
+    '#weight' => -43,
+  );
+
+  $form['contact_field_vlaues'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Allowed values"),
+    '#description' => t("Add key-value pair in key|value format. Add each pair in separate line."),
+    '#default_value' => $ss__option,
+    '#required' => TRUE,
+    '#weight' => -42,
+  );
+
+  $form['contact_field_help'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Help text"),
+    '#description' => t("Help text will appear just beneath the field like this, 
+      to help user in filling value in the field."),
+    '#default_value' => $om__field_details->description ? $om__field_details->description : "",
+    '#weight' => -41,
+  );
+  
+  $form['contact_field_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Save configuration"),
+  );
+  
+  return $form;
+}
+
+
+/**
+ * 
+ * @param $form
+ * @param $form_values
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_option_submit($form, $form_values) {
+  $ss__num_values = $form_values['values']['contact_field_num_value'];
+  $ss__field_type = ($ss__num_values) ? 'checkboxes' : 'radios';
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['prefix'] = $form_values['values']['contact_field_prefix'];
+  $ss__field_settings['suffix'] = $form_values['values']['contact_field_suffix'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+  $am__options = explode("\n", $form_values['values']['contact_field_vlaues']);
+  foreach ($am__options as $option) {
+    $option = contact_field_filter_xss($option);
+    if (strpos($option, '|') !== FALSE) {
+      list($key, $value) = explode("|", $option);
+      $ss__field_settings['options'][$key] = $value;
+    }
+  }
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+
+  db_query("INSERT INTO {contact_fields} VALUES('%s', '%s', '%s', %d, %d, %d, %d, '%s')",
+    $ss__field_name, $ss__field_type, serialize($ss__field_settings),
+    $ss__field_required, $ss__field_enabled, $ss__field_weight, 0, NULL);
+  drupal_set_message($ss__field_settings['title'] ." ". t("created"));
+  drupal_goto('admin/build/contact/manage');
+}
+
+
+
+/**
+ * 
+ * @param unknown_type $form
+ * @param unknown_type $form_values
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_option_update($form, $form_values) {
+  $ss__num_values = $form_values['values']['contact_field_num_value'];
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_type = ($ss__num_values) ? 'checkboxes' : 'radios';
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['prefix'] = $form_values['values']['contact_field_prefix'];
+  $ss__field_settings['suffix'] = $form_values['values']['contact_field_suffix'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  
+  $am__options = explode("\n", $form_values['values']['contact_field_vlaues']);
+  foreach ($am__options as $option) {
+    var_dump($am__options);
+    $option = contact_field_filter_xss($option);
+    if (strpos($option, '|') !== FALSE) {
+      list($key, $value) = explode("|", $option);
+      $ss__field_settings['options'][$key] = $value;
+    }
+  }
+
+  db_query("UPDATE {contact_fields} SET field_type = '%s', settings = '%s', enabled = %d, 
+    required = %d, weight = %d WHERE field_name = '%s'", $ss__field_type, serialize($ss__field_settings), 
+    $ss__field_enabled, $ss__field_required, $ss__field_weight, $ss__field_name);
+  drupal_goto('admin/build/contact/manage');
+}

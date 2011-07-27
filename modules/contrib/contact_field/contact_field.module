@@ -1,0 +1,431 @@
+<?php
+//$Id: contact_field.module,v 1.1.2.14.2.7 2010/08/27 08:57:40 beautifulmind Exp $
+
+
+/**
+ * @file
+ *
+ * Add custom fields to site wide contact form
+ *
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+
+
+
+/**
+ * Implementation of hook_menu
+ * 
+ * @return $item
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_menu() {
+  $item = array();
+  $item['admin/build/contact/manage'] = array(
+    'type' => MENU_LOCAL_TASK,
+    'title' => "Manage fields",
+    'title callback' => 't',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_field_list_field'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'contact_field_admin.inc',
+    'file path' => drupal_get_path('module', 'contact_field'),
+    'weight' => 49,
+  );
+  
+  $item['admin/build/contact/display'] = array(
+    'type' => MENU_LOCAL_TASK,
+    'title' => "Message template",
+    'title callback' => 't',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_field_display_field'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'contact_field_admin.inc',
+    'file path' => drupal_get_path('module', 'contact_field'),
+    'weight' => 50,
+  );
+  
+  $item['admin/build/contact/add/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'contact_field_add_field',
+    'page arguments' => array(3, 4),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'contact_field_admin.inc',
+    'file path' => drupal_get_path('module', 'contact_field'),
+  );
+  
+  $item['admin/build/contact/%/edit'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'contact_field_add_field',
+    'page arguments' => array(3),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'contact_field_admin.inc',
+    'file path' => drupal_get_path('module', 'contact_field'),
+  );
+  
+  $item['admin/build/contact/%/delete'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'contact_field_delete_field',
+    'page arguments' => array(3),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $item;
+}
+
+
+
+/**
+ * Implementation of hook_form_alter
+ * 
+ * @param $form
+ * @param $form_state
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_form_alter(&$form, $form_state, $form_id) {
+  if (strstr($form_id, 'contact_mail') && $form_id !== 'contact_mail_user') {
+    $am__elements = _get_field_details();
+
+    if (!empty($am__elements)) {
+      foreach ($am__elements as $name => $value) {
+        $form[$name] = $value;
+      }
+    }
+
+    $r__result = db_query("SELECT field_name, weight FROM {contact_fields} WHERE core = 1");
+    while ($om__result = db_fetch_object($r__result)) {
+      $form[$om__result->field_name]['#weight'] = $om__result->weight;
+    }
+    
+    $r__weight = db_query("SELECT weight FROM {contact_fields}");
+    while ($om__weight = db_fetch_object($r__weight)) {
+      $am__weight[] = $om__weight->weight;
+    }
+
+    $form['submit']['#weight'] = max($am__weight) + 2;
+    $form['copy']['#weight'] = max($am__weight) + 1;
+    $form['contact_information']['#weight'] = min($am__weight) - 1;
+  }
+  
+}
+
+
+
+
+/**
+ * contact_field_validate
+ * 
+ * Validate the form values against specified criterias
+ * 
+ * @param $form
+ * @param $form_state
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_validate($form, $form_state) {
+  $ss__field_lable = $form_state['clicked_button']['#post']['field_label'];
+  $ss__field_name = $form_state['clicked_button']['#post']['field_name'];
+  $ss__field_type = $form_state['clicked_button']['#post']['field_type'];
+  $ss__group_label = $form_state['clicked_button']['#post']['field_group_label'];
+  $ss__group_name = $form_state['clicked_button']['#post']['field_group_name'];
+  
+  if ($ss__field_lable && empty($ss__field_name)) {
+    form_set_error('field_name', t("Please set a unique field name."));
+  }
+  
+  if ($ss__field_lable && $ss__field_name && empty($ss__field_type)) {
+    form_set_error('field_type', t("Please select a field type."));
+  }
+  
+  if ($ss__group_label && empty($ss__group_name)) {
+    form_set_error('field_group_name', t("Please set a group name."));
+  }
+  
+  $ss__field_exist = db_result(db_query("SELECT field_type FROM {contact_fields}
+    WHERE field_name = '%s'", $form_state['clicked_button']['#post']['field_name']));
+  if ($ss__field_exist) {
+    form_set_error('contact_field_name', t("A contact field with the same name already exists."));
+  }
+}
+
+
+/**
+ * _get_field_details
+ * 
+ * Return created fields
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_field_details() {
+  $r__result = db_query("SELECT * FROM {contact_fields} WHERE enabled = 1 AND 
+    core = 0 AND (field_group IS NULL OR field_group = '')");
+  while($om__result = db_fetch_object($r__result)) {
+    $am__settings = unserialize($om__result->settings);
+    $am__field[$om__result->field_name] = array(
+      '#type' => $om__result->field_type,
+      '#title' => $am__settings['title'],
+      '#required' => $om__result->required,
+      '#weight' => $om__result->weight,
+    );
+
+    foreach ($am__settings as $key => $value) {
+      if ($key != 'title' && $value != "") {
+        $am__field[$om__result->field_name]["#". $key] = $value;
+      }
+    }
+  }
+  if (module_exists('contact_field_group')) {
+    $r__result = db_query("SELECT * FROM {contact_fields} WHERE enabled = 1 AND 
+      core = 0 AND (field_group IS NULL OR field_group = '')");
+    while ($om__result = db_fetch_object($r__result)) {
+      $am__settings = unserialize($om__result->settings);
+      $am__field[$om__result->field_group][$om__result->field_name] = array(
+        '#type' => $om__result->field_type,
+        '#title' => $am__settings['title'],
+        '#parent' => array($om__result->field_name),
+        '#required' => $om__result->required,
+        '#weight' => $om__result->weight,
+      );
+      
+      foreach ($am__settings as $key => $value) {
+        if ($key != 'title') {
+          $am__field[$om__result->field_group][$om__result->field_name]["#". $key] = $value;
+        }
+      }
+    }
+  }
+  return $am__field;
+}
+
+
+
+/**
+ * contact_field_delete_field
+ * 
+ * @param string $ss__field_name
+ *  The field name to be deleted
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_delete_field($ss__field_name) {
+	if ($ss__field_name) {
+		db_query("DELETE FROM {contact_fields} WHERE field_name = '%s'", $ss__field_name);
+		drupal_goto("admin/build/contact/manage");
+	}
+	
+}
+
+
+
+/**
+ * 
+ * @param string $ss__field
+ */
+//function contact_field_edit_field($ss__field) {
+//	if ($ss__field) {
+//	  module_load_include('inc', 'contact_field', 'contact_field_admin');
+//		$ss__field_type = db_result(db_query("SELECT field_type FROM {contact_fields} 
+//	    WHERE field_name = '%s'", $ss__field));
+//	  switch($ss__field_type) {
+//	    case 'textfield':
+//	      return drupal_get_form('contact_field_add_field_text_form', $form_state, $ss__field, TRUE);
+//	  }
+//	}
+//}
+
+
+/**
+ * _get_field_values
+ * 
+ * Return all the details related to a field
+ * 
+ * @param array $ss__field
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_field_values($ss__field) {
+	if ($ss__field) {
+		$r__result_field = db_query("SELECT * FROM {contact_fields} WHERE 
+		  field_name = '%s'", $ss__field);
+		while ($om__result_field = db_fetch_object($r__result_field)) {
+			$am__field = unserialize($om__result_field->settings);
+			$am__field_value['name'] = $om__result_field->field_name;
+			$am__field_value['title'] = $am__field['title'];
+			$am__field_value['weight'] = $om__result_field->weight;
+			$am__field_value['required'] = $om__result_field->required;
+			$am__field_value['enabled'] = $om__result_field->enabled;
+			foreach ($am__field as $key => $value) {
+				$am__field_value[$key] = $value;
+			}
+		}
+		return $am__field_value;
+	}
+}
+
+
+
+/**
+ * contact_field_filter_xss
+ * 
+ * Filter the provided string for restricted html tags
+ * 
+ * @param string $ss__string
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_filter_xss($ss__string) {
+	return filter_xss($ss__string, _contact_field_allowed_tags());
+}
+
+
+/**
+ * _contact_field_allowed_tags
+ * 
+ * Return tags to be filtered from allowed values
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _contact_field_allowed_tags() {
+	return array('a', 'b', 'big',  'code', 'del', 'em', 'i', 'ins',  'pre', 'q', 'small', 'span', 'strong', 'sub', 'sup', 'tt', 'ol', 'ul', 'li', 'p', 'br', 'img');
+}
+
+
+/**
+ * _get_field_type
+ * 
+ * Return type of the field
+ * 
+ * @param string $ss__field_name
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_field_type($ss__field_name) {
+	return db_result(db_query("SELECT field_type FROM {contact_fields} 
+	 WHERE field_name = '%s'", $ss__field_name));
+}
+
+
+/**
+ * Implementation of hook_mail_alter
+ * 
+ * @param unknown_type $message
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_mail_alter($message) {
+  if ($message['id'] == "contact_page_mail") {
+    $am__fields = _get_enabled_fields();
+    if (!variable_get("contact_field_use_template", 0)) {
+      $ss__additional = t("Additional information") ."\n";
+      foreach ($am__fields as $type => $field) {
+        $as__title = array_values($field);
+        $as__field = array_keys($field);
+        if (is_array($message['params'][$as__field[0]])) {
+          $ss__value = _get_field_setting($as__field[0], $message['params'][$as__field[0]]);
+          $ss__additional .= $as__title[0].": \t". $ss__value ."\n";
+        }
+        else {
+          $ss__additional .= $as__title[0] .": \t". $message['params'][$as__field[0]] ."\n"; 
+        }
+      }
+      $message['body'][] = "\n". $ss__additional;
+    }
+    else {
+      foreach ($am__fields as $type => $field) {
+        $as__title = array_values($field);
+        $as__field = array_keys($field);
+        for ($i = 0; $i < count($field); $i++) {
+          $ss__value = _get_field_setting($as__field[0], $message['params'][$as__field[$i]]);
+          $am__value["!". $as__field[$i]] = $ss__value;             
+        }
+      }
+      $am__value['!message'] = check_plain($message['body'][1]);
+      $am__value['!mail'] = $message['params']['mail']; 
+      $am__value['!subject'] = $message['params']['subject']; 
+      $am__value['!name'] = $message['params']['name']; 
+      $message['body'][1] = t(variable_get("contact_field_message_template", ""), $am__value);
+    }
+  }
+}
+
+
+/**
+ * _get_enabled_fields
+ * 
+ *  Return all the enabled fields
+ *  
+ *  @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_enabled_fields() {
+	$r__result = db_query("SELECT field_name, field_type, settings FROM {contact_fields} 
+	  WHERE  enabled = 1 AND core = 0 AND field_type <> 'fieldset'");
+	while ($om__result = db_fetch_object($r__result)) {
+		$am__settings = unserialize($om__result->settings);
+		$am__field[$om__result->field_type][$om__result->field_name] = $am__settings['title'];
+	}
+	return $am__field;
+}
+
+
+
+/**
+ * _get_contact_field
+ * 
+ * Return field name and description
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_contact_field() {
+  $r__result = db_query("SELECT field_name, settings FROM {contact_fields} WHERE  enabled = 1 AND field_type <> 'fieldset'");
+  $ss__value = "!message: ". t("The content of message field on the contact form") ."<br />";
+  while ($om__result = db_fetch_object($r__result)) {
+    if ($om__result->field_name != 'cid' && $om__result->field_name != 'message') {
+      $am__settings = unserialize($om__result->settings);
+      $ss__description = $am__settings['description']; 
+      $ss__value .= "!". $om__result->field_name .": ". $ss__description ."<br />"; 
+    }
+  }
+  
+  return $ss__value;
+}
+
+
+
+/**
+ * _get_contact_group
+ */
+function _get_contact_group() {
+  $r__result = db_query("SELECT field_name, settings FROM {contact_fields}  
+    WHERE field_type = 'fieldset'");
+  $am__group[""] = t("Select");
+  while ($om__result = db_fetch_object($r__result)) {
+    $am__settings = unserialize($om__result->settings);
+    $am__group[$om__result->field_name] = $am__settings['title'];
+  }
+  
+  return $am__group;
+}
+
+
+
+/**
+ * _get_field_setting
+ * 
+ * Return human readable values for options and lists
+ * 
+ * @param unknown_type $ss__field_name
+ * @param unknown_type $ss__field_value
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function _get_field_setting($ss__field_name, $am__field_value) {
+  if (!is_array($am__field_value)) {
+    $am__field_value = array($am__field_value);
+  }
+  $am__field_type = array('textfield', 'textarea');
+  $r__result = db_query("SELECT settings, field_type FROM {contact_fields} WHERE field_name = '%s'", $ss__field_name);
+  $om__result = db_fetch_object($r__result);
+  $am__settings = unserialize($om__result->settings);
+  if (!in_array($om__result->field_type, $am__field_type)) {
+    foreach ($am__field_value as $value) {
+      if ($value != "" || $value != 0) {
+        $ss__value .= "<li>". $am__settings['options'][$value] ."</li>";
+      }
+    }
+    return drupal_html_to_text("<ul>". $ss__value ."</ul>");
+  }
+  else {
+    return $am__field_value[0];
+  }
+}

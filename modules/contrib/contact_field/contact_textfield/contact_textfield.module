@@ -1,0 +1,400 @@
+<?php
+//$Id: contact_textfield.module,v 1.1.2.5.2.2 2010/08/07 05:32:25 beautifulmind Exp $
+
+/**
+ * @file
+ * 
+ * Add textfields on contact form
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+
+
+/**
+ * contact_textfield_field_info
+ * 
+ * Returns field infomrmation
+ * 
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_textfield_info() {
+	return array(
+	  'textfield' => array(
+	    'type' => 'text',
+	    'title' => t("Text field"),
+	    'description' => t("Add a text box on contact form")
+	  ),
+	  'textarea' => array(
+	    'type' => 'area',
+	    'title' => t("Textarea"),
+	    'description' => t("Add a text area on contact form"),
+	  ),
+	);
+}
+
+
+/**
+ * contact_field_add_field_text_form
+ *
+ * Form builder function
+ *
+ * @return unknown_type
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_add_field_text_form($form_state, $ss__field_name = NULL, $om__field_details = NULL) {
+  $form = array();
+
+  if (arg(3) != 'add') {
+    $om__field_details = (object) _get_field_values($om__field_details);
+    $form['#submit'] = array('contact_field_update');
+  }
+  else {
+    $form['#submit'] = array('contact_field_submit');
+    $form['#validate'] = array('contact_field_validate');
+  }
+
+  $form['name'] = array(
+    '#type' => 'item',
+    '#title' => t("Field name"),
+    '#value' => $om__field_details->name,
+    '#description' => t("Field name can not be changed."),
+    '#weight' => -50,
+  );
+  
+  $form['contact_field_name'] = array(
+    '#type' => 'hidden',
+    '#value' => $om__field_details->name,
+  );
+
+  $form['field_type'] = array(
+    '#type' => 'hidden',
+    '#default_value' => 'textfield',
+  );
+
+  $form['contact_field_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Field title"),
+    '#description' => t("Provide the title of the field."),
+    '#default_value' => $om__field_details->title,
+    '#required' => TRUE,
+    '#weight' => -49,
+  );
+
+  $form['contact_field_prefix'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Prefix"),
+    '#description' => t("Add prefix to add style to the field."),
+    '#default_value' => $om__field_details->prefix,
+    '#weight' => -48,
+  );
+
+  $form['contact_field_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Suffix"),
+    '#description' => t("Add suffix to add style to the field."),
+    '#default_value' => $om__field_details->suffix,
+    '#weight' => -47,
+  );
+
+  $form['contact_field_maxlength'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Maximum length"),
+    '#description' => t("Maximum number of charcter allowed for the field. Leave blank for default length."),
+    '#default_value' => $om__field_details->maxlength,
+    '#weight' => -46,
+  );
+
+  $form['contact_field_prefix_field'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Field prefix"),
+    '#description' => t("A prefix to field itslef. Like Rs., श्री, Mr."),
+    '#default_value' => $om__field_details->field_prefix,
+    '#weight' => -45,
+  );
+
+  $form['contact_field_suffix_field'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Field suffix"),
+    '#description' => t("A suffix to field itself. Like भैया, feet, gms"),
+    '#default_value' => $om__field_details->field_suffix,
+    '#weight' => -44,
+  );
+
+  $form['contact_field_require'] = array(
+    '#type' => 'radios',
+    '#title' => t("Required?"),
+    '#description' => t("Whether this field is mandatory."),
+    '#default_value' => $om__field_details->required ? $om__field_details->required : 1,
+    '#options' => array(
+      0 => t("No"),
+      1 => t("Yes"),
+    ),
+    '#required' => TRUE,
+    '#weight' => -43,
+  );
+
+  $form['contact_field_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Display this field"),
+    '#description' => t("Check this box to make this field available on
+      contact form."),
+    '#default_value' => $om__field_details->enabled ? $om__field_details->enabled : 1,
+    '#weight' => -42,
+  );
+
+  $form['contact_field_weight'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Weight"),
+    '#size' => 10,
+    '#description' => t("Fields with positive weight will sink.
+      Negative weight will make the field pop up."),
+    '#default_value' => $om__field_details->weight ? $om__field_details->weight : 0,
+    '#weight' => -41,
+  );
+
+  $form['contact_field_help'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Help text"),
+    '#description' => t("Help text will appear just beneath the field like this,
+      to help user in filling value in the field."),
+    '#default_value' => $om__field_details->description ? $om__field_details->description : "",
+    '#weight' => -40,
+  );
+
+
+  $form['contact_field_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Save configuration"),
+  );
+
+  return $form;
+}
+
+
+
+
+/**
+ * Implementation of hook_submit
+ *
+ * @param $form
+ * @param $form_values
+ * @return unknown_type
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_submit($form, $form_values) {
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_type = $form_values['values']['field_type'];
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_settings['prefix'] = $form_values['values']['contact_field_prefix'];
+  $ss__field_settings['suffix'] = $form_values['values']['contact_field_suffix'];
+  $ss__field_settings['maxlength'] = $form_values['values']['contact_field_maxlength'] ? $form_values['values']['contact_field_maxlength'] : 255;
+  $ss__field_settings['field_prefix'] = $form_values['values']['contact_field_prefix_field'];
+  $ss__field_settings['field_suffix'] = $form_values['values']['contact_field_suffix_field'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+
+  db_query("INSERT INTO {contact_fields} VALUES('%s', '%s', '%s', %d, %d, '%s', %d, '%s')",
+    $ss__field_name, $ss__field_type, serialize($ss__field_settings),
+    $ss__field_required, $ss__field_enabled, $ss__field_weight, 0, NULL);
+  drupal_set_message($ss__field_settings['title'] ." ". t("created"));
+  drupal_goto('admin/build/contact/manage');
+}
+
+
+/**
+ *
+ * @param unknown_type $form
+ * @param unknown_type $form_values
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_update($form, $form_values) {
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_type = $form_values['values']['field_type'];
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['prefix'] = $form_values['values']['contact_field_prefix'];
+  $ss__field_settings['suffix'] = $form_values['values']['contact_field_suffix'];
+  $ss__field_settings['maxlength'] = $form_values['values']['contact_field_maxlength'] ? $form_values['values']['contact_field_maxlength'] : 255;
+  $ss__field_settings['field_prefix'] = $form_values['values']['contact_field_prefix_field'];
+  $ss__field_settings['field_suffix'] = $form_values['values']['contact_field_suffix_field'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+
+  db_query("UPDATE {contact_fields} SET settings = '%s', enabled = %d,
+    required = %d, weight = '%s' WHERE field_name = '%s'", serialize($ss__field_settings),
+    $ss__field_enabled, $ss__field_required, $ss__field_weight, $ss__field_name);
+
+  drupal_set_message($ss__field_settings['title'] ." ". t("updated"));
+  drupal_goto('admin/build/contact/manage');
+}
+
+
+/**
+ * contact_field_add_field_textarea_form
+ *
+ * Form builder function for text area
+ *
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_add_field_textarea_form($form_state, $ss__field_name = NULL, $om__field_details = NULL) {
+  drupal_set_title(t("Configure text area"));
+  $form = array();
+  if (arg(3) != 'add') {
+    $om__field_details = (object) _get_field_values($om__field_details);
+    $form['#submit'] = array('contact_field_textarea_update');
+  }
+  else {
+    $form['#submit'] = array('contact_field_textarea_submit');
+    $form['#validate'] = array('contact_field_validate');
+  }
+  
+  $form['name'] = array(
+    '#type' => 'item',
+    '#title' => t("Field name"),
+    '#value' => $om__field_details->name,
+    '#description' => t("Field name can not be changed."),
+    '#weight' => -50,
+  );
+  
+  $form['contact_field_name'] = array(
+    '#type' => 'hidden',
+    '#value' => $om__field_details->name,
+  );
+  
+  $form['field_type'] = array(
+    '#type' => 'hidden',
+    '#default_value' => 'textarea',
+  );
+
+  $form['contact_field_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Field title"),
+    '#description' => t("Provide the title of the field"),
+    '#default_value' => $om__field_details->title,
+    '#required' => TRUE,
+    '#weight' => -49,
+  );
+
+  $form['contact_field_row'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Rows"),
+    '#description' => t("Number of rows. Leave blank for default rows"),
+    '#default_value' => $om__field_details->rows,
+    '#weight' => -48,
+  );
+
+  $form['contact_field_column'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Columns"),
+    '#description' => t("Number of column. Leave blank for default columns."),
+    '#default_value' => $om__field_details->cols,
+    '#weight' => -47,
+  );
+
+  $form['contact_field_require'] = array(
+    '#type' => 'radios',
+    '#title' => t("Required?"),
+    '#description' => t("Whether this field is mandatory."),
+    '#default_value' => $om__field_details->required ? $om__field_details->required : 1,
+    '#options' => array(
+      0 => t("No"),
+      1 => t("Yes"),
+    ),
+    '#required' => TRUE,
+    '#weight' => -43,
+  );
+
+  $form['contact_field_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Display this field"),
+    '#description' => t("Check this box to make this field available on
+      contact form."),
+    '#default_value' => $om__field_details->enabled ? $om__field_details->enabled : 1,
+    '#weight' => -42,
+  );
+
+  $form['contact_field_weight'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Weight"),
+    '#size' => 10,
+    '#description' => t("Fields with positive weight will sink.
+      Negative weight will make the field pop up."),
+    '#default_value' => $om__field_details->weight ? $om__field_details->weight : 0,
+    '#weight' => -41,
+  );
+
+  $form['contact_field_help'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Help text"),
+    '#description' => t("Help text will appear just beneath the field like this,
+      to help user in filling value in the field."),
+    '#default_value' => $om__field_details->description ? $om__field_details->description : "",
+    '#weight' => -40,
+  );
+
+  $form['contact_field_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Save configuration"),
+  );
+
+  return $form;
+}
+
+
+
+/**
+ *
+ * @param unknown_type $form
+ * @param unknown_type $form_values
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_textarea_submit($form, $form_values) {
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_type = $form_values['values']['field_type'];
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['rows'] = $form_values['values']['contact_field_row'];
+  $ss__field_settings['cols'] = $form_values['values']['contact_field_column'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+
+  db_query("INSERT INTO {contact_fields} VALUES('%s', '%s', '%s', %d, %d, '%s', %d, '%s')",
+    $ss__field_name, $ss__field_type, serialize($ss__field_settings),
+    $ss__field_required, $ss__field_enabled, $ss__field_weight, 0, NULL);
+  drupal_set_message($ss__field_settings['title'] ." ". t("created"));
+  drupal_goto('admin/build/contact/manage');
+}
+
+
+
+
+/**
+ *
+ * @param $form
+ * @param $form_values
+ * @author Bhavin H. Joshi <bhavinjosi@joshics.in>
+ */
+function contact_field_textarea_update($form, $form_values) {
+  $ss__field_name = $form_values['values']['contact_field_name'];
+  $ss__field_type = $form_values['values']['field_type'];
+  $ss__field_required = $form_values['values']['contact_field_require'];
+  $ss__field_enabled = $form_values['values']['contact_field_enabled'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_settings['title'] = $form_values['values']['contact_field_label'];
+  $ss__field_settings['rows'] = $form_values['values']['contact_field_row'];
+  $ss__field_settings['cols'] = $form_values['values']['contact_field_column'];
+  $ss__field_settings['description'] = $form_values['values']['contact_field_help'];
+  $ss__field_weight = $form_values['values']['contact_field_weight'];
+
+  db_query("UPDATE {contact_fields} SET settings = '%s', enabled = %d,
+    required = %d, weight = '%s' WHERE field_name = '%s'", serialize($ss__field_settings),
+    $ss__field_enabled, $ss__field_required, $ss__field_weight, $ss__field_name);
+
+  drupal_set_message($ss__field_settings['title'] ." ". t("updated"));
+  drupal_goto('admin/build/contact/manage');
+}
