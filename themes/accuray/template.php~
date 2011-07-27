@@ -113,7 +113,7 @@ function accuray_preprocess_page(&$vars, $hook) {
     $vars['section_title'] = $vocab->name;
   }
   else 
-  if (empty($section_title)) {   
+  if (empty($vars['section_title'])) {   
     $trail = menu_get_active_trail();
   
     if (count($trail) && 1 < count($trail)) {
