@@ -1,4 +1,4 @@
-# $Id: zh-hans.po,v 1.1.4.2 2010/02/20 00:41:10 sun Exp $
+# $Id: zh-hans.po,v 1.1.2.2 2010/02/20 00:41:06 sun Exp $
 #
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
