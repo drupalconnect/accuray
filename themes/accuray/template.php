@@ -195,7 +195,7 @@ function accuray_preprocess_block(&$vars, $hook) {
  * @return
  *   A string containing the breadcrumb output.
  */
-function zen_breadcrumb($breadcrumb) {
+function accuray_breadcrumb($breadcrumb) {
   if (!count($breadcrumb)) {
     $breadcrumb[] = l('Home', '<front>');
   }  
