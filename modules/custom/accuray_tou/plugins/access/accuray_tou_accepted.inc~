@@ -16,7 +16,7 @@ $plugin = array(
   'title' => t("Accuray TOU accepted"),
   'description' => t('Determine whether the user has accepted a TOU.'),
   'callback' => 'accuray_tou_accepted_access_check',
-  'default' => array('rids' => array()),
+  'default' => array('vid' => array()),
   'settings form' => 'accuray_tou_accepted_access_settings',
   'summary' => 'accuray_tou_accepted_access_summary',
   'required context' => new ctools_context_required(t('Vocabulary'), 'vocabulary'),

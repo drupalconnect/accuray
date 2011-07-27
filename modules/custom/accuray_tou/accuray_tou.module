@@ -135,9 +135,8 @@ function accuray_tou_aggreement_form($form_state, $vid=0) {
   if ($nid) {
     $node = node_load(array('nid' => $nid));
     $form['tou_agreement'] = array(
-      '#type' => 'textarea',
-      '#title' => 'Terms of Use',
-      '#default_value' => $node->body,
+      '#type' => 'markup',
+      '#value' => $node->body,
       '#disabled' => TRUE,
       '#description' => t('Please read and accept the above terms and conditions before continuing.'),
       );
@@ -158,10 +157,8 @@ function accuray_tou_aggreement_form($form_state, $vid=0) {
 }
 
 function accuray_tou_aggreement_form_submit($form, &$form_state) {
-  dpm($form_state);
   if ($form_state['values']['tou_agreement_agree'] && $form_state['values']['tou_agreement_vid']) {
-    dpm('setting sess');
-    $_SESSION['accuray_tou_accepted'] = $form_state['values']['tou_agreement_vid'];
+    $_SESSION['accuray_tou_' . $form_state['values']['tou_agreement_vid']] = $form_state['values']['tou_agreement_vid'];
   }
 }
  

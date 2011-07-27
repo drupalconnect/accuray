@@ -43,7 +43,7 @@ function accuray_tou_accepted_access_check($conf, $context) {
     return FALSE;
   }
   
-  if ($context->data->vid == $_SESSION['accuray_tou_accepted']) {
+  if ($_SESSION['accuray_tou_' . $context->data->vid]) {
     return TRUE;
   }
 
