@@ -169,3 +169,7 @@
   clear: both;
   margin-top: 1em;
 }
+
+.buildmode-teaser .node-type-location .nd-region-right .field-field-product-terms {
+  float: right;
+}

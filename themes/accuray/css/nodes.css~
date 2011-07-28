@@ -51,6 +51,10 @@
 .node h2.title /* Node title */ {
 }
 
+.node-type-story h2.content-title {
+  text-align: center;
+}
+
 .marker /* "New" or "Updated" marker for content that is new or updated for the current user */ {
   color: #c00;
 }
