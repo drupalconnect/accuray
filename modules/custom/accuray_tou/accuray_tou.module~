@@ -104,7 +104,7 @@ function accuray_tou_form_vocab_settings_submit($form, $form_state) {
 function accuray_tou_nodeapi(&$node, $op) {
   if (!strcmp('view', $op) && variable_get('accura_tou_enabled_' . $node->type)) {
     $node->content['accuray_tou'] = array(
-      '#value' => drupal_get_form('accuray_tou_aggreement_form'),
+      '#value' => drupal_get_form('accuray_tou_aggreement_form', $node),
       '#weight' => 1,
     );
   }
@@ -115,7 +115,7 @@ function accuray_tou_nodeapi(&$node, $op) {
 /**
  * Form builder for ToU agreement form 
  */
-function accuray_tou_aggreement_form($form_state, $vid=0) {
+function accuray_tou_aggreement_form($form_state, $node, $vid=0) {
   $form = array();    
 
   if ($vid) {  
@@ -136,8 +136,7 @@ function accuray_tou_aggreement_form($form_state, $vid=0) {
     $node = node_load(array('nid' => $nid));
     $form['tou_agreement'] = array(
       '#type' => 'markup',
-      '#title' => 'Terms of Use',
-      '#default_value' => $node->body,
+      '#value' => $node->body,
       '#disabled' => TRUE,
       '#description' => t('Please read and accept the above terms and conditions before continuing.'),
       );

@@ -75,9 +75,11 @@ function accuray_tou_acceptance_form_content_type_render($subtype, $conf, $args,
 
   // Don't forget to check this data if it's untrusted.
   // The title actually used in rendering.
-  dpm($context);
-  $block->title = "Accuray TOU agreement";
-  $block->content = drupal_get_form('accuray_tou_aggreement_form', $vid=$context->data->vid);
+  $nid = variable_get('accuray_tou_' . $context->data->vid);
+  $node = node_load(array('nid' => $nid));
+  
+  $block->title = $node->title;
+  $block->content = drupal_get_form('accuray_tou_aggreement_form', $node);
   
   return $block;
 }
