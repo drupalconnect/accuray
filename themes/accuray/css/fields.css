@@ -74,7 +74,7 @@
 .field-field-product-terms ul li {
   list-style-type: none;
   list-style-image: none;
-  text-indent: -10000px
+  text-indent: -10000px;
   display: block;
   width: 58px;
   height: 50px;
