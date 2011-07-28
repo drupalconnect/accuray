@@ -75,8 +75,15 @@
   list-style-type: none;
   list-style-image: none;
   text-indent: -10000px
-  background: url(../images/icon-tomotherapy.png) left top no-repeat;
   display: block;
   width: 58px;
   height: 50px;
+}
+
+.field-field-product-terms ul li.cyberknife-location {
+  background: url(../images/icon-cyberknife.png) left top no-repeat;
+}
+
+.field-field-product-terms ul li.tomotherapy-locaton {
+  background: url(../images/icon-tomotherapy.png) left top no-repeat;
 }
