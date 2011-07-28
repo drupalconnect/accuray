@@ -94,7 +94,7 @@ div#site-name /* The name of the website */ {
   line-height: 1.3em;
   text-transform: uppercase;
   font-weight: normal;
-  margin-top: 1.33em;
+  margin-top: 15px;
 }
 
 #site-name strong {
@@ -142,7 +142,6 @@ div#site-name /* The name of the website */ {
 }
 
 #content .section {
-  padding-bottom: 7px;
   border: 1px solid #bebebe;
   border-radius: 3px;
   -moz-border-radius: 3px;

@@ -33,6 +33,7 @@
 }
 
 .block h2.title /* Block title */ {
+  font-weight: normal;
 }
 
 .block .content /* Block's content wrapper */ {
@@ -93,4 +94,67 @@
 }
 
 #block-user-3 /* "Who's online" block for a list of the online users */ {
+}
+
+/**
+ * Header blocks
+ */
+#header .block {
+  float: right;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+#header .block-menu {
+  padding-top: 0.3em;
+}
+
+#header .block ul.menu {
+  margin: 0;
+}
+
+#header .block ul.menu li {
+  list-style-type: none;
+  list-style-image: none;
+  float: left;
+}
+
+#header #block-menu-menu-stay-in-touch-header {
+}
+
+#header #block-menu-menu-stay-in-touch-header h2 {
+  float: left;
+  width: 12ex;
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+  text-transform: none;
+  color: #4d4d4d;
+}
+
+#header #block-menu-menu-stay-in-touch-header .content {
+  margin-left: 12ex;
+}
+
+#header #block-block-1 /* AddThis custom code block */ {
+  padding-top: 0.3em;
+}
+
+#header #block-menu-secondary-links {
+  clear: right;
+}
+
+#header #block-menu-secondary-links ul li {
+  margin-left: 0.5em;
+  padding-left: 0.5em;
+  border-left: 1px solid #4d4d4d;
+}
+
+#header #block-menu-secondary-links ul li.first {
+  border-left: 0 none;
+  margin-left: 0;
+}
+
+#header #block-menu-secondary-links ul li a {
+  text-transform: uppercase;
 }
