@@ -162,59 +162,9 @@ h2.pane-title {
   padding: 5px;
 }
 
-#mini-panel-footer .pane-menu-secondary-links ul.menu li {
-  list-style-image: none;
-  list-style-type: none;
-}
-
-#mini-panel-footer .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
-  border-right: 1px solid #E2E9E8;
-  margin-right: 0.5em;
-  padding-right: 0.5em;
-}
-
-.pane-menu-secondary-links ul.menu li.last a {
-  border-right: 0 none;
-}
-
-.panels-row-menubar .pane-content {
-  padding: 0 7px;
-}
-
-.panels-row-menubar .pane-block ul.menu li a {
-  color: #E2E9E8;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.panels-row-menubar .pane-block ul.menu li a:hover {
-  color: #FFF;
-}
-
-
-.panels-row-copytext {
-  padding: 0;
-}
-
-.panels-row-copytext .inside {
-  padding: 0;
-}
-
-#mini-panel-footer .panels-row-copytext .panels-flexible-region .panels-flexible-region-inside {
-  padding: 0;
-}
-
-.panels-row-copytext .panel-pane {
-  padding: 0;
-}
-
-.panels-row-copytext .pane-content p {
-  margin: 0;
-}
-
 .panels-row-contentbox {
   //background: #f2f2f2;
-  background: #4d4d4d;
+  background: #000;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
