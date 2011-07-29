@@ -228,6 +228,6 @@ h2.pane-title {
 /**
  * Taxonomy and vocabulary pages
  */
-.pane-term-description p
-  margin: 0;
+.pane-term-description p {
+  margin-bottom: 0;
 }
