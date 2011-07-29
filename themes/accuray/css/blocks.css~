@@ -144,13 +144,13 @@
   clear: right;
 }
 
-#header #block-menu-secondary-links ul li {
+#header #block-menu-secondary-links ul li a{
   margin-left: 0.5em;
   padding-left: 0.5em;
   border-left: 1px solid #4d4d4d;
 }
 
-#header #block-menu-secondary-links ul li.first {
+#header #block-menu-secondary-links ul li.first a {
   border-left: 0 none;
   margin-left: 0;
 }
