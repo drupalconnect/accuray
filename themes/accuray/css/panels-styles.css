@@ -231,3 +231,10 @@ h2.pane-title {
 .pane-term-description p {
   margin: 0 0 1em;
 }
+
+/**
+ * Treatment centers 
+ */
+#treatment-centers .panels_pane {
+  margin-bottom: 1em;
+}
