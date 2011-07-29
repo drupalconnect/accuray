@@ -45,3 +45,7 @@ tr.odd td {
 .clearfix {
   zoom: 1;
 }
+
+.buildmode-teaser .node {
+  height: 80px; /* gradient images are 40px each in height. Make sure they don't overlap. See nodes.css */
+}
