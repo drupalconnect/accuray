@@ -104,6 +104,7 @@
   min-height: 80px; /* gradient images are 40px each in height. Make sure they don't overlap. See ie.css for the IE hack */
   background: url(../images/gradient-gray-vertical-bottom.png) left bottom repeat-x;
   padding: 10px;
+  margin-bottom: 0;
 }
 
 .buildmode-teaser .nd-region-left {
