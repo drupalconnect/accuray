@@ -20,6 +20,7 @@ h2.pane-title {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
 }
 
 .panels-flexible-row .inside {
@@ -28,6 +29,7 @@ h2.pane-title {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
 }
 
 .panels-flexible-region .inside {
