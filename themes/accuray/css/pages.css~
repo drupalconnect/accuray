@@ -150,6 +150,7 @@ div#site-name /* The name of the website */ {
 
 .not-front #content .section {
   padding-top: 7px;
+}
 
 .sidebar-first #content .section {
   margin-left: 8px;
