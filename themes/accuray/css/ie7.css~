@@ -1,3 +1,6 @@
+/*fixes distance between top of slides and bottom of navigation */
+#content-area  #panel-page-home {margin-top: -11px;}
+
 /*fixes distance betweent bottom of slides and top of triptych */
 #content-area #panel-page-home .panels-flexible-row-inside.panels-flexible-row-inside-last .panels-flexible-region {margin-top:3px; }
 
