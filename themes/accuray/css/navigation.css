@@ -127,6 +127,11 @@ ul.menu li a.menu_icon {
   margin-bottom: 0;
 }
 
+#secondary-navigation #block-menu-menu-stay-in-touch ul li {
+  list-style-type: none;
+  list-style-image: none;
+}
+
 #secondary-navigation #block-menu-menu-stay-in-touch h2 {
   float: left;
   color: #FFF;
