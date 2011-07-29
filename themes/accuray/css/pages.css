@@ -147,6 +147,11 @@ div#site-name /* The name of the website */ {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+
+.not-front #content .section {
+  padding-top: 7px;
+}
+
 .sidebar-first #content .section {
   margin-left: 8px;
   margin-right: 8px;
