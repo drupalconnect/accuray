@@ -217,7 +217,8 @@ h1.title /* Title of the page */ {
   margin-left: 18px;
   margin-right: 18px;
   padding-left: 10px;
-  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */ 
+  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */
+  color: #002D62;
 }
 
 h2.title {
