@@ -71,6 +71,7 @@
   padding: 0;
 }
 
+/**
 .field-field-product-terms ul li {
   list-style-type: none;
   list-style-image: none;
@@ -89,3 +90,4 @@
 .field-field-product-terms ul li.tomotherapy-locaton {
   background: url(../images/icon-tomotherapy.png) left top no-repeat;
 }
+*/
