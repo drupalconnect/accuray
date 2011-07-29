@@ -141,6 +141,13 @@ h2.pane-title {
 /**
  * "Footer" minipanel
  */
+#mini-panel-footer {
+  background: #f2f2f2;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
 #mini-panel-footer .inside {
   margin: 0;
   padding: 0;
@@ -161,15 +168,6 @@ h2.pane-title {
   margin: 0;
   padding: 5px;
 }
-
-.panels-row-contentbox {
-  background: #f2f2f2;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-
-
 
 /**
  * "Home" panel page
