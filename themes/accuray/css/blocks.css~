@@ -124,7 +124,7 @@
 
 #header #block-menu-menu-stay-in-touch-header h2 {
   float: left;
-  width: 12ex;
+  width: 13ex;
   margin: 0;
   font-size: 1em;
   font-weight: normal;
@@ -133,7 +133,7 @@
 }
 
 #header #block-menu-menu-stay-in-touch-header .content {
-  margin-left: 12ex;
+  margin-left: 13ex;
 }
 
 #header #block-block-1 /* AddThis custom code block */ {
