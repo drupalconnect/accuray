@@ -32,7 +32,7 @@ h2.pane-title {
 
 .panels-flexible-region .inside {
   padding: 4px;
-  margin: 4px;
+  margin: 0 4px;
 }
 
 .panels-flexible-region-first .inside {
@@ -109,7 +109,7 @@ h2.pane-title {
 
 #mini-panel-header ul.menu li, 
 #mini-panel-header #secondary-navigation li {
-  list-style-image:none;
+  list-style-image: none;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li {
@@ -240,6 +240,7 @@ h2.pane-title {
 
 .panels-row-contentbox {
   background: #f2f2f2;
+  background: #4d4d4d;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
