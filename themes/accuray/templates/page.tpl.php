@@ -183,7 +183,7 @@
         <?php print $content_top; ?>
 
         <?php if ($title): ?>
-          <h2 class="content-title"><?php print $title; ?></h1>
+          <h2 class="content-title"><?php print $title; ?></h2>
         <?php endif; ?>
 
         <div id="content-area">
