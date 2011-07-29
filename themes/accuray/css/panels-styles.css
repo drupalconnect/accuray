@@ -224,3 +224,10 @@ h2.pane-title {
 #panel-page-home .panels-flexible-row-inside-last .panels-flexible-region {
   width:308px; 
 }
+
+/**
+ * Taxonomy and vocabulary pages
+ */
+.pane-term-description p {
+  margin: 0;
+}
