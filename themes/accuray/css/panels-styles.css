@@ -107,7 +107,7 @@ h2.pane-title {
   padding-top: 0.4em;
 }
 
-#mini-panel-header ul li, 
+#mini-panel-header ul.menu li, 
 #mini-panel-header #secondary-navigation li {
   list-style-image: none;
   list-style-type: none;
@@ -153,6 +153,11 @@ h2.pane-title {
   text-transform: none;
 }
 
+#mini-panel-footer ul.menu li {
+  list-style-image: none;
+  list-style-type: none;
+}
+
 #mini-panel-footer p {
   margin-top: 0;
 }
@@ -160,38 +165,6 @@ h2.pane-title {
 #mini-panel-footer .panels-flexible-region .inside {
   margin: 0;
   padding: 5px;
-}
-
-#mini-panel-footer .panels-row-menubar {
-  background:  #113b6d;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-#mini-panel-footer .panels-row-menubar .panels-flexible-region .inside {
-  padding: 0;
-  margin: 0;
-}
-
-.panels-row-menubar .pane-block ul {
-  padding: 0;
-  margin: 0;
-}
-
-.panels-row-menubar .panels-flexible-region-first .pane-block {
-  float: left;
-}
-
-.panels-row-menubar .panels-flexible-region-last .pane-block {
-  float: right;
-}
-
-.panels-row-menubar .pane-block ul.menu li {
-  float: left;
-  list-style: outside none;
-  font-size: 75%;
-  padding-top: 0.5em;
 }
 
 #mini-panel-footer .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {

@@ -110,6 +110,7 @@ h2.pane-title {
 #mini-panel-header ul.menu li, 
 #mini-panel-header #secondary-navigation li {
   list-style-image: none;
+  list-style-type: none;
 }
 
 #mini-panel-header .pane-menu-secondary-links ul.menu li {
