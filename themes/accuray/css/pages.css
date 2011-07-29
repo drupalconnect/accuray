@@ -190,7 +190,6 @@ div#site-name /* The name of the website */ {
 }
 
 #page-title {
-  
 }
 
 #mission /* The mission statement of the site (displayed on homepage) */ {
@@ -209,7 +208,7 @@ h3.title /* Comment title */ {
   margin: 0;
 }
 
-h1.title {
+h1.title /* Title of the page */ {
   background: #d9e0e8;
   border-radius: 3px;
   -moz-border-radius: 3px;
@@ -218,7 +217,7 @@ h1.title {
   margin-left: 18px;
   margin-right: 18px;
   padding-left: 10px;
-  line-height: 1.55em;
+  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */ 
 }
 
 h2.title {
