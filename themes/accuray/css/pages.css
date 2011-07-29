@@ -146,6 +146,7 @@ div#site-name /* The name of the website */ {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
 }
 
 .not-front #content .section {
@@ -213,6 +214,7 @@ h1.title {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
   margin-left: 18px;
   margin-right: 18px;
   padding-left: 10px;
@@ -354,6 +356,7 @@ ul.links li {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
   margin-left: 18px;
 }
 
@@ -532,6 +535,7 @@ ul.links li {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
   border: 1px solid #CCC;
   padding: 3px;
 }

@@ -46,6 +46,7 @@ li a.active {
   border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
+  behavior: url(../css3pie/PIE.htc);
 }
 
 /* testing css3pie */
@@ -82,6 +83,7 @@ li a.active {
   border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
+  behavior: url(../css3pie/PIE.htc);
   font-size: 0.8em;
   word-wrap: normal; /* fixes wrapping in IE */ 
 }

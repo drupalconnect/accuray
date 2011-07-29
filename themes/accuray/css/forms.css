@@ -77,6 +77,7 @@
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
   padding: 1px;
 }
 
@@ -96,6 +97,7 @@
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
   margin: 0;
   padding: 0;
 }
