@@ -148,7 +148,8 @@ ul.menu li a.menu_icon {
 
 #secondary-navigation #block-menu-menu-stay-in-touch ul li {
   float: left;
-  list-style: inside none;
+  list-style-type: none;
+  list-style-image: none;
 }
 
 #secondary-navigation #block-menu-menu-footer-links-right {
