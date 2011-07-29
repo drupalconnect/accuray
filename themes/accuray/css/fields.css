@@ -74,4 +74,5 @@
 .field-field-product-terms ul li {
   list-style-type: none;
   list-style-image: none;
+  float: left;
 }

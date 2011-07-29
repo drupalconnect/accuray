@@ -71,23 +71,7 @@
   padding: 0;
 }
 
-/**
 .field-field-product-terms ul li {
   list-style-type: none;
   list-style-image: none;
-  text-indent: -10000px;
-  display: block;
-  width: 58px;
-  height: 50px;
-  padding-top: 50px;
-  overflow: hidden;
 }
-
-.field-field-product-terms ul li.cyberknife-location {
-  background: url(../images/icon-cyberknife.png) left top no-repeat;
-}
-
-.field-field-product-terms ul li.tomotherapy-locaton {
-  background: url(../images/icon-tomotherapy.png) left top no-repeat;
-}
-*/
