@@ -149,7 +149,7 @@ body {
 .with-navigation-and-title #content,
 .with-navigation-and-title .region-sidebar-first,
 .with-navigation-and-title .region-sidebar-second {
-  margin-top: 7.9em; /* ??? doesn't add up, but it looks right */
+  margin-top: 7.801em; /* 3.8 (navigation) + 0.438 (7px) + 3.563 (title) */
 }
 
 #navigation .section {
