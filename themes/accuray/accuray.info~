@@ -49,6 +49,7 @@ stylesheets[print][] = css/print.css
 conditional-stylesheets[if IE][all][]       = css/ie.css
 conditional-stylesheets[if lte IE 6][all][] = css/ie6.css
 conditional-stylesheets[if lte IE 7][all][] = css/ie7.css
+conditional-stylesheets[if lte IE 8][all][] = css/ie8.css
 
   ; Optionally add some JavaScripts to your theme.
 ; scripts[] = js/script.js
