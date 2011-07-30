@@ -124,8 +124,8 @@
 
 #header #block-menu-menu-stay-in-touch-header h2 {
   float: left;
-  width: 8em;
-  margin: 0;
+  width: 7.5em;
+  margin: 0 0 0 -7.5em;
   font-size: 1em;
   font-weight: normal;
   text-transform: none;
@@ -133,7 +133,7 @@
 }
 
 #header #block-menu-menu-stay-in-touch-header .content {
-  margin-left: 8em;
+  margin-left: 7.5em;
 }
 
 #header #block-block-1 /* AddThis custom code block */ {
