@@ -172,3 +172,14 @@ form thead th {
 form tbody th {
   border-bottom: 1px solid #ccc;
 }
+
+/**
+ * Forms in sidebars
+ */
+.region-sidebar .form-select {
+  width: 90%;
+}
+
+.region-sidebar .form-submit {
+  width: 10%;
+}

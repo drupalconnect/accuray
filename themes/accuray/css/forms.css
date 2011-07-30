@@ -176,10 +176,10 @@ form tbody th {
 /**
  * Forms in sidebars
  */
-.region-sidebar .form-select {
+.sidebar .form-select {
   width: 90%;
 }
 
-.region-sidebar .form-submit {
+.sidebar .form-submit {
   width: 10%;
 }
