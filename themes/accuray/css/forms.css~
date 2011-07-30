@@ -176,10 +176,9 @@ form tbody th {
 /**
  * Forms in sidebars
  */
-.region-sidebar .form-select {
-  width: 90%;
+.sidebar .form-select {
+  width: 120px;
 }
 
-.region-sidebar .form-submit {
-  width: 10%;
+.sidebar .form-submit {
 }
