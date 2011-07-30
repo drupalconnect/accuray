@@ -6,6 +6,10 @@
 /**
  * Generic styles
  */
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 1.3em;
+}
+
 .view-content .item-list li {
   margin-bottom: 1em;
 }

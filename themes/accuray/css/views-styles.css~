@@ -6,6 +6,10 @@
 /**
  * Generic styles
  */
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 1.4em;
+}
+
 .view-content .item-list li {
   margin-bottom: 1em;
 }
@@ -22,7 +26,6 @@
 
 .view-id-VocabularyOverview h3,
 .view-id-TermBrowsing h3 {
-  clear: both;
   margin: 0 0 0.25em 0;
   font-size: 100%;
   font-weight: bold;
