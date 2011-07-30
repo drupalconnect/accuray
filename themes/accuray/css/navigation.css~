@@ -123,7 +123,13 @@ li a.active {
 /**
  * "Stay in touch" menu
  */
+#secondary-navigation #block-menu-menu-stay-in-touch ul li
+  margin-right: 0.5em;
+}
 
+#secondary-navigation #block-menu-menu-stay-in-touch ul li.last {
+  margin-right: 0;
+}
 
 #secondary-navigation #block-menu-menu-stay-in-touch {
   float: left;
