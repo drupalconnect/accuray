@@ -125,7 +125,7 @@
 #header #block-menu-menu-stay-in-touch-header h2 {
   float: left;
   width: 7.5em;
-  margin: 0 0 0 -7.5em;
+  margin: 0 -7.5em 0 0;
   font-size: 1em;
   font-weight: normal;
   text-transform: none;
