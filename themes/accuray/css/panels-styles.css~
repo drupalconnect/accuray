@@ -239,6 +239,6 @@ h2.pane-title {
   margin-bottom: 2em;
 }
 
-#mini-panel-location_selector .panels-pane {
+#mini-panel-location_selector .panels_pane {
   margin-bottom: 2em;
 }
