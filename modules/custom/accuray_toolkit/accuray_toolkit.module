@@ -1,0 +1,14 @@
+<?php
+function accuray_toolkit_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+function accuray_toolkit_views_api() {
+  return array('api' => 2.0);
+}
+
+function accuray_toolkit_init() {
+  
+}

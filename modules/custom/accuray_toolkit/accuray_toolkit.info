@@ -1,0 +1,5 @@
+; $Id: accuray_toolkit.info,v 1.1.2.1 2008/02/01 16:00:24 fago Exp $
+name = "Accuray toolkit"
+description = "Toolkit extras, incuding an ctools access plugin."
+package = "Accuray"
+core = 6.x

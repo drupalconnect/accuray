@@ -1,0 +1,31 @@
+<?php
+function accuray_toolkit_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+function accuray_toolkit_views_api() {
+  return array('api' => 2.0);
+}
+
+function accuray_toolkit_init() {
+  // load viewobject
+  $view = views_get_view('ToolkitNodeAccess');
+
+  // ensure view exists
+  if (!$view) return;
+
+  // set object property to return total rows 
+  $view->get_total_rows = true;
+
+  // set display_id
+  $view->set_display('Defaults');
+  
+  // set args
+  $view->set_arguments(array(2));
+
+  // execute view
+  $view->execute();
+  dsm(count($view->result));
+}
