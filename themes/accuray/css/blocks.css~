@@ -133,7 +133,7 @@
 }
 
 #header #block-menu-menu-stay-in-touch-header .content {
-  margin-left: 6em; /* WTF? 8em for the h2 but only 6em for the block content? */
+  margin-left: 8em;
 }
 
 #header #block-block-1 /* AddThis custom code block */ {
