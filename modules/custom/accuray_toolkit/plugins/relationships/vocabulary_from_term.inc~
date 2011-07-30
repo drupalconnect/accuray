@@ -1,0 +1,47 @@
+<?php
+// $Id: vocabulary_from_term.inc,v 1.1.2.1 2010/01/29 19:54:02 merlinofchaos Exp $
+
+
+/**
+ * @file
+ *
+ * Sample relationship plugin.
+ *
+ * We take a term, look in it for what we need to make a relcontext, and make it.
+ * In the real world, this might be getting a taxonomy id from a node, for example.
+ */
+
+/**
+ * Plugins are described by creating a $plugin array which will be used
+ * by the system that includes this file.
+ */
+$plugin = array(
+  'title' => t("Vocabulary from term"),
+  'keyword' => 'vocabulary',
+  'description' => t('Adds a vocabulary from existing term.'),
+  'required context' => new accuray_toolkit_context_required(t('Term'), 'term'),
+  'context' => 'accuray_toolkit_vocabulary_from_term_context',
+  'settings form' => 'accuray_toolkit_vocabulary_from_term_settings_form',
+);
+
+/**
+ * Return a new context based on an existing context.
+ */
+function accuray_toolkit_vocabulary_from_term_context($context = NULL, $conf) {
+  // If unset it wants a generic, unfilled context, which is just NULL.
+  if (empty($context->data)) {
+    return ctools_context_create_empty('vocabulary');
+  }
+
+  $vocabulary = taxonomy_vocabulary_load($context->data->vid);
+  return ctools_context_create('vocabulary', $vocabulary);
+}
+
+/**
+ * Settings form for the relationship.
+ */
+function accuray_toolkit_vocabulary_from_term_settings_form($conf) {
+  // We won't configure it in this case.
+  return array();
+}
+

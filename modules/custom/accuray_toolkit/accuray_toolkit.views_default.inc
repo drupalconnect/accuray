@@ -1,6 +1,5 @@
 <?php
 function accuray_toolkit_views_default_views() {
-  dsm('hook');
   $views = array();
    
   $view = new view;
