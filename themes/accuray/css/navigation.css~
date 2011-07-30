@@ -20,6 +20,11 @@ ul.menu ul       { list-style-type: none; }
 ul.menu ul ul    { list-style-type: none; }
 ul.menu ul ul ul { list-style-type: none; }
 
+ul.menu li a.menu_icon {
+  display: block;
+  text-indent: -10000px;
+}
+
 /*
  * The active item in a Drupal menu
  */
@@ -46,6 +51,7 @@ li a.active {
   border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
+  behavior: url(../css3pie/PIE.htc);
 }
 
 /* testing css3pie */
@@ -82,6 +88,7 @@ li a.active {
   border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
+  behavior: url(../css3pie/PIE.htc);
   font-size: 0.8em;
   word-wrap: normal; /* fixes wrapping in IE */ 
 }
@@ -116,11 +123,7 @@ li a.active {
 /**
  * "Stay in touch" menu
  */
-ul.menu li a.menu_icon {
-  display: block;
-  text-indent: -10000px;
-  margin-right: 0.5em;
-}
+
 
 #secondary-navigation #block-menu-menu-stay-in-touch {
   float: left;

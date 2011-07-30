@@ -137,6 +137,14 @@
   margin-left: 7.5em;
 }
 
+#header #block-menu-menu-stay-in-touch-header ul li
+  margin-right: 0.5em;
+}
+
+#header #block-menu-menu-stay-in-touch-header ul li.last {
+  margin-right: 0;
+}
+
 #header #block-block-1 /* AddThis custom code block */ {
   padding-top: 0.3em;
 }
@@ -150,7 +158,7 @@
   float: right;
 }
 
-#header #block-menu-secondary-links ul li a{
+#header #block-menu-secondary-links ul li a {
   margin-left: 0.5em;
   padding-left: 0.5em;
   border-left: 1px solid #4d4d4d;

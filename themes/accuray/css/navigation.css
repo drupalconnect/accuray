@@ -20,6 +20,11 @@ ul.menu ul       { list-style-type: none; }
 ul.menu ul ul    { list-style-type: none; }
 ul.menu ul ul ul { list-style-type: none; }
 
+ul.menu li a.menu_icon {
+  display: block;
+  text-indent: -10000px;
+}
+
 /*
  * The active item in a Drupal menu
  */
@@ -118,10 +123,12 @@ li a.active {
 /**
  * "Stay in touch" menu
  */
-ul.menu li a.menu_icon {
-  display: block;
-  text-indent: -10000px;
+#secondary-navigation #block-menu-menu-stay-in-touch ul li
   margin-right: 0.5em;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul li.last {
+  margin-right: 0;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch {
