@@ -137,6 +137,14 @@
   margin-left: 7.5em;
 }
 
+#header #block-menu-menu-stay-in-touch-header ul li
+  margin-right: 0.5em;
+}
+
+#header #block-menu-menu-stay-in-touch-header ul li.last {
+  margin-right: 0;
+}
+
 #header #block-block-1 /* AddThis custom code block */ {
   padding-top: 0.3em;
 }
