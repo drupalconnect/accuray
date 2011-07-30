@@ -1,0 +1,12 @@
+; $Id: apply_for_role.info,v 1.6.2.1 2010/07/24 21:25:26 sorenjones Exp $
+name = Apply for role
+description = "Allows users to apply for roles."
+package = "User management"
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-07-24
+version = "6.x-1.9"
+core = "6.x"
+project = "apply_for_role"
+datestamp = "1280007005"
+

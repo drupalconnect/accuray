@@ -1,0 +1,541 @@
+<?php
+// $Id: apply_for_role.module,v 1.39 2009/07/15 06:45:37 sorenjones Exp $
+
+/**
+ * @file
+ * Allows users to apply for roles.
+ */
+
+define('APPLY_FOR_ROLE_PENDING', 0);
+define('APPLY_FOR_ROLE_APPROVED', 1);
+define('APPLY_FOR_ROLE_DENIED', 2);
+
+if (module_exists('token')) {
+  module_load_include('inc', 'apply_for_role', 'apply_for_role.token');
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function apply_for_role_help($path, $arg) {
+  switch ($path) {
+    case 'admin/build/trigger/apply_for_role':
+      $explanation = '<p>'. t('Triggers are system events, such as when new content is added or when a user logs in. Trigger module combines these triggers with actions (functional tasks), such as unpublishing content or e-mailing an administrator. The <a href="@url">Actions settings page</a> contains a list of existing actions and provides the ability to create and configure additional actions.', array('@url' => url('admin/settings/actions'))) .'</p>';
+      return $explanation .'<p>'. t('Below you can assign actions to run when certain role application related triggers happen. For example, you could email a user when their application is approved.') .'</p>';
+
+    case 'admin/help#apply_for_role':
+      return $explanation = '<p>'. t('The <em>Apply for roles</em> module allows users to apply for roles from their user page and allows administrators to easily view, approve and delete role applications.', array('@url' => url('admin/settings/apply_for_role'))) .'</p>';
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function apply_for_role_perm() {
+  return array('administer apply for role', 'approve role applications', 'apply for roles');
+}
+
+/**
+ * Check that the user is allowed to create applications and that there are
+ * roles that they don't yet belong to.
+ */
+function apply_for_role_apply_access($account) {
+  return ((!empty($account->uid))
+    && ($GLOBALS['user']->uid == $account->uid)
+    && (user_access('apply for roles', $account))
+    // && (count(apply_for_role_available_roles($account))
+  );
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function apply_for_role_menu() {
+  $items['admin/settings/apply_for_role'] = array(
+    'title' => t('Apply for role administration'),
+    'description' => t('Administer which roles users can apply for.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_settings_form'),
+    'access arguments' => array('administer apply for role'),
+    'file' => 'apply_for_role.admin.inc',
+  );
+
+  $items['admin/user/apply_for_role'] = array(
+    'title' => t('Manage role applications'),
+    'description' => t('View, approve and delete role applications.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_admin_form'),
+    'access arguments' => array('approve role applications'),
+    'file' => 'apply_for_role.admin.inc',
+  );
+
+  $items['admin/user/apply_for_role/approve/%user/%'] = array(
+    'title' => t('Approve role application'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_approve_form', 4, 5),
+    'access arguments' => array('approve role applications'),
+    'type' => MENU_CALLBACK,
+    'file' => 'apply_for_role.admin.inc',
+  );
+
+  $items['admin/user/apply_for_role/deny/%user/%'] = array(
+    'title' => t('Deny role application'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_deny_form', 4, 5),
+    'access arguments' => array('approve role applications'),
+    'type' => MENU_CALLBACK,
+    'file' => 'apply_for_role.admin.inc',
+  );
+
+  $items['admin/user/apply_for_role/remove/%user/%'] = array(
+    'title' => t('Remove role application'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_remove_form', 4, 5),
+    'access arguments' => array('approve role applications'),
+    'type' => MENU_CALLBACK,
+    'file' => 'apply_for_role.admin.inc',
+  );
+
+  $items['user/%user/apply_for_role'] = array(
+    'title' => t('Apply for role'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apply_for_role_apply_form', 1),
+    'access callback' => 'apply_for_role_apply_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+function theme_apply_for_role_status($status) {
+  $statuses = array(
+   -1 => t('Removed'),
+    APPLY_FOR_ROLE_PENDING => t('Pending'),
+    APPLY_FOR_ROLE_APPROVED => t('Approved'),
+    APPLY_FOR_ROLE_DENIED => t('Denied'),
+  );
+  return isset($statuses[$status]) ? $statuses[$status] : t('Unknown status');
+}
+
+
+/**
+ * User interface
+ */
+
+/**
+ * Implementation of hook_form().
+ */
+function apply_for_role_apply_form(&$form_state, $user) {
+  drupal_set_title(check_plain($user->name));
+  $form = array();
+
+  $filter_roles = apply_for_role_available_roles($user);
+  if (count($filter_roles)) {
+    $form['user'] = array(
+      '#type' => 'value',
+      '#value' => $user,
+    );
+    // List of roles that were already approved.
+    $approved = apply_for_role_approved_roles($user);
+    if (variable_get('apply_for_role_display_approved', 0) && count($approved)) {
+      $form['approved'] = array(
+        '#value' => theme('item_list', $approved, t('You have applied for these roles and were approved:')),
+      );
+    }
+    $form['rid'] = array(
+      '#type' => variable_get('apply_for_role_multiple', 0) ? 'checkboxes' : 'select',
+      '#title' => variable_get('apply_for_role_multiple', 0) ? t('Select a role or roles') : t('Select a role'),
+      '#options' => $filter_roles,
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply')
+    );
+  }
+  else {
+    drupal_set_message(t('No roles are available at this time.'));
+  }
+
+  return $form;
+}
+
+function apply_for_role_apply_form_submit($form, &$form_state) {
+  global $user;
+  apply_for_role_process_applications($form_state['values']['user'], $form_state['values']['rid']);
+  $form_state['redirect'] = 'user/'. $user->uid;
+}
+
+
+/**
+ * Implementation of hook_theme()
+ */
+function apply_for_role_theme() {
+  return array(
+    'apply_for_role_admin_form' => array(
+      'arguments' => array('form' => NULL),
+      'file' => 'apply_for_role.admin.inc',
+    ),
+    'apply_for_role_status' => array(
+      'arguments' => array('status' => NULL),
+    )
+  );
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function apply_for_role_user($op, &$edit, &$user, $category = NULL) {
+  switch ($op) {
+    case 'register':
+      // Admin created account aren't processed by the module.
+      if (user_access('administer users')) {
+        break;
+      }
+      if (variable_get('apply_for_role_register', 0)) {
+        $filter_roles = array();
+        foreach (variable_get('users_apply_roles', array()) as $rid => $role) {
+          if ($rid > 2) {
+            $filter_roles[$rid] = $role;
+          }
+        }
+        if (count($filter_roles)) {
+          $form['apply_for_role'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Apply for role'),
+            '#collapsible' => FALSE,
+          );
+          if ((variable_get('apply_for_role_multiple', 0) == 0) && (variable_get('apply_for_role_register', 0) == 1)) {
+            $filter_roles[0] = t('--');
+            ksort($filter_roles);
+          }
+          $form['apply_for_role']['rid'] = array(
+            '#type' => variable_get('apply_for_role_multiple', 0) ? 'checkboxes' : 'select',
+            '#title' => variable_get('apply_for_role_multiple', 0) ? t('Select a role or roles') : t('Select a role'),
+            '#options' => $filter_roles,
+            '#required' => (variable_get('apply_for_role_register', 0) == 2) ? TRUE : FALSE,
+          );
+        }
+        return $form;
+      }
+      break;
+
+    case 'insert':
+      if ((variable_get('apply_for_role_register', 0)) && (!empty($edit['rid']))) {
+          apply_for_role_process_applications($user, $edit['rid']);
+          $edit['rid'] = NULL;
+      }
+      break;
+
+    case 'delete':
+      db_query("DELETE FROM {users_roles_apply} WHERE uid = %d", $user->uid);
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_hook_info().
+ *
+ * Let Drupal know about our hook_apply_for_role($op, $apply) hook so that
+ * it can be used triggers for actions.
+ *
+ * We provide information on these hooks  This allows admins to do things
+ * like send an email after the user applies for a role.
+ */
+function apply_for_role_hook_info() {
+  $info = array(
+    'apply_for_role' => array(
+      'apply_for_role' => array(
+        'apply' => array(
+          'runs when' => t('When a user submits an application for a role'),
+        ),
+        'approve' => array(
+          'runs when' => t("When an admin approves a user's application for a role"),
+        ),
+        'deny' => array(
+          'runs when' => t("When an admin denies a user's application for a role"),
+        ),
+        'remove' => array(
+          'runs when' => t("When an admin deletes a user's application for a role"),
+        ),
+      ),
+    ),
+  );
+  return $info;
+}
+
+/**
+* Implementation of hook_action_info_alter().
+*
+* None of the built-in actions will be enabled for our hook by default. We
+* need to implement hook_action_info_alter() so that we can enable a couple.
+*/
+function apply_for_role_action_info_alter(&$info) {
+  $actions = array(
+    'system_message_action',
+    'system_send_email_action',
+    'token_actions_message_action',
+    'token_actions_send_email_action',
+    'token_actions_goto_action',
+  );
+  $ops = array('apply', 'approve', 'deny', 'remove');
+  foreach ($actions as $action) {
+    if (isset($info[$action])) {
+      $info[$action]['hooks']['apply_for_role'] = $ops;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_apply_for_role().
+ *
+ * We implement our own event to fire triggers.
+ *
+ * @param $op The operation that just occured: 'apply', 'approve', 'deny', 'remove'.
+ * @param $apply A role application object.
+ */
+function apply_for_role_apply_for_role($op, $apply) {
+  // Keep objects for reuse so that changes actions make to objects can persist.
+  static $objects;
+
+  if (!module_exists('trigger')) {
+    return;
+  }
+
+  $user = user_load(array('uid' => $apply->uid));
+  $apply->user = $user;
+
+  $aids = _trigger_get_hook_aids('apply_for_role', $op);
+  $context = array(
+    'hook' => 'apply_for_role',
+    'op' => $op,
+    'user' => $user,
+    'apply_for_role' => $apply,
+  );
+  foreach ($aids as $aid => $action_info) {
+    if ($action_info['type'] != 'user') {
+      if (!isset($objects[$action_info['type']])) {
+        $objects[$action_info['type']] = _trigger_normalize_user_context($action_info['type'], $user);
+      }
+      $context['user'] = $user;
+      $context['apply'] = $apply;
+      actions_do($aid, $objects[$action_info['type']], $context);
+    }
+    else {
+      actions_do($aid, $user, $context);
+    }
+  }
+}
+
+
+/**
+ * Callbacks
+ */
+
+/**
+ * Check if a user has a given role.
+ *
+ * @param $uid User id
+ * @param $rid Role id
+ * @return Boolean
+ */
+function apply_for_role_user_has_role($uid, $rid) {
+  if (!empty($uid) && !empty($rid)) {
+    $user = user_load(array('uid' => $uid));
+    return (!empty($user->uid) && isset($user->roles[$rid]));
+  }
+  return FALSE;
+}
+
+/**
+ * Return an array of the roles that are available for application by a user.
+ *
+ * @param $user User object
+ * @return array keyed by role id with the role names as values.
+ */
+function apply_for_role_available_roles($user) {
+  // Get the complete list of roles (other than anonyous)...
+  $roles = user_roles(TRUE);
+  // ...the roles that can be applied for...
+  $enabled = (array) variable_get('users_apply_roles', array());
+
+  // ...the roles the user has already applied for...
+  $applied = array();
+  $result = db_query("SELECT rid FROM {users_roles_apply} WHERE uid = %d", $user->uid);
+  while ($row = db_fetch_object($result)) {
+    $applied[$row->rid] = isset($roles[$row->rid]) ? $roles[$row->rid] : t('Invalid role');
+  }
+
+  // ... now figure out what's left from the enabled roles list once you remove
+  // those they have and those they've applied for.
+  $used = $user->roles + $applied;
+  return array_diff($enabled, $used);
+}
+
+/**
+ * Store a role application in the database.
+ *
+ * @param $user User object
+ * @param $rid Role id
+ * @return Boolean indicating success
+ */
+function apply_for_role_add_apply($user, $rid) {
+  $uid = $user->uid;
+  if (!apply_for_role_user_has_role($uid, $rid)) {
+    // Check if the user has already applied for this role
+    if (!db_result(db_query("SELECT COUNT(*) FROM {users_roles_apply} WHERE uid = %d AND rid = %d", $uid, $rid))) {
+      $apply = (object) array('uid' => $uid, 'rid' => $rid, 'approved' => 0, 'apply_date' => time());
+      drupal_write_record('users_roles_apply', $apply);
+
+      module_invoke_all('apply_for_role', 'apply', $apply);
+
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Approve a role application and put the user into the role.
+ *
+ * @param $user User object
+ * @param $rid Role id
+ * @return Boolean indicating success
+ */
+function apply_for_role_approve_apply($user, $rid) {
+  $uid = $user->uid;
+  if ($apply = db_fetch_object(db_query("SELECT * FROM {users_roles_apply} WHERE uid = %d AND rid = %d AND approved <> %d", $uid, $rid, APPLY_FOR_ROLE_APPROVED))) {
+    apply_for_role_add_role($uid, $rid);
+    $apply->approve_date = time();
+    $apply->approved = APPLY_FOR_ROLE_APPROVED;
+    drupal_write_record('users_roles_apply', $apply, array('uid', 'rid'));
+
+    module_invoke_all('apply_for_role', 'approve', $apply);
+
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Deny a role application.
+ *
+ * @param $user User object
+ * @param $rid Role id
+ * @return Boolean indicating success
+ */
+function apply_for_role_deny_apply($user, $rid) {
+  $uid = $user->uid;
+  if ($apply = db_fetch_object(db_query("SELECT * FROM {users_roles_apply} WHERE uid = %d AND rid = %d AND approved <> %d", $uid, $rid, APPLY_FOR_ROLE_DENIED))) {
+    apply_for_role_delete_role($uid, $rid);
+    $apply->approve_date = time();
+    $apply->approved = APPLY_FOR_ROLE_DENIED;
+    drupal_write_record('users_roles_apply', $apply, array('uid', 'rid'));
+
+    module_invoke_all('apply_for_role', 'deny', $apply);
+
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Deletea role application from the database.
+ *
+ * @param $user User object
+ * @param $rid Role id
+ * @return Boolean indicating success
+ */
+
+function apply_for_role_remove_apply($user, $rid) {
+  $uid = $user->uid;
+  if ($apply = db_fetch_object(db_query("SELECT * FROM {users_roles_apply} WHERE uid = %d AND rid = %d", $uid, $rid))) {
+    apply_for_role_delete_role($uid, $rid);
+    db_query("DELETE FROM {users_roles_apply} WHERE uid = %d AND rid = %d", $uid, $rid);
+
+    $apply->approval = -1;
+    module_invoke_all('apply_for_role', 'remove', $apply);
+
+    return TRUE;
+  }
+  return FALSE;
+}
+
+function apply_for_role_add_role($uid, $rid) {
+  if (!in_array($rid, array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID))) {
+    $account = user_load(array('uid' => $uid));
+    $myroles = $account->roles;
+    $rolenames = user_roles(TRUE);
+    $myroles[$rid] = $rolenames[$rid];
+    user_save($account, array('roles' => $myroles));
+  }
+}
+
+function apply_for_role_delete_role($uid, $rid) {
+  if (!in_array($rid, array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID))) {
+    $account = user_load(array('uid' => $uid));
+    $myroles = $account->roles;
+    unset($myroles[$rid]);
+    user_save($account, array('roles' => $myroles));
+  }
+}
+
+/**
+ * Process an application and store it for admin review.
+ *
+ * @param $user User object.
+ * @param $applications Mixed, either a role id or an array keyed by role id.
+ */
+function apply_for_role_process_applications($user, $applications) {
+  $roles = user_roles(TRUE);
+
+  // They can hand in either an array keyed by role id or single role id.
+  // Ensure we've got an array keyed by role id with the name as the value.
+  if (is_array($applications)) {
+    // Filter out any thing with empty role names. And use the official role
+    // name.
+    $applications = array_intersect_key($roles, array_filter($applications));
+  }
+  else {
+    $applications = array($applications => $roles[$applications]);
+  }
+
+  $received = array();
+  $not_received = array();
+  foreach ($applications as $rid => $role) {
+    if (apply_for_role_add_apply($user, $rid)) {
+      $received[] = $role;
+    }
+    else {
+      $not_received[] = $role;
+    }
+  }
+
+  if (!empty($received)) {
+    drupal_set_message(t('%message %roles', array('%message' => format_plural(count($received), t('Your application was received for the following role:'), t('Your applications were received for the following roles:')), '%roles' => implode(', ', $received))));
+  }
+  if (!empty($not_received)) {
+    drupal_set_message(t('%message %roles', array('%message' => format_plural(count($not_received), t('There was a problem processing your application for the following role:'), t('There was a problem processing your applications for the following roles:')), '%roles' => implode(', ', $not_received))), 'error');
+  }
+}
+
+/**
+ * Return an array of roles that were approved for this user.
+ *
+ * @param $user User object.
+ */
+function apply_for_role_approved_roles(&$user) {
+  $approved = array();
+
+  $roles = user_roles(TRUE);
+
+  $result = db_query("SELECT rid FROM {users_roles_apply} WHERE uid = %d and approved = %d", $user->uid, APPLY_FOR_ROLE_APPROVED);
+  while ($row = db_fetch_object($result)) {
+    if (isset($roles[$row->rid]) && isset($user->roles[$row->rid]))
+      $approved[$row->rid] = $roles[$row->rid];
+    else
+      continue;
+  }
+
+  return $approved;
+}

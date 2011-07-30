@@ -1,0 +1,412 @@
+# $Id: fi.po,v 1.1 2009/01/13 06:10:09 sorenjones Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  apply_for_role.admin.inc: n/a
+#  apply_for_role.module,v 1.35 2008/12/20 04:11:53 sorenjones
+#  apply_for_role.token.inc,v 1.3 2008/10/17 08:20:56 sorenjones
+#  apply_for_role.info,v 1.6 2008/08/03 11:56:40 sorenjones
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-01-09 18:18+0200\n"
+"PO-Revision-Date: 2009-01-11 16:36+0200\n"
+"Last-Translator: Petri Tonteri <scope.note a gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: apply_for_role.admin.inc:21
+msgid "Apply for role options"
+msgstr "Säädöt"
+
+#: apply_for_role.admin.inc:25
+msgid "Allow multiple roles per application"
+msgstr "Salli useiden roolipyyntöjen tekeminen yhdellä kertaa"
+
+#: apply_for_role.admin.inc:26;34
+msgid "No"
+msgstr "Ei"
+
+#: apply_for_role.admin.inc:26
+msgid "Yes"
+msgstr "Kyllä"
+
+#: apply_for_role.admin.inc:28
+msgid "Chosing 'no' will limit users to applying for only one role per role application. Choosing 'yes' will allow users to apply for multiple roles per role application."
+msgstr "Valitsemalla 'Ei' asetat rajoituksen, ettei käyttäjä voi pyytää kuin yhden roolin kerrallaan. Valitsemalla 'Kyllä' sallit, että käyttäjä voi pyytää useampia rooleja samalla kertaa."
+
+#: apply_for_role.admin.inc:33
+msgid "Apply for role on registration"
+msgstr "Pyydä roolia rekisteröityessä"
+
+#: apply_for_role.admin.inc:34
+msgid "Optional"
+msgstr "Valinnainen"
+
+#: apply_for_role.admin.inc:34
+msgid "Required"
+msgstr "Pakollinen"
+
+#: apply_for_role.admin.inc:36
+msgid "Choosing 'optional' will allow users to apply for roles when creating a new account. Choosing 'required' will require users to apply for roles when creating a new account."
+msgstr "Valitsemalla 'Valinnainen' sallit, että käyttäjä voi pyytää rooleja luodessaan käyttäjätilin. Valitsemalla 'Pakollinen' määrittelet, että käyttäjän täytyy pyytää rooleja luodessaan käyttäjätilin."
+
+#: apply_for_role.admin.inc:43
+msgid "Roles"
+msgstr "Roolit"
+
+#: apply_for_role.admin.inc:46
+msgid "Select the roles that users will be able to apply for."
+msgstr "Valitse roolit, joita käyttäjät voivat pyytää."
+
+#: apply_for_role.admin.inc:51
+msgid "Update"
+msgstr "Päivitä"
+
+#: apply_for_role.admin.inc:68
+msgid "Apply for role settings have been saved."
+msgstr "Apply for role -moduulin asetukset on tallennettu."
+
+#: apply_for_role.admin.inc:79
+msgid "Username"
+msgstr "Käyttäjänimi"
+
+#: apply_for_role.admin.inc:80
+msgid "Current Roles"
+msgstr "Nykyiset roolit"
+
+#: apply_for_role.admin.inc:81
+msgid "Applying For"
+msgstr "Pyytää roolia"
+
+#: apply_for_role.admin.inc:82
+msgid "Applied"
+msgstr "Pyyntö tehty"
+
+#: apply_for_role.admin.inc:83
+msgid "Status"
+msgstr "Tila"
+
+#: apply_for_role.admin.inc:84
+msgid "Processed"
+msgstr "Käsitelty"
+
+#: apply_for_role.admin.inc:85
+msgid "Operations"
+msgstr "Toiminnot"
+
+#: apply_for_role.admin.inc:99
+msgid "<em>Invalid Role</em>"
+msgstr "<em>Virheellinen rooli</em>"
+
+#: apply_for_role.admin.inc:117;165
+msgid "Approve"
+msgstr "Hyväksy"
+
+#: apply_for_role.admin.inc:117
+msgid "Approve this user"
+msgstr "Hyväksy tämä käyttäjä"
+
+#: apply_for_role.admin.inc:122;184
+msgid "Deny"
+msgstr "Hylkää"
+
+#: apply_for_role.admin.inc:122
+msgid "Deny this user"
+msgstr "Hylkää tämä käyttäjä"
+
+#: apply_for_role.admin.inc:127;203
+msgid "Delete"
+msgstr "Poista"
+
+#: apply_for_role.admin.inc:127
+msgid "Remove application"
+msgstr "Poista sovellus"
+
+#: apply_for_role.admin.inc:153
+msgid "There are currently no applications."
+msgstr "Ei roolipyyntöjä"
+
+#: apply_for_role.admin.inc:165
+msgid "Do you want to approve the application from user %username for role %role"
+msgstr "Haluatko hyväksyä käyttäjän %username pyynnön roolille %role?"
+
+#: apply_for_role.admin.inc:165
+msgid "The role will be automatically assigned to the user."
+msgstr "Rooli annetaan käyttäjälle."
+
+#: apply_for_role.admin.inc:170
+msgid "The application was approved and the user was added to the role."
+msgstr "Pyyntö hyväksyttiin ja käyttäjälle lisättiin rooli."
+
+#: apply_for_role.admin.inc:173
+msgid "Error approving application. Please try again!"
+msgstr "Virhe pyynnön hyväksymisessä. Yritä uudelleen, ole hyvä."
+
+#: apply_for_role.admin.inc:184
+msgid "Do you want to deny the application from user %username for role %role"
+msgstr "Haluatko hylätä käyttäjän %username pyynnön roolille %role?"
+
+#: apply_for_role.admin.inc:184
+msgid "The role will not be assigned to the user and the user will not be able to apply again."
+msgstr "Roolia ei anneta käyttäjälle eikä käyttäjä voi pyytää roolia uudelleen."
+
+#: apply_for_role.admin.inc:189
+msgid "The application was denied ."
+msgstr "Pyyntö hylättiin."
+
+#: apply_for_role.admin.inc:192
+msgid "Error denying application. Please try again!"
+msgstr "Virhe pyynnön hylkäämisessä. Yritä uudelleen, ole hyvä."
+
+#: apply_for_role.admin.inc:203
+msgid "Do you want to remove the application from user %username for role %role"
+msgstr "Haluatko poistaa käyttäjän %username pyynnön roolille %role?"
+
+#: apply_for_role.admin.inc:203
+#: apply_for_role.module:357
+msgid "Invalid role"
+msgstr "Virheellinen rooli"
+
+#: apply_for_role.admin.inc:203
+msgid "The role will be automatically deleted from the user and they will be allowed to re-apply for the role."
+msgstr "Roolia ei myönnetä käyttäjälle, mutta käyttäjän sallitaan pyytää uudelleen roolia"
+
+#: apply_for_role.admin.inc:208
+msgid "The application was deleted."
+msgstr "Pyyntö on poistettu."
+
+#: apply_for_role.admin.inc:211
+msgid "Error deleting application. Please try again!"
+msgstr "Virhe pyynnön poistamisessa. Yritä uudelleen, ole hyvä."
+
+#: apply_for_role.token.inc:50
+msgid "Applicant's user ID"
+msgstr "Pyytäjän käyttäjätunnus"
+
+#: apply_for_role.token.inc:51
+msgid "Applicant's user name"
+msgstr "Pyytäjän käyttäjänimi"
+
+#: apply_for_role.token.inc:52
+msgid "Applicant's user name. WARNING - raw user input."
+msgstr "Hakijan käyttäjänimi. VAROITUS: raakamuotoista käyttäjän antamaa syötettä."
+
+#: apply_for_role.token.inc:53
+msgid "Applicant's e-mail."
+msgstr "Pyytäjän sähköpostiosoite"
+
+#: apply_for_role.token.inc:54
+msgid "Applicant's e-mail. WARNING - raw user input."
+msgstr "Hakijan sähköpostiosoite. VAROITUS: raakamuotoista käyttäjän antamaa syötettä."
+
+#: apply_for_role.token.inc:56
+msgid "Application role ID"
+msgstr "Pyynnön roolitunnus"
+
+#: apply_for_role.token.inc:57
+msgid "Application role name"
+msgstr "Pyynnön roolinimi"
+
+#: apply_for_role.token.inc:58
+msgid "Application status"
+msgstr "Pyynnön tila"
+
+#: apply_for_role.token.inc:60
+msgid "Application creation year (four digit)"
+msgstr "Pyynnön luontivuosi (nelinumeroinen)"
+
+#: apply_for_role.token.inc:61
+msgid "Application creation year (two digit)"
+msgstr "Pyynnön luontivuosi (kaksinumeroinen)"
+
+#: apply_for_role.token.inc:62
+msgid "Application creation month (full word)"
+msgstr "Pyynnön luontikuukausi"
+
+#: apply_for_role.token.inc:63
+msgid "Application creation month (abbreviated)"
+msgstr "Pyynnön luontikuukausi (lyhennettynä)"
+
+#: apply_for_role.token.inc:64
+msgid "Application creation month (two digit, zero padded)"
+msgstr "Pyynnön luontikuukausi (kaksinumeroinen, 0 erottimena)"
+
+#: apply_for_role.token.inc:65
+msgid "Application creation month (one or two digit)"
+msgstr "Pyynnön luontikuukausi (yksi- tai kaksinumeroinen)"
+
+#: apply_for_role.token.inc:66
+msgid "Application creation week (two digit)"
+msgstr "Pyynnön luontiviikko (kaksinumeroinen)"
+
+#: apply_for_role.token.inc:67
+msgid "Application creation date (day of month)"
+msgstr "Pyynnön luontipäivä (numeroin)"
+
+#: apply_for_role.token.inc:68
+msgid "Application creation day (full word)"
+msgstr "Pyynnön luontipäivä"
+
+#: apply_for_role.token.inc:69
+msgid "Application creation day (abbreviation)"
+msgstr "Pyynnön luontipäivä (lyhennetty)"
+
+#: apply_for_role.token.inc:70
+msgid "Application creation day (two digit, zero-padded)"
+msgstr "Pyynnön luontipäivä (kaksinumeroinen, 0 erottimena)"
+
+#: apply_for_role.token.inc:71
+msgid "Application creation day (one or two digit)"
+msgstr "Pyynnön luontipäivä (yksi- tai kaksinumeroinen)"
+
+#: apply_for_role.module:23
+msgid "Triggers are system events, such as when new content is added or when a user logs in. Trigger module combines these triggers with actions (functional tasks), such as unpublishing content or e-mailing an administrator. The <a href=\"@url\">Actions settings page</a> contains a list of existing actions and provides the ability to create and configure additional actions."
+msgstr "Triggerit ovat järjestelmätapahtumia, kuten uuden sisällön lisääminen tai käyttäjän kirjautuminen sisään. Trigger-moduuli yhdistää triggereitä toimintoihin (funktionaalisiin tehtäviin), kuten sisällön jättäminen julkaisematta tai sähköpostiviestin lähettäminen ylläpitäjälle. <a href=\"@url\">Toimenpiteet-sivulla</a> näet listan olemassa olevista toiminnoista ja voit luoda ja muokata uusia toimintoja."
+
+#: apply_for_role.module:24
+msgid "Below you can assign actions to run when certain role application related triggers happen. For example, you could email a user when their application is approved."
+msgstr "Alla voit kytkeä käyttöön toimintoja, jotka käynnistetään, kun tiettyyn roolipyyntöön liittyvä trigger ilmenee. Esimerkiksi voit määritellä lähetettäväksi sähköpostiviestin käyttäjälle, kun hänen pyyntönsä on hyväksytty."
+
+#: apply_for_role.module:27
+msgid "The <em>Apply for roles</em> module allows users to apply for roles from their user page and allows administrators to easily view, approve and delete role applications."
+msgstr "<em>Apply for roles</em> -moduuli sallii käyttäjien pyytää rooleja käyttäjäsivullaan ja ylläpitäjien tarkastella, hylätä ja poistaa roolipyyntöjä."
+
+#: apply_for_role.module:55
+msgid "Apply for role administration"
+msgstr "Apply for role -ylläpito"
+
+#: apply_for_role.module:56
+msgid "Administer which roles users can apply for."
+msgstr "Määrittele, mitä rooleja käyttäjät voivat pyytää."
+
+#: apply_for_role.module:64
+msgid "Manage role applications"
+msgstr "Hallinnoi roolipyyntöjä"
+
+#: apply_for_role.module:65
+msgid "View, approve and delete role applications."
+msgstr "Tarkastele, hyväksy ja poista roolipyyntöjä."
+
+#: apply_for_role.module:73
+msgid "Approve role application"
+msgstr "Hyväksy roolipyyntö"
+
+#: apply_for_role.module:82
+msgid "Deny role application"
+msgstr "Hylkää roolipyyntö"
+
+#: apply_for_role.module:91
+msgid "Remove role application"
+msgstr "Poista roolipyyntö"
+
+#: apply_for_role.module:100;197
+#: apply_for_role.info:0
+msgid "Apply for role"
+msgstr "Apply for role"
+
+#: apply_for_role.module:113
+msgid "Removed"
+msgstr "Poistettu"
+
+#: apply_for_role.module:114
+msgid "Pending"
+msgstr "Odottaa käsittelyä"
+
+#: apply_for_role.module:115
+msgid "Approved"
+msgstr "Hyväksytty"
+
+#: apply_for_role.module:116
+msgid "Denied"
+msgstr "Hylätty"
+
+#: apply_for_role.module:118
+msgid "Unknown status"
+msgstr "Tuntematon tila"
+
+#: apply_for_role.module:140;206
+msgid "Select a role or roles"
+msgstr "Valitse rooli tai roolit"
+
+#: apply_for_role.module:140;206
+msgid "Select a role"
+msgstr "Valitse rooli"
+
+#: apply_for_role.module:145
+msgid "Apply"
+msgstr "Pyydä"
+
+#: apply_for_role.module:149
+msgid "No roles are available at this time."
+msgstr "Yhtään roolia ei ole nyt tarjolla."
+
+#: apply_for_role.module:201
+msgid "--"
+msgstr "--"
+
+#: apply_for_role.module:241
+msgid "When a user submits an application for a role"
+msgstr "Kun käyttäjä lähettää roolipyynnön"
+
+#: apply_for_role.module:244
+msgid "When an admin approves a user's application for a role"
+msgstr "Kun ylläpitäjä hyväksyy käyttäjän roolipyynnön"
+
+#: apply_for_role.module:247
+msgid "When an admin denies a user's application for a role"
+msgstr "Kun ylläpitäjä hylkää käyttäjän roolipyynnön"
+
+#: apply_for_role.module:250
+msgid "When an admin deletes a user's application for a role"
+msgstr "Kun ylläpitäjä poistaa käyttäjän roolipyynnön"
+
+#: apply_for_role.module:499;502
+msgid "%message %roles"
+msgstr "%message %roles"
+
+#: apply_for_role.module:499
+msgid "Your application was received for the following role:"
+msgstr "Olemme vastaanottaneet pyyntösi seuraavalle roolille:"
+
+#: apply_for_role.module:499
+msgid "Your applications were received for the following roles:"
+msgstr "Olemme vastaanottaneet roolipyyntösi:"
+
+#: apply_for_role.module:502
+msgid "There was a problem processing your application for the following role:"
+msgstr "Ilmeni ongelma tämän roolipyyntösi käsittelyssä:"
+
+#: apply_for_role.module:502
+msgid "There was a problem processing your applications for the following roles:"
+msgstr "Ilmeni ongelma seuraavien roolipyyntöjesi käsittelyssä:"
+
+#: apply_for_role.module:35
+msgid "administer apply for role"
+msgstr "Apply for role -moduulin hallinnointi"
+
+#: apply_for_role.module:35
+msgid "approve role applications"
+msgstr "roolipyyntöjen hyväksyminen"
+
+#: apply_for_role.module:35
+msgid "apply for roles"
+msgstr "roolien pyytäminen"
+
+#: apply_for_role.module:0
+msgid "apply_for_role"
+msgstr "apply_for_role"
+
+#: apply_for_role.info:0
+msgid "Allows users to apply for roles."
+msgstr "Salli käyttäjien pyytää rooleja"
+
+#: apply_for_role.info:0
+msgid "User management"
+msgstr "Käyttäjähallinta"
+

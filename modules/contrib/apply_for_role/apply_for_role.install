@@ -1,0 +1,62 @@
+<?php
+// $Id: apply_for_role.install,v 1.6 2008/03/30 06:42:55 sorenjones Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function apply_for_role_install() {
+  // Create tables.
+  drupal_install_schema('apply_for_role');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function apply_for_role_schema() {
+  $schema['users_roles_apply'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'rid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'approved' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+      ),
+      'apply_date' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'approve_date' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('uid', 'rid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function apply_for_role_uninstall() {
+  //Remove tables
+  drupal_uninstall_schema('apply_for_role');
+  //Remove variables
+  variable_del('users_apply_roles');
+  variable_del('apply_for_role_multiple');
+  variable_del('apply_for_role_register');
+}
