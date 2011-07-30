@@ -238,3 +238,7 @@ h2.pane-title {
 #treatment-centers .panels_pane {
   margin-bottom: 2em;
 }
+
+#mini-panel-location_selector .panels-pane {
+  margin-bottom: 2em;
+}
