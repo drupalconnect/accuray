@@ -43,27 +43,55 @@ function accuray_toolkit_access_check($conf, $context) {
     return FALSE;
   }
   
-  // load viewobject
-  $view = views_get_view('ToolkitNodeAccess');
+  global $user;
 
-  // ensure view exists
-  if (!$view) return;
+  // Virtual press kit vid = 9
 
-  // set object property to return total rows 
-  $view->get_total_rows = true;
-
-  // set display_id
-  $view->set_display('Defaults');
+  // Premium marketing toolkit vid = 2
+  // Premium toolkit membership rid = 6
+  if (!isset($user->roles[6]) && drupal_match_path($_GET['q'], 'taxonomy/vocabulary/2')) {
+    return FALSE;
+  }  
   
-  // set args
-  $view->set_arguments($context->data->vid);
-
-  // execute view
-  $view->execute();
+  // Coverage reimbursement = vid = 8
+  // Coverage reimbursement rid = 10
+  if (!isset($user->roles[10]) && drupal_match_path($_GET['q'], 'taxonomy/vocabulary/8')) {
+    return FALSE;
+  }  
   
-  $rows = count($view->result);
+  // Marketing toolkit vid = 10
+  // Marketing toolkit membership rid = 7
+  if (!isset($user->roles[7]) && drupal_match_path($_GET['q'], 'taxonomy/vocabulary/10')) {
+    return FALSE;
+  }  
+  
+  return TRUE;
+  
+  
+    
+  
+if (0) {  
+  $sql = "SELECT node.nid AS nid
+    FROM node node 
+    LEFT JOIN term_node term_node ON node.vid = term_node.vid
+    LEFT JOIN term_data term_data ON term_node.tid = term_data.tid
+    LEFT JOIN vocabulary vocabulary ON term_data.vid = vocabulary.vid
+    WHERE (node.type in ('asset')) AND (node.status = 1) AND (vocabulary.vid = '%d')";
+  
+  $result = db_query($sql, $context->data->vid);
+  
+  while ($row = db_fetch_object($result)) {
+    $node = node_load(array('nid'=>$row->nid));
+    $access[$row->nid] = node_access('view', $node);
+  }
+  
+  foreach ($access as $nid => $access) {
+    $grant = $nid . ': ' . ($access ? 'Yes' : 'No');
+    dsm($grant);
+  }
 
-  return $rows > 0 ? TRUE : FALSE;
+  return TRUE;
+} //if0
 }
 
 /**
