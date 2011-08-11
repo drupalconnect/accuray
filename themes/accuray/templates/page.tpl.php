@@ -264,6 +264,9 @@
   <?php print $page_closure; ?>
 
   <?php print $closure; ?>
+  <!-- I know, this should be stuck in with drupal_add_js().-->
+  <SCRIPT TYPE='text/javascript' LANGUAGE='JavaScript' SRC='/elqNow/elqCfg.js'></SCRIPT>
+  <SCRIPT TYPE='text/javascript' LANGUAGE='JavaScript' SRC='/elqNow/elqImg.js'></SCRIPT>
 
 </body>
 </html>
