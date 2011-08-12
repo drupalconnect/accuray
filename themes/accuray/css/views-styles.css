@@ -74,6 +74,11 @@
 }
 
 .views-slideshow-controls-bottom {
+
+    margin-top: -2em;
+    position: relative;
+    z-index: 5;
+
 }
 .views_slideshow_singleframe_pager {
   /*position: absolute;
