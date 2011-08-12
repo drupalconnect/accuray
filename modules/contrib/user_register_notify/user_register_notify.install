@@ -1,0 +1,28 @@
+<?php
+// $Id: user_register_notify.install,v 1.2 2008/12/06 01:17:17 rmiddle Exp $
+// Built for Drupal 6
+/**
+ * @file
+ * Notifies administrator of new user registrations.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ */
+function user_register_notify_install() {
+  //  Set the weight of the module lower so modules like logintobogie don't cause problmes.
+  db_query("UPDATE {system} SET weight = 1002 WHERE name = 'user_register_notify'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function user_register_notify_uninstall() {
+  variable_del('user_register_notify_type');
+  variable_del('user_register_notify_mailto');
+  variable_del('user_register_notify_roles');
+  variable_del('user_register_notify_subject');
+  variable_del('user_register_notify_body');
+  variable_del('user_register_notify_alert');
+}

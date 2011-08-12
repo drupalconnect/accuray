@@ -1,0 +1,183 @@
+<?php
+// $Id: user_register_notify.module,v 1.20 2009/07/02 03:41:42 rmiddle Exp $
+// Built for Drupal 6
+
+/**
+ * @file
+ * Notifies administrator of new user registrations.
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function user_register_notify_help($path, $arg) {
+  if ($path == 'admin/help#user_register_notify') {
+    return '<p>'.
+      t('This module provides a way for an administrator to get'.
+      'an email when a user account is created. '.
+      'It assumes that the Drupal mailer is configured.') .
+      '</p>';
+  }
+}
+
+define('USER_REGISTER_NOTIFY_SUBJECT', t('Account details for !user_name at !site'));
+define('USER_REGISTER_NOTIFY_BODY', t("!user_name (!user_view) has !action account.\n\nEdit user: !user_edit\n\nDelete User: !user_delete\n\n!profile"));
+
+/**
+ * Implementation of hook_menu().
+ */
+function user_register_notify_menu() {
+  $items['admin/settings/register_notify'] = array(
+    'title' => 'User Register Notify',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('user_register_notify_settings'),
+    'description' => 'Configure the User Register Notify module.',
+    'file' => 'user_register_notify.admin.inc',
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+function user_register_notify_setup_email(&$edit, &$account, $action = 'insert') {
+  // Notify administrator of new user only if this is not first user and
+  // if visitors can create accounts without administrator's approval.
+  // In case when accounts must be created with administrator's approval
+  // there is already a 'pending approval' e-mail notification.
+  if ($account->uid != 1 && (variable_get('user_register', 1) == 1 ? $account->status : !$account->status)) {
+    $notify_type = variable_get('user_register_notify_type', 'Custom');
+    $from = variable_get('site_mail', ini_get('sendmail_from'));
+    $params = array(
+      'account' => $account,
+      'action' => $action,
+    );
+
+    $emails = array();
+    switch ($notify_type) {
+      case 'Custom':
+        $emails = preg_split('/,[\w]+/', variable_get('user_register_notify_mailto', $from));
+        break;
+      case 'Both':
+        $emails = preg_split('/,[\w]+/', variable_get('user_register_notify_mailto', $from));
+        // There is no break here for a reason.
+      case 'Role':
+        $roles = implode(',', variable_get('user_register_notify_roles', array()));
+        if (!empty($roles)) {
+          $result = db_query("SELECT mail FROM {users} AS u INNER JOIN {users_roles} AS r ON u.uid = r.uid WHERE r.rid IN('%s')", $roles);
+          while ($mail = db_fetch_object($result)) {
+            $emails[] = $mail->mail;
+          }
+        }
+        break;
+    }
+    $emails = array_unique($emails);
+    $to = implode(', ', $emails);
+
+//    watchdog('user_register_notify', check_plain($to));
+
+    drupal_mail(
+      'user_register_notify',
+      'user-register-notify-admin',
+      $to,
+      language_default(),
+      $params,
+      $from,
+      TRUE // Automatically send
+      );
+  }
+}
+
+
+/**
+ * Implementation of hook_user().
+ */
+function user_register_notify_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'insert':
+      user_register_notify_setup_email($edit, $account);
+      break;
+    case 'update':
+      if (variable_get('user_register_notify_alert', 'create') == 'update')
+        user_register_notify_setup_email($edit, $account, 'update');
+      break;
+  }
+}
+
+
+
+function user_register_notify_mail($key, &$message, $params) {
+  global $base_url;
+  if ($key == 'user-register-notify-admin') {
+    $language = $message['language'];
+    $langcode = $language->language;
+    $uaccount = $params['account'];
+    $profile_data = "";
+    $og_data = "";
+
+    if ($params['action'] == 'insert') {
+      $action = 'created';
+    }
+    else {
+      $action = 'updated';
+    }
+    if (module_exists('profile')) {
+      $result = db_query('SELECT f.title, f.name, f.type, v.value FROM {profile_fields} f INNER JOIN {profile_values} v ON f.fid = v.fid WHERE uid = %d', $uaccount->uid);
+      while ($field = db_fetch_object($result)) {
+        switch ($field->type) {
+          case 'date':
+            $date_field = unserialize($field->value);
+            if (is_array($date_field)) {
+              $date_timestamp = mktime(0, 0, 0, $date_field['month'], $date_field['day'], $date_field['year']);
+              $profile_data .= sprintf("%s: %s\n", $field->title, format_date($date_timestamp));
+              $variables['!'. $field->name] = format_date($date_timestamp);
+            }
+            break;
+          case 'checkbox':
+            if ($field->value) {
+              $profile_data .= sprintf("%s: Checked\n", $field->title);
+              $variables['!'. $field->name] = "Checked";
+            } 
+            else {
+              $profile_data .= sprintf("%s: Not Checked\n", $field->title);
+              $variables['!'. $field->name] = "Not Checked";
+            }
+            break;
+          default:
+            $profile_data .= sprintf("%s: %s\n", $field->title, $field->value);
+            $variables['!'. $field->name] = check_plain($field->value);
+        }
+      }
+    }
+    else {
+      $profile_data = t("Profile Module Not Installed.\n");
+    }
+
+    if (module_exists('og')) {
+      $result = db_query('SELECT o.og_description, n.title FROM {og_uid} u INNER JOIN {og} o ON o.nid = u.nid INNER JOIN {node} n on n.nid = u.nid WHERE u.uid = %d', $uaccount->uid);
+      $og_data = t("Organic groups belonged to:\n");
+
+      while ($og = db_fetch_object($result)) {
+        $og_data .= sprintf("%s - %s\n", $og->title, $og->og_description);
+      }
+    }
+    else {
+      $og_data = t("Organic Groups Module Not Installed.\n");
+    }
+
+    $variables['!user_name'] = isset($uaccount->realname) ? $uaccount->realname : $uaccount->name;
+    $variables['!user_mail'] = $uaccount->mail;
+    $variables['!user_view'] = url('user/'. $uaccount->uid, array('absolute' => TRUE));
+    $variables['!user_edit'] = url('user/'. $uaccount->uid .'/edit', array('absolute' => TRUE));
+    $variables['!user_delete'] = url('user/'. $uaccount->uid .'/delete', array('absolute' => TRUE));
+    $variables['!site'] = variable_get('site_name', 'Drupal');
+    $variables['!uri'] = $base_url;
+    $variables['!uri_brief'] = drupal_substr($base_url, drupal_strlen('http://'));
+    $variables['!date'] = format_date(time());
+    $variables['!profile'] = check_plain($profile_data);
+    $variables['!og'] = check_plain($og_data);
+    $variables['!action'] = check_plain($action);
+
+    $message['subject'] = t(variable_get('user_register_notify_subject', USER_REGISTER_NOTIFY_SUBJECT), $variables);
+    $message['body'] = t(variable_get('user_register_notify_body', USER_REGISTER_NOTIFY_BODY), $variables);
+  }
+}
+
