@@ -77,6 +77,8 @@
   position: absolute;
   bottom: 2em;
   left: 10px;
+  height: 0;
+  overflow: visible;
   z-index: 9999;
   /*padding: 10px;*/
 }
