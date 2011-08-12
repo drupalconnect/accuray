@@ -10,3 +10,8 @@
 
 .view-Slideshow .view-content {
   margin-bottom: -1.7em;
+}
+
+.views_slideshow_singleframe_pager {
+  bottom: 2em;
+}
