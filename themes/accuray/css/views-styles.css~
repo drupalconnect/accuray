@@ -77,9 +77,8 @@
   position: absolute;
   bottom: 2em;
   left: 10px;
-  margin-bottom: -2em;
   overflow: visible;
-  z-index: 9999;
+  z-index: 888;
   /*padding: 10px;*/
 }
 

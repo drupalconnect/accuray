@@ -75,7 +75,7 @@
 
 .views_slideshow_singleframe_pager {
   position: absolute;
-  bottom: 2em;
+  bottom: 1em;
   left: 10px;
   overflow: visible;
   z-index: 888;
