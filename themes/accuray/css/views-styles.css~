@@ -77,7 +77,7 @@
   position: absolute;
   bottom: 0;
   z-index: 9999;
-  padding: 10px;
+  /*padding: 10px;*/
 }
 
 .views_slideshow_singleframe_pager a {
