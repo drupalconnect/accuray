@@ -7,3 +7,6 @@
 /*fixing problem of background image appearing where it shouldn't*/
 #header {margin-top:0px;}
 #page-wrapper {margin-top:20px;}
+
+.view-Slideshow .view-content {
+  margin-bottom: -1.7em;
