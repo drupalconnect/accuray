@@ -73,11 +73,9 @@
   /*position: relative !important; /* in IE, the absolute positioning provided by the module caused containing divs to collapse */
 }
 
-.views-slideshow-controls-bottom {
-}
 .views_slideshow_singleframe_pager {
-  /*position: absolute;
-  bottom: 4em;
+  position: absolute;
+  bottom: 2em;
   left: 10px;
   margin-bottom: -2em;
   overflow: visible;
