@@ -1,4 +1,5 @@
 Drupal.behaviors.divHeight = function (context) {
+  return false;
   
   var sidebarFirst = $(".region-sidebar-first");
   var sidebarFirstSection = $(".region-sidebar-first .section");
@@ -12,5 +13,5 @@ Drupal.behaviors.divHeight = function (context) {
   
   var toHeight = content.height() - offset;
 
-  sidebarFirstSection.height(toHeight - offset);
+  sidebarFirstSection.height(toHeight);
 }
