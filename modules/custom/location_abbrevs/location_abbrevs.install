@@ -1,0 +1,7 @@
+<?php
+function location_abbrevs_install() {
+  $abbrevs = 
+}
+
+function location_abbrevs_uninstall() {
+}

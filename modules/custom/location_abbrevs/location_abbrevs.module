@@ -1,0 +1,6 @@
+<?php
+function location_abbrevs_get_abbrev($str) {
+}
+
+function location_abbrevs_get_expanded($str) {
+}

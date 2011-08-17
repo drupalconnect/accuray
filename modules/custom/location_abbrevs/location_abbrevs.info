@@ -1,0 +1,5 @@
+; $Id: location_abbrevs.info,v 1.1.2.1 2008/02/01 16:00:24 fago Exp $
+name = "Accuray location abbreviations"
+description = "Provides simple lookup for expansion of locality abbreviations."
+package = "Accuray"
+core = 6.x
