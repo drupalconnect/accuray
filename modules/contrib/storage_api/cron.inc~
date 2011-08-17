@@ -115,7 +115,7 @@ function _storage_api_ensure_instance_exists(&$file, $container) {
       if(!$exists) {
         $file['filepath'] = $filepath;
         $file['keep_me'] = $keep_me;
-        watchdog("Storage API", "Trying to create object instance for " . $file['file_id']);
+        watchdog("Storage API", "Trying to create object instance for " . $file->file_id);
         $exists = _storage_api_create_object_instance($container, $file);
       }
       
