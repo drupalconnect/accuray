@@ -1,0 +1,467 @@
+<?php  
+
+function filefield_storage_theme_registry_alter($registry) {
+  $registry['filefield_file']['theme paths'][] = drupal_get_path('module', 'filefield_storage');
+}
+function phptemplate_filefield_file($file) {
+  // Views may call this function with a NULL value, return an empty string.
+  if (empty($file['fid'])) {
+    return '';
+  }
+
+  if ($file['storage_api_serve_path'] && $storage = storage_api_file_load($file['storage_api_file_id'])) {
+    $path = $file['storage_api_serve_path'];
+    $url = storage_api_serve_url($storage, $absolute=TRUE);
+    $icon = theme('filefield_icon', $file);
+  } 
+  
+  else {
+    $path = $file['filepath'];
+    $url = file_create_url($path);
+    $icon = theme('filefield_icon', $file);
+  }
+  
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  // TODO: Possibly move to until I move to the more complex format described 
+  // at http://darrelopry.com/story/microformats-and-media-rfc-if-you-js-or-css
+  $options = array(
+    'attributes' => array(
+      'type' => $file['filemime'] . '; length=' . $file['filesize'],
+    ),
+  );
+
+  // Use the description as the link text if available.
+  if (empty($file['data']['description'])) {
+    $link_text = $file['filename'];
+  }
+  else {
+    $link_text = $file['data']['description'];
+    $options['attributes']['title'] = $file['filename'];
+  }
+
+  return '<div class="filefield-file">'. $icon . l($link_text, $url, $options) .'</div>';
+}
+
+function filefield_storage_access() {
+  return TRUE;
+}
+
+/**
+ * Implementation of hook_widget_settings_alter().
+ */
+function filefield_storage_widget_settings_alter(&$settings, $op, $widget) {
+  
+  if ($op == 'form') {
+    $settings = array_merge($settings, filefield_storage_form($widget));
+  }
+
+  if ($op == 'save') {
+    $settings = array_merge($settings, filefield_storage_widget_settings($widget));
+  }
+}
+
+/**
+ * Implementation of hook_widget_settings_alter $op = 'form'
+ */
+function filefield_storage_form($widget) {
+  $args = array_reverse(arg());
+  
+  $field_name = $args[0];
+  $type_name = $args[2];
+  $settings_key = $type_name . '-' . $field_name;
+  
+  $selector_ids = variable_get('filefield_storage_selectors', array());
+
+  if ($selector_ids[$settings_key]) {
+    $selector_id = $selector_ids[$settings_key];
+  }
+  else {
+    $selector_id = $selector_ids[$settings_key] = storage_api_new_selector_id();
+    variable_set('filefield_storage_selectors', $selector_ids);
+  }
+    
+  $form['filefield_storage'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Storage settings',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    );
+    
+  $form['filefield_storage']['filefield_storage_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Use Storage API for file storage',
+    '#default_value' => $widget['filefield_storage_enable'] ? $widget['filefield_storage_enable'] : FALSE,
+    );
+  
+  $form['filefield_storage']['filefield_storage_force_download'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Force the user agent to download the file',
+    '#default_value' => $widget['filefield_storage_force_download'] ? $widget['filefield_storage_force_download'] : FALSE,
+    );
+      
+  $form['filefield_storage']['filefield_storage_keep_local'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Keep local files',
+    '#description' => "Check this to have local files removed from disk once they've been added into a storage. You should enable this if your 
+      local storage is limited and you are using storage api to offload large files. You should leave this disabled if some other module
+      requires your files to actually exist on disk.",
+    '#default_value' => $widget['filefield_storage_keep_local'] ? $widget['filefield_storage_keep_local'] : FALSE,
+    ); 
+    
+  $form['filefield_storage']['filefield_storage_selector'] = storage_api_selector_item($selector_id, $title = 'Storage class', $description = NULL);
+  
+  return $form;
+}
+
+/**
+ * Implementation of hook_widget_settings_alter $op = 'save'
+ *
+ * TODO: What happens when the user changes the class in this form? How do files get moved from one class to another?
+ */
+function filefield_storage_widget_settings($widget) {  
+  if ($widget['filefield_storage_enable']) {
+    storage_api_selector_submit($widget['filefield_storage_selector']);
+  }  
+  
+  $settings = array(
+    'filefield_storage_enable',
+    'filefield_storage_force_download',
+    'filefield_storage_keep_local',
+    'filefield_storage_selector',
+  );
+  
+  return $settings;
+}
+
+/**
+ * Implementation of filefield's hook_file_load()
+ */
+function filefield_storage_file_load(&$file) {  
+  // Extra data is stored in the database, keyed by fid
+  $result = db_query('SELECT data FROM {filefield_storage} WHERE fid=%d', array('fid' => $file->fid));
+  
+  if (!$result) {
+    return;
+  }
+  
+  $blob = db_fetch_object($result)->data;
+  
+  // Unserialize the data
+  $data = array();
+  
+  $data = !empty($blob) ? unserialize(base64_decode($blob)) : array();
+  
+  // Merge the data into the file object  
+  $file->data = is_array($file->data) ? array_merge($file->data, $data) : $data;
+
+  $storage = FALSE;
+  
+  if ($data['file_id']) {
+    $storage = storage_api_file_load($data['file_id']);
+  }
+
+  if ($storage) {
+    // Prevent filefield's widgets from serving source URLs when this is turned off in storage api
+    if (!$storage['options']['serve_source_url']) {
+      $file->filepath = '';
+    }
+    
+    // Add in the serve path
+    $file->storage_api_serve_path = _storage_api_serve_path($storage);
+    $file->storage_api_file_id = $data['file_id'];
+  }
+  
+}
+
+/**
+ * Let modules add additional properties to the yet barebone file object.
+ * Called from field_file_save_upload() and from field_file_save_file() 
+ * in field_file.inc
+ * 
+ * We use this to check for the additional information we need in order to 
+ * put the file into storage. This means options and selector id, both of
+ * which are coming from hook_nodeapi(). 
+ */
+function filefield_storage_file_insert(&$file) {
+  /* Proceed only if we know the selector. We set this in hook_nodeapi */  
+  if (empty($file->fid) || empty($file->storage_api['selector_id'])) {
+    return;
+  }
+
+  /* Add the file into storage */
+  $file_id = storage_api_file_add($file->storage_api['selector_id'], $file->storage_api['options']);    
+  
+  /* Load up storage api's file object for setting up the data property */
+  $storage = storage_api_file_load($file_id, $reload=FALSE);
+
+  /* This is the basic info we need for invoking storage api's hooks. */
+  $data = array(
+    'file_id' => $file_id,
+    'selector_id' => $storage['selector_id'],
+    'object_id' => $storage['object_id'],
+    'class_id' => $storage['class_id'],
+    );
+  
+  /* Because we're lazy and don't want to have to update the schema every time we decide to add something into the data array */  
+  $blob = base64_encode(serialize($data));
+  $result = drupal_write_record('filefield_storage', $object = (object)array('fid' => $file->fid, 'data' => $blob));
+  $file->data = isset($file->data) ? array_merge($file->data, $data) : $data;
+
+  unset($file->storage_api);
+}
+
+/**
+ * Implementation of hook file_update()
+ *
+ * Called from field_file_save() in field_file.inc. 
+ */
+function filefield_storage_file_update(&$file) {
+
+  /* If the file already is in storage */
+  if (!empty($file->fid) && isset($file->data['file_id'])) {
+    /**
+     * TODO: Need to implement this workflow, along with
+     * inheriting servings
+     */
+    $file_incoming = clone $file;
+    
+    /* filefield_storage_file_insert() expects nodeapi to have set temporary data outside of the $file->data property. */    
+    $file->storage_api['selector_id'] = $file->data['selector_id'];
+    $file->storage_api['options'] = _filefield_storage_storage_file_options($file_id_incoming);
+    
+    storage_api_inherit_servings($file->data['file_id'], $file_incoming->data['file_id']);
+
+    filefield_storage_file_insert($file);
+    filefield_storage_file_delete($file_incoming->data['file_id']);
+
+    return;
+  }
+  
+  /* If the file is not in storage */
+  if (!empty($file->fid) && !isset($file->data['file_id'])) {
+    filefield_storage_file_insert($file);
+  }
+}
+
+/**
+ * Implementation of hook_file_delete()
+ *
+ */
+function filefield_storage_file_delete($file) {
+
+  filefield_storage_file_load($file);  
+  
+  $file_id = $file->data['file_id'];
+  if ($file_id) {
+    /* Remove the file from storage */
+    storage_api_file_remove($file_id);
+    
+    /* Remove extra data from our tables */
+    $result = db_query("DELETE FROM {filefield_storage} WHERE 'fid' = %d", array('fid' => $file->fid));
+    drupal_set_message(t('Files have been removed from storage'));
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi()
+ *
+ * We use nodeapi to save files into storage api because lots of what we need to know comes from
+ * the node, and especially the field settings. Unfortunately, this is passed through none of 
+ * filefield's file handling hooks.
+ */
+function filefield_storage_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  $function = 'filefield_storage_nodeapi_' . $op;
+  if (function_exists($function)) {
+    $function($node, $a3, $a4);
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi $op = validate
+ */
+function filefield_storage_nodeapi_validate(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($op !== 'validate') {
+    return;
+  }
+}
+
+function filefield_storage_nodeapi_update(&$node, $a3 = NULL, $a4 = NULL) {
+  filefield_storage_nodeapi_save($node, $a3, $a4);
+}
+
+function filefield_storage_nodeapi_save(&$node, $a3 = NULL, $a4 = NULL) {
+  
+  // Um, yea. I guess we really shouldn't be calling a private function. But it doesn't look private,
+  // and this really is the best way to get the fields on this content type without looping through
+  // every fracking property on the node object.
+  $info = _content_type_info();
+
+  $fields = $info['content types'][$node->type]['fields'];
+  
+  $storage_fields = array();
+
+  // Compile filefields with storage enabled
+  foreach ($fields as $field_name => $field) {
+    // Check that the field is a filefield and enabled for storage api handling */
+    if (!strcmp('filefield', $field['type']) && $field['widget']['filefield_storage_enable'] && count($node->$field_name)) {
+      $storage_fields[$field_name] = $field;
+    }
+  }
+  
+  // Process filefields with storage enabled
+  foreach ($storage_fields as $field_name => $field) {
+    foreach ($node->$field_name as $delta => $file) {
+      
+      if (!$file['fid']) {
+        continue;
+      }
+      
+      $file_id = ($file['data']['file_id'] ? $file['data']['file_id'] : FALSE);
+      
+      // If we didn't get a file id then the file isn't in storage and needs to be added
+      if (!$file_id || 1) {
+        // Build out storage api file options based on the field's file object      
+        $options = _filefield_storage_node_file_options($file, $field, $node);
+        $file['storage_api']['options'] = $options;
+  
+        // Selector id comes from widget settings 
+        $selector_id = $field['widget']['filefield_storage_selector']['selector_id'];
+        $file['storage_api']['selector_id'] = $selector_id;  
+
+        //Save the file. Invokes hook_file_update()
+        field_file_save($node, $file);
+        
+      }// add file into storage          
+  }} // foreach file, foreach field
+}
+
+/**
+ * Build out an storage api options array from an file object
+ * 
+ * @file stdClass Object Drupal file object
+ * 
+ * @field Array CCK field definition as returned by content_fields() or the like
+ * 
+ * @node stdClass Object Fully loaded drupal node object
+ *
+ */ 
+function _filefield_storage_node_file_options($file, $field = NULL, $node = NULL) {
+  
+  $file = (object)$file;
+  
+  $options = array(
+    'filepath' => $file->filepath,
+    'keep_me' => (!is_null($field) ? $field['widget']['filefield_storage_keep_local'] : TRUE),
+    'source_url' => $file->filepath,
+    'filename' => $file->filename,
+    'get_filename' => FALSE,
+    'force_download' => (!is_null($field) ? $field['widget']['filefield_storage_force_download'] : FALSE),
+    'module' => (!is_null($field) ? $field['widget']['module'] : 'filefield'),
+    'nid' => (!is_null($node) ? $node->nid : NULL),
+    'obtained' => $file->timestamp,
+    'data' => is_array($file->data) ? $file->data : array(),
+    );
+    
+  return $options;
+}
+
+/**
+ * Build out an options array from data in an existing storage file object. 
+ *
+ * @TODO: Not sure if this is actually working?
+ */
+function _filefield_storage_storage_file_options($incoming) {
+  // Incoming might be a file_id or it might be a fully loaded storage api file object */
+  $file = FALSE;
+  
+  if (is_object($incoming)) {
+    $file = $incoming;
+  }
+  else if (is_numeric($incoming)) {
+    $file = storage_api_file_load($incoming);
+  }
+  
+  if (!$file) {
+    return FALSE;
+  }
+  
+  $options = array(
+    'filepath' => $file->filepath,
+    'keep_me' => $file->keep_me,
+    'source_url' => $file->filepath,
+    'filename' => $file->filename,
+    'get_filename' => $file->get_filename,
+    'force_download' => $file->force_download,
+    'module' => $file->module,
+    'nid' => $file->nid,
+    'obtained' => $file->obtained,
+    'data' => $file->data,
+    );
+    
+  return $options;
+}
+    
+
+  
+/*****************************************************************
+ *                     Filefield Sources                         
+ *****************************************************************/
+if(0){
+/**
+ * Implementation of hook_filefield_source_info().
+ */
+function filefield_storage_filefield_sources_info() {
+
+  $source = array();
+  $source['storage'] = array(
+    'name' => t('Storage API Container'),
+    'label' => t('Storage API container'),
+    'description' => t('Reference a file in a container'),
+    'process' => 'filefield_source_storage_process',
+    'value' => 'filefield_source_storage_value',
+  );
+  return $source;
+}
+
+function filefield_source_storage_settings($op, $field) {
+
+  $return = array();
+
+  if ($op == 'form') {
+    $return['storage_attach'] = array(
+      '#title' => t('Storage attach settings'),
+      '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#description' => t('File attach allows for selecting a file from a directory on the server, commonly used in combination with FTP.') . ' <strong>' . t('This file source will ignore file size checking when used.') . '</strong>',
+      '#element_validate' => array('_filefield_source_attach_file_path_validate'),
+      '#weight' => 3,
+    );
+  }
+}
+
+function filefield_source_storage_process($element, $edit, &$form_state, $form) {
+
+  /**
+   * REFACTOR
+   */
+   
+  $service_info = module_invoke_all('storage_service_info');
+
+  $element['filefield_storage'] = array(
+    '#type' => 'select',
+    '#title' => 'object',
+    );
+  return $element;
+}
+
+function filefield_source_storage_value($element, &$item) {
+
+}
+
+function filefield_storage_filefield_sources_widgets() {
+
+}
+
+}//if0
