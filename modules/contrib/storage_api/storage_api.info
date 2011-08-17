@@ -1,0 +1,15 @@
+; $Id: storage_api.info,v 1.2.4.2 2009/04/29 20:09:03 jbrown Exp $
+name = Storage API
+description = "Storage module."
+package = Storage
+dependencies[] = mimedetect
+core = 6.x
+php = 5.0
+
+
+; Information added by drupal.org packaging script on 2010-03-14
+version = "6.x-1.2"
+core = "6.x"
+project = "storage_api"
+datestamp = "1268589306"
+

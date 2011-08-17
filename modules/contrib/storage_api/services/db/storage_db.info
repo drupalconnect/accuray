@@ -1,0 +1,15 @@
+; $Id: storage_db.info,v 1.1.4.2.2.1 2009/11/24 14:56:45 jbrown Exp $
+name = Database
+description = "Database storage service serving via Drupal."
+package = Storage
+dependencies[] = storage_api
+core = 6.x
+php = 5.0
+
+
+; Information added by drupal.org packaging script on 2010-03-14
+version = "6.x-1.2"
+core = "6.x"
+project = "storage_api"
+datestamp = "1268589306"
+
