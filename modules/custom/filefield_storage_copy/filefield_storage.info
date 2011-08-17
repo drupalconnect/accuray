@@ -1,5 +1,0 @@
-name = Filefield Storage
-description = Integrate filefield with storage api
-core = 6.x
-dependencies[] = filefield
-dependenceis[] = storage_api
