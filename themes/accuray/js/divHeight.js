@@ -8,7 +8,6 @@ Drupal.behaviors.divHeight = function (context) {
   var max = lengths[0];
   
   $(lengths).each(function(i, val){
-    console.log(val);
     if (val > max) {
       max = val;
     }
