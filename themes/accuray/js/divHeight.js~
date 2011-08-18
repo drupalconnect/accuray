@@ -1,17 +1,26 @@
 Drupal.behaviors.divHeight = function (context) {
-  return false;
-  
-  var sidebarFirst = $(".region-sidebar-first");
-  var sidebarFirstSection = $(".region-sidebar-first .section");
-  var content = $("#content");  
-  
-  if (content.height() < sidebarFirst.height()) {
-    return FALSE;
-  }
-  
-  var offset = sidebarFirst.height() - sidebarFirstSection.height();
-  
-  var toHeight = content.height() - offset;
+  var lengths = [];
 
-  sidebarFirstSection.height(toHeight);
+  lengths.push($(".region-sidebar-first").height());
+  lengths.push($("#content").height());
+  lengths.push($(".region-sidebar-second").height());
+  
+  var max = lengths[0];
+  
+  $(lengths).each(function(i, val){
+    console.log(val);
+    if (val > max) {
+      max = val;
+    }
+  });
+  
+  var offset = $("#content").height() - $("#content .section").height();
+  $("#content .section").height(max - offset);
+  
+  var offset = $(".region-sidebar-first").height() - $(".region-sidebar-first .section").height();
+  $(".region-sidebar-first .section").height(max - offset);
+  
+  var offset = $(".region-sidebar-second").height() - $(".region-sidebar-second .section").height();
+  $(".region-sidebar-second .section").height(max  - offset);
+
 }

@@ -15,12 +15,12 @@ Drupal.behaviors.divHeight = function (context) {
   });
   
   var offset = $("#content").height() - $("#content .section").height();
-  $("#content .section").height(max - offset);
+  $("#content .section").css("min-height": max - offset);
   
   var offset = $(".region-sidebar-first").height() - $(".region-sidebar-first .section").height();
-  $(".region-sidebar-first .section").height(max - offset);
+  $(".region-sidebar-first .section").css("min-height": max - offset);
   
   var offset = $(".region-sidebar-second").height() - $(".region-sidebar-second .section").height();
-  $(".region-sidebar-second .section").height(max  - offset);
+  $(".region-sidebar-second .section").css("min-height": max  - offset);
 
 }
