@@ -63,7 +63,7 @@ body {
 }
 
 #header .section {
-  padding-top: 20px;
+  padding-top: 15px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -85,6 +85,7 @@ body {
 
 #name-and-slogan /* Wrapper for website name and slogan */ {
   float:left;
+  margin-right: -100%;
 }
 
 h1#site-name,
@@ -94,8 +95,6 @@ div#site-name /* The name of the website */ {
   line-height: 1.3em;
   text-transform: uppercase;
   font-weight: normal;
-  margin-top: 20px;
-  margin-left: 80px;
 }
 
 #site-name strong {
@@ -104,14 +103,14 @@ div#site-name /* The name of the website */ {
 
 #site-name a:link,
 #site-name a:visited {
-  color: #000;
-  text-decoration: none;
+  background: url("../images/logo.png") no-repeat scroll left top transparent;
+  color: #000000;
   display: block;
-  width: 217px;
-  height: 24px;
+  height: 57px;
+  overflow: hidden;
+  text-decoration: none;
   text-indent: -10000px;
-  overflow:hidden;
-  background: url(../images/bg-site-name.png) left top no-repeat;
+  width: 308px;
 }
 
 #site-name a:hover,
@@ -124,6 +123,7 @@ div#site-name /* The name of the website */ {
 
 .region-header /* Wrapper for any blocks placed in the header region */ {
   padding-left: 250px; /* width of site name */
+  margin-top: 5px;
 }
 
 /*

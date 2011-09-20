@@ -47,6 +47,10 @@ body {
 #main {
 }
 
+.region-sidebar-first .section {
+  background: #E9EAEC;
+}
+
 #footer {
 }
 
