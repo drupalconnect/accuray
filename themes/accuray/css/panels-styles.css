@@ -144,7 +144,8 @@ h2.pane-title {
  * "Footer" minipanel
  */
 #mini-panel-footer {
-  background: #f2f2f2;
+  /*background: #f2f2f2;*/
+  background: #E9EAEC;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -176,7 +177,8 @@ h2.pane-title {
  * "Home" panel page
  */
 #panel-page-home .panels-flexible-region-inside {
-  background: #e5e5e5;
+  /*background: #e5e5e5;*/
+  background: #E9EAEC;
   height: 320px;
   overflow: auto;
 }
@@ -196,9 +198,11 @@ h2.pane-title {
   list-style-image: url(../images/bullet-square.png);
 }
 
+/**
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
+*/
 
 #panel-page-home .panels-flexible-row-first {
   padding: 0;

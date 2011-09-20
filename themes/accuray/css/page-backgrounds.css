@@ -40,10 +40,22 @@ body {
 #main-wrapper {
 }
 
+#navigation #main-menu {
+  background: #004864 url(../images/navigation-gradient-tall.png) left top repeat-x;
+}
+
 #main {
 }
 
+.region-sidebar-first .section {
+  background: #E9EAEC;
+}
+
 #footer {
+}
+
+#secondary-navigation .section {
+  background: transparent url(../images/footer-background.png) left top no-repeat;
 }
 
 #footer .section {

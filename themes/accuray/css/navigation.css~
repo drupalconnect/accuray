@@ -47,7 +47,6 @@ li a.active {
 #navigation #main-menu {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
-  background: #023064 url(../images/navigation-gradient-tall.png) left top repeat-x;
   border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
@@ -159,6 +158,7 @@ li a.active {
   float: left;
   list-style-type: none;
   list-style-image: none;
+  margin-right: 0.5em;
 }
 
 #secondary-navigation #block-menu-menu-footer-links-right {

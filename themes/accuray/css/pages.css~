@@ -209,7 +209,8 @@ h3.title /* Comment title */ {
 }
 
 h1.title /* Title of the page */ {
-  background: #d9e0e8;
+  /*background: #d9e0e8;*/
+  background: #6A737B;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -217,7 +218,8 @@ h1.title /* Title of the page */ {
   margin-left: 18px;
   margin-right: 18px;
   padding-left: 10px;
-  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */ 
+  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */
+  color: #002D62;
 }
 
 h2.title {
@@ -351,7 +353,6 @@ ul.links li {
 
 .region-sidebar-first .section {
   padding: 10px;
-  background: #e1edf9;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -402,7 +403,6 @@ ul.links li {
  * Secondary navigation
  */
 #secondary-navigation .section {
-  background: none repeat scroll 0 0 #113B6D;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;

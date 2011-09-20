@@ -176,7 +176,8 @@ h2.pane-title {
  * "Home" panel page
  */
 #panel-page-home .panels-flexible-region-inside {
-  background: #e5e5e5;
+  /*background: #e5e5e5;*/
+  background: #E9EAEC;
   height: 320px;
   overflow: auto;
 }
@@ -196,9 +197,11 @@ h2.pane-title {
   list-style-image: url(../images/bullet-square.png);
 }
 
+/**
 #panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
   background: #e1edf9;
 }
+*/
 
 #panel-page-home .panels-flexible-row-first {
   padding: 0;
@@ -240,5 +243,5 @@ h2.pane-title {
 }
 
 #mini-panel-location_selector .panels_pane {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }

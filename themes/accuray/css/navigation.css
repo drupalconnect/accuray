@@ -47,7 +47,6 @@ li a.active {
 #navigation #main-menu {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
-  background: #023064 url(../images/navigation-gradient-tall.png) left top repeat-x;
   border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
@@ -60,7 +59,7 @@ li a.active {
 }
 
 #navigation #main-menu li a {
-  color: #e2e9e8;
+  color: #CFE0F3;
   text-decoration: none;
   padding-left: 10px;
   /* below should be identical to h2 */
@@ -97,7 +96,7 @@ li a.active {
 .breadcrumb a {
   text-transform: uppercase;  
   text-decoration: none;
-  color: #B5D4F0;
+  color: #CFE0F3;
 }
 
 .breadcrumb a:hover {

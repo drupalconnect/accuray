@@ -237,20 +237,20 @@ dd {
  * http://meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states
  */
 a:link {
-  color: #407FBC;
+  color: #004964;
 }
 
 a:visited {
-  color: #407FBC;
+  color: #004964;
 }
 
 a:hover,
 a:focus {
-  color: #407FBC;
+  color: #004964;
 }
 
 a:active {
-  color: #407FBC;
+  color: #004964;
 }
 
 /*
