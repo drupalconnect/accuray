@@ -1,0 +1,13 @@
+/* Fixing Header Spacing issues */
+.addthis_toolbox.addthis_default_style {
+  margin-right: 20px;
+}
+
+#mini-panel-header ul.menu li {
+  margin-right: 0;
+}
+
+/* Remove border on home page and adjust horizontal spacing - issue #754 */
+.front #content .section {
+  border: none;
+}

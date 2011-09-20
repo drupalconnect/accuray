@@ -1,0 +1,541 @@
+/**
+ * @file
+ * Page Styling
+ *
+ * Style the markup found in page.tpl.php. Also includes some styling of
+ * miscellaneous Drupal elements that appear in the $content variable, such as
+ * ul.links, .pager, .more-link, etc.
+ */
+
+
+/*
+ * Body
+ */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#page-wrapper {
+}
+
+#page-wrapper-inner {
+}
+
+#page {
+}
+
+#page-inner {
+}
+
+/*
+ * The skip navigation link will be completely hidden until a user tabs to the
+ * link. See http://www.webaim.org/techniques/skipnav/
+ */
+#skip-link a,
+#skip-link a:visited {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: -500px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+}
+
+#skip-link a:hover,
+#skip-link a:active,
+#skip-link a:focus {
+  position: static;
+  width: 100%;
+  height: auto;
+  padding: 2px 0 3px 0;
+}
+
+/*
+ * Header
+ */
+#header {
+  margin-top: 20px;
+}
+
+#header .section {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#header a {
+  color: #4d4d4d;
+  text-decoration: none;
+}
+
+#logo /* Wrapping link for logo */ {
+  float: left; /* LTR */
+  margin: 0;
+  padding: 0;
+}
+
+#logo img {
+  vertical-align: bottom;
+}
+
+#name-and-slogan /* Wrapper for website name and slogan */ {
+  float:left;
+}
+
+h1#site-name,
+div#site-name /* The name of the website */ {
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin-top: 20px;
+}
+
+#site-name strong {
+  font-weight: normal;
+}
+
+#site-name a:link,
+#site-name a:visited {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  width: 250px;
+  height: 32px;
+  text-indent: -10000px;
+  overflow:hidden;
+  background: url(../images/bg-site-name.png) left top no-repeat;
+}
+
+#site-name a:hover,
+#site-name a:focus {
+  text-decoration: none;
+}
+
+#site-slogan /* The slogan (or tagline) of a website */ {
+}
+
+.region-header /* Wrapper for any blocks placed in the header region */ {
+  padding-left: 250px; /* width of site name */
+}
+
+/*
+ * Main (container for everything else)
+ */
+#main-wrapper {
+}
+
+#main {
+  margin-bottom: 8px;
+}
+
+/*
+ * Content
+ */
+#content {
+}
+
+#content .section {
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+.not-front #content .section {
+  padding-top: 7px;
+}
+
+.sidebar-first #content .section {
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.sidebar-second #content .section {
+  margin-right: 8px;
+}
+
+.two-sidebars #content .section {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.no-sidebars #content .section {
+  margin-left: 18px;
+  margin-right: 18px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.front #content .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#navigation /* the navigation region */ {
+}
+
+#navigation .section {
+  margin: 0 8px; /* this clears the drop shadow */
+  padding: 0 10px;
+}
+
+#page-title {
+}
+
+#mission /* The mission statement of the site (displayed on homepage) */ {
+}
+
+.region-content-top /* Wrapper for any blocks placed in the "content top" region */ {
+}
+
+.breadcrumb /* The path to the current page in the form of a list of links */ {
+  padding-bottom: 0; /* Undo system.css */
+}
+
+h1.title, /* The title of the page */
+h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
+h3.title /* Comment title */ {
+  margin: 0;
+}
+
+h1.title /* Title of the page */ {
+  background: #d9e0e8;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+  margin-left: 18px;
+  margin-right: 18px;
+  padding-left: 10px;
+  line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */
+  color: #002D62;
+}
+
+h2.title {
+  font-weight: normal;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h2.content-title {
+  color: #555555;
+  font-size: 1.25em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+h3.title {
+  font-size: 1.1em;
+  font-weight: normal;
+  line-height: 1.3em;
+  margin-top: 0;
+  margin-bottom: 0.909em;
+  color: #407fbc; 
+}
+
+table {
+  width: 100%;
+}
+
+tr.even /* Some tables have rows marked even or odd. */ {
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+tr.odd { 
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+div.messages /* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */ {
+}
+
+div.status /* Normal priority messages */ {
+}
+
+div.warning,
+tr.warning /* Medium priority messages */ {
+  /* border: 1px solid #f0c020; */ /* Drupal core uses: 1px solid #f0c020 */
+}
+
+div.error,
+tr.error /* High priority messages. See also the .error declaration below. */ {
+}
+
+.error /* Errors that are separate from div.messages status messages. */ {
+  /* color: #e55; */ /* Drupal core uses a #e55 background */
+}
+
+.warning /* Warnings that are separate from div.messages status messages. */ {
+  /* color: #e09010; */ /* Drupal core uses a #e09010 background */
+}
+
+div.tabs /* See also the tabs.css file. */ {
+  margin-bottom: 0;
+}
+
+.help /* Help text on a page */ {
+  margin: 1em 0;
+}
+
+.more-help-link /* Link to more help */ {
+  font-size: 0.85em;
+  text-align: right;
+}
+
+#content-area /* Wrapper for the actual page content */ {
+}
+
+ul.links /* List of links */ {
+  margin: 1em 0;
+  padding: 0;
+}
+
+ul.links.inline {
+  margin: 0;
+  display: inline;
+}
+
+ul.links li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 0.5em;
+}
+
+.pager /* A list of page numbers when more than 1 page of content is available */ {
+  clear: both;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.pager a,
+.pager strong.pager-current /* Each page number in the pager list */ {
+  padding: 0.5em;
+}
+
+.feed-icons /* The links to the RSS or Atom feeds for the current list of content */ {
+  margin: 1em 0;
+}
+
+.more-link /* Aggregator, blog, and forum more link */ {
+  text-align: right; /* LTR */
+}
+
+.more-link a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-size: 1.1em;
+}
+
+.region-content-bottom /* Wrapper for any blocks placed in the "content bottom" region */ {
+}
+
+/*
+ * First sidebar (on left in LTR languages, on right in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-first
+ * (see the layout.css file.)
+ */
+.region-sidebar-first {
+  
+}
+
+.region-sidebar-first .section {
+  padding: 10px;
+  background: #e1edf9;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+  margin-left: 18px;
+}
+
+/*
+ * Second sidebar (on right in LTR languages, on left in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-second
+ * (see the layout.css file.)
+ */
+.region-sidebar-second {
+}
+
+.region-sidebar-second .section {
+  padding: 10px 20px;
+}
+
+/*
+ * Footer
+ */
+#footer {
+}
+
+#footer .section {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+#footer-message /* Wrapper for the footer message from Drupal's "Site information"
+                   and for any blocks placed in the footer region */ {
+  clear: both;
+}
+
+.region-footer {
+}
+
+/*
+ * Closure
+ */
+.region-page-closure /* Wrapper for any blocks placed in the closure region */ {
+}
+
+/*
+ * Secondary navigation
+ */
+#secondary-navigation .section {
+  background: none repeat scroll 0 0 #113B6D;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+  margin: 0 18px;
+  padding: 5px 10px;
+}
+
+/*
+ * Drupal boxes
+ *
+ * Wrapper for Comment form, Comment viewing options, Menu admin, and
+ * Search results.
+ */
+.box /* Wrapper for box */ {
+}
+
+.box h2 /* Box title */ {
+}
+
+.box .content /* Box's content wrapper */ {
+}
+
+/*
+ * Markup free clearing (See: http://www.positioniseverything.net/easyclearing.html )
+ */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/**
+ * Hide elements from all users.
+ *
+ * Used for elements which should not be immediately displayed to any user. An
+ * example would be a collapsible fieldset that will be expanded with a click
+ * from a user. The effect of this class can be toggled with the jQuery show()
+ * and hide() functions.
+ */
+.element-hidden {
+  display: none;
+}
+
+/**
+ * Hide elements visually, but keep them available for screen-readers.
+ *
+ * Used for information required for screen-reader users to understand and use
+ * the site where visual display is undesirable. Information provided in this
+ * manner should be kept concise, to avoid unnecessary burden on the user. Must
+ * not be used for focusable elements (such as links and form elements) as this
+ * causes issues for keyboard only or voice recognition users. "!important" is
+ * used to prevent unintentional overrides.
+ */
+.element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+/**********************************************************
+ * styles for use in setting and laying out out body text
+ **********************************************************/
+
+
+ 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.smallest {
+  font-size: 25%;
+}
+
+.smaller {
+  font-size: 50%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+.normal {
+  font-size: 100%;
+}
+
+.large {
+  font-size: 150%;
+}
+
+.largest {
+  font-size: 175%;
+}
+
+.gray {
+  color: #9a9a9a;
+}
+
+.content h2 {
+  color: #555;
+  text-transform: none;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+.content p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.content ul {
+  margin-top: 0;
+  margn-bottom: 1em;
+}
+
+/**
+ * Open layers styles
+ */
+.openlayers-popup-feature {
+  background: #FFF;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+  border: 1px solid #CCC;
+  padding: 3px;
+}

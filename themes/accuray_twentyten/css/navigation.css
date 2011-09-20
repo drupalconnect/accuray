@@ -1,0 +1,193 @@
+/**
+ * @file
+ * Navigation Styling
+ *
+ * Default menu styling (ul.menu) is defined in system-menus.css.
+ */
+
+ul.menu li,
+ul.menu li.expanded { 
+  list-style-type: none; 
+  list-style-image: url(../images/bullet-double-square.png); 
+}
+ul.menu li li,
+ul.menu li li.expanded {
+  list-style-type: none;
+  list-style-image: url(../images/bullet-square.png);
+}
+
+ul.menu ul       { list-style-type: none; }
+ul.menu ul ul    { list-style-type: none; }
+ul.menu ul ul ul { list-style-type: none; }
+
+ul.menu li a.menu_icon {
+  display: block;
+  text-indent: -10000px;
+}
+
+/*
+ * The active item in a Drupal menu
+ */
+li a.active {
+  color: #000;
+}
+
+/*
+ * Navigation bar
+ */
+#navigation {
+}
+
+.region-navigation {
+}
+
+/*
+ * Primary and Secondary menu links
+ */
+#navigation #main-menu {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  background: #023064 url(../images/navigation-gradient-tall.png) left top repeat-x;
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+/* testing css3pie */
+#navigation #main-menu {
+  behavior: url(../../../libraries/PIE/PIE.htc);
+}
+
+#navigation #main-menu li a {
+  color: #e2e9e8;
+  text-decoration: none;
+  padding-left: 10px;
+  /* below should be identical to h2 */
+  font-size: 1.1em;
+  font-weight: normal;
+  line-height: 1.3em;
+  margin-top: 0.909em; /* Equivalent to 1em in the page's base font: 1 / 1.1 = 0.909 */
+  margin-bottom: 0.909em;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+}
+
+#navigation #main-menu li a:hover {
+  color: #FFF;
+}
+
+#navigation #main-menu li.last {
+  float: right; /* no kidding. This was really important to them, to get that last item separated from the others */
+}
+
+.breadcrumb /* moved here since now it's part of navigation (which it is, semantically, anyway) */ {
+  padding-left: 10px;
+  background: #023064 url(../images/navigation-gradient-short.png) left top repeat-x;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  behavior: url(../css3pie/PIE.htc);
+  font-size: 0.8em;
+  word-wrap: normal; /* fixes wrapping in IE */ 
+}
+
+.breadcrumb,
+.breadcrumb a {
+  text-transform: uppercase;  
+  text-decoration: none;
+  color: #B5D4F0;
+}
+
+.breadcrumb a:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+#secondary-menu {
+}
+
+/*
+ * Menu blocks
+ */
+.block-menu {
+}
+
+/*
+ * "Menu block" blocks. See http://drupal.org/project/menu_block
+ */
+.block-menu_block {
+}
+
+/**
+ * "Stay in touch" menu
+ */
+#secondary-navigation #block-menu-menu-stay-in-touch ul li
+  margin-right: 0.5em;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul li.last {
+  margin-right: 0;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch {
+  float: left;
+  margin-bottom: 0;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch h2 {
+  float: left;
+  color: #FFF;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  line-height: 16px;
+  margin-right: 1ex;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch .content {
+  float: left;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul {
+  padding: 0;
+  margin: 0;
+}
+
+#secondary-navigation #block-menu-menu-stay-in-touch ul li {
+  float: left;
+  list-style-type: none;
+  list-style-image: none;
+  margin-right: 0.5em;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right {
+  float: right;
+  margin-bottom: 0;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul {
+  margin: 0;
+  padding: 0;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li {
+  float: left;
+  list-style-type: none;
+  list-style-image: none;
+  padding-right:8px;
+}
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li.last {
+  padding-right:0px;
+} 
+
+#secondary-navigation #block-menu-menu-footer-links-right ul li a {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.75em;
+}
+
+

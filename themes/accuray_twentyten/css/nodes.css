@@ -1,0 +1,178 @@
+/**
+ * @file
+ * Node Styling
+ *
+ * Style anything that isn't in the $content variable.
+ */
+
+
+.node /* Node wrapper */ {
+  padding-bottom: 1em;
+}
+
+.node-sticky /* A sticky node (displayed before others in a list) */ {
+}
+
+.node-unpublished /* Unpublished nodes */ {
+  /* background-color: #fff4f4; */ /* Drupal core uses a #fff4f4 background */
+}
+
+.node-unpublished div.unpublished,
+.comment-unpublished div.unpublished /* The word "Unpublished" displayed underneath the content. */ {
+  height: 0;
+  overflow: visible;
+  color: #d8d8d8;
+  font-size: 75px;
+  line-height: 1;
+  font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  word-wrap: break-word; /* A very nice CSS3 property */
+}
+
+.node-by-viewer /* A node created by the current user */ {
+}
+
+.node-teaser /* A node displayed as teaser */ {
+  padding-bottom: 1em;
+}
+
+/* All nodes are given a node-type-FOO class that describes the type of
+ * content that it is. If you create a new content type called
+ * "my-custom-type", it will receive a "node-type-my-custom-type" class.
+ */
+.node-type-page /* Page content node */ {
+}
+
+.node-type-story /* Story content node */ {
+}
+
+.node h2.title /* Node title */ {
+}
+
+.node-type-story h2.content-title {
+  text-align: center;
+}
+
+.marker /* "New" or "Updated" marker for content that is new or updated for the current user */ {
+  color: #c00;
+}
+
+.node .picture /* The picture of the node author */ {
+}
+
+.node.node-unpublished .picture,
+.comment.comment-unpublished .picture {
+  position: relative; /* Otherwise floated pictures will appear below the "Unpublished" text. */
+}
+
+.node .meta /* Wrapper for submitted and terms data */ {
+}
+
+.node .submitted /* The "posted by" information */ {
+}
+
+.node .terms /* Node terms (taxonomy) */ {
+}
+
+.node .content /* Node's content wrapper */ {
+}
+
+.node ul.links /* Node links. See also the ul.links declaration in the pages.css. */ {
+}
+
+.preview .node /* Preview of the content before submitting new or updated content */ {
+  /* background-color: #ffffea; */ /* Drupal core uses a #ffffea background */
+}
+
+/*******************************
+ *        ND / DS nodes
+ *******************************/
+
+.buildmode-teaser {
+  background: url(../images/gradient-gray-vertical-top.png) left top repeat-x;
+  margin-bottom: 1em;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+.buildmode-teaser .node,
+div.panel-pane .buildmode-teaser .node {
+  min-height: 80px; /* gradient images are 40px each in height. Make sure they don't overlap. See ie.css for the IE hack */
+  background: url(../images/gradient-gray-vertical-bottom.png) left bottom repeat-x;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.buildmode-teaser .nd-region-left {
+  overflow: hidden;
+  width: 180px; /** 
+                 * Normally, we're using the left region to display a thumbnail at 160px. 
+                 * 180px makes sure the image doesn't spill into the middle region when
+                 * content is compressed
+                 */ 
+}
+
+.buildmode-teaser .nd-region-middle-wrapper {
+}
+
+.buildmode-teaser .nd-two-sidebars .nd-region-middle,
+.buildmode-teaser .nd-left-sidebar .nd-region-middle {
+  margin-left: 180px;
+}
+
+.buildmode-teaser .nd-two-sidebars .nd-region-middle,
+.buildmode-teaser .nd-no-sidebars .nd-region-middle {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.buildmode-teaser .nd-left-sidebar .nd-region-middle {
+  padding-left: 10px;
+}
+
+.buildmode-teaser .nd-right-sidebar .nd-region-middle {
+  padding-right: 10px;
+}
+
+.buildmode-teaser .field-field-file-info ul {
+  padding: 0;
+}
+
+.buildmode-teaser .field-field-file-info ul li {
+  list-style-type: none;
+} 
+
+.buildmode-teaser .filefield-file .filefield-icon {
+  display: none;
+}
+
+.buildmode-teaser .filefield-file a {
+  display: block;
+  width: 103px;
+  height: 132px;
+  background: url(../images/icon-download.png) center center no-repeat;
+  text-indent: -10000px;
+}
+
+.buildmode-teaser .node-type-event .field-date {
+  float: right;
+}
+
+.buildmode-teaser .node-type-event .field-short-address {
+  float: right;
+  clear: right;
+}
+
+.buildmode-teaser .node-type-event .field-body {
+  clear: both;
+  margin-top: 2em;
+}
+
+.buildmode-teaser .node-type-location .nd-region-right .field-field-product-terms {
+  float: right;
+}

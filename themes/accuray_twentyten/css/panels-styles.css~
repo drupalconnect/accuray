@@ -1,0 +1,244 @@
+/**
+ * @file
+ * Panels Styling
+ */
+
+/**
+ * Generic styles
+ */ 
+h2.pane-title {
+  margin-top: 0;
+  font-weight: bold;
+} 
+
+ div.panel-pane div.node {
+    margin: inherit;
+    padding: 10px;
+ }
+
+.panels-flexible-row {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+.panels-flexible-row .inside {
+  padding: 0;
+  margin: 0;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+.panels-flexible-region .inside {
+  padding: 4px;
+  margin: 0 4px;
+}
+
+.panels-flexible-region-first .inside {
+  margin-left: 0;
+}
+
+.panels-flexible-region-last .inside {
+  margin-right: 0;
+}
+
+/**
+ * "Header" minipanel
+ */
+#mini-panel-header a,
+#mini-panel-header li,
+#mini-panel-header h2 {
+  font-size: 95%;
+  /*line-height: 2em;*/
+  color: #4d4d4d;
+} 
+ 
+#mini-panel-header .inside {
+  padding: 0;
+  margin: 0;
+}
+
+#mini-panel-header .pane-block {
+  float: right;
+}
+
+#mini-panel-header h2.pane-title {
+  float: left;
+  margin: 0;
+  font-weight: normal;
+  text-transform: none;
+}
+
+#mini-panel-header ul.menu {
+  padding: 0;
+  margin: 0;
+}
+
+#mini-panel-header ul.menu li {
+  float: left;
+  list-style: outside none;
+  margin-right: 0.5em;
+  margin-left: 0;
+}
+
+
+/**
+ * The "Stay in touch" copy should be about 7em. We need to set this width 
+ * so we can send the h2 left without causing the LIs to wrap.
+ */
+.pane-menu-menu-stay-in-touch h2.pane-title {
+  width: 7em;
+  margin-right: -100%;
+  margin-left: -7em;
+}
+
+
+.pane-menu-menu-stay-in-touch {
+  margin-right:23px;
+  padding-top: 0.4em; /* brings it down to the same horizontal as the form text */
+}
+
+.pane-menu-menu-stay-in-touch .pane-content {
+  float: left;
+}
+
+#pane-block-addthis {
+  padding-top: 0.4em;
+}
+
+#mini-panel-header ul.menu li, 
+#mini-panel-header #secondary-navigation li {
+  list-style-image: none;
+  list-style-type: none;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li {
+  margin-right: 0;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li a /* fake a pipe */ {
+  border-right: 1px solid #4d4d4d;
+  margin-right: 0.5em;
+  padding-right: 0.5em;
+  text-transform: uppercase;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li.last {
+  margin-right: 0;
+}
+
+#mini-panel-header .pane-menu-secondary-links ul.menu li.last a {
+  border-right: 0 none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+#mini-panel-header .addthis_toolbox {
+  margin-right: 23px;
+}
+
+/**
+ * "Footer" minipanel
+ */
+#mini-panel-footer {
+  background: #f2f2f2;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  behavior: url(../css3pie/PIE.htc);
+}
+
+#mini-panel-footer .inside {
+  margin: 0;
+  padding: 0;
+}
+
+#mini-panel-footer h2.pane-title {
+  margin: 0;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: none;
+}
+
+#mini-panel-footer p {
+  margin-top: 0;
+}
+
+#mini-panel-footer .panels-flexible-region .inside {
+  margin: 0;
+  padding: 5px;
+}
+
+/**
+ * "Home" panel page
+ */
+#panel-page-home .panels-flexible-region-inside {
+  background: #e5e5e5;
+  height: 320px;
+  overflow: auto;
+}
+
+#panel-page-home .panels-flexible-region-inside .panel-pane {
+  padding: 11px; /* 11 + 4 = 15px */
+}
+
+#panel-page-home ul li,
+#panel-page-home ul li.expanded { 
+  list-style-type: none; 
+  list-style-image: url(../images/bullet-double-square.png); 
+}
+#panel-page-home ul li li,
+#panel-page-home ul li li.expanded {
+  list-style-type: none;
+  list-style-image: url(../images/bullet-square.png);
+}
+
+#panel-page-home .panels-flexible-region-first .panels-flexible-region-inside /* The leftmost region gets a blue background */ {
+  background: #e1edf9;
+}
+
+#panel-page-home .panels-flexible-row-first {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+#panel-page-home .panels-flexible-row-first .panels-flexible-region {
+  width: 100%;
+}
+
+#panel-page-home .panels-flexible-row-first .panels-flexible-region-inside {
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background: transparent none;
+  overflow: hidden;
+}
+
+#panel-page-home .panels-flexible-row-first .panel-pane {
+  padding: 0;
+}
+
+#panel-page-home .panels-flexible-row-inside-last .panels-flexible-region {
+  width:308px; 
+}
+
+/**
+ * Taxonomy and vocabulary pages
+ */
+.pane-term-description p {
+  margin: 0 0 1em;
+}
+
+/**
+ * Treatment centers 
+ */
+#treatment-centers .panels_pane {
+  margin-bottom: 2em;
+}
+
+#mini-panel-location_selector .panels_pane {
+  margin-bottom: 2em;
+}
