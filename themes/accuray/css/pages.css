@@ -89,12 +89,11 @@ body {
 
 h1#site-name,
 div#site-name /* The name of the website */ {
-  margin: 0;
+  margin: 20px 0 0 80px;
   font-size: 2em;
   line-height: 1.3em;
   text-transform: uppercase;
   font-weight: normal;
-  margin-top: 20px;
 }
 
 #site-name strong {
@@ -106,8 +105,8 @@ div#site-name /* The name of the website */ {
   color: #000;
   text-decoration: none;
   display: block;
-  width: 250px;
-  height: 32px;
+  width: 217px;
+  height: 24px;
   text-indent: -10000px;
   overflow:hidden;
   background: url(../images/bg-site-name.png) left top no-repeat;

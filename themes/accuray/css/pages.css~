@@ -95,6 +95,7 @@ div#site-name /* The name of the website */ {
   text-transform: uppercase;
   font-weight: normal;
   margin-top: 20px;
+  margin-left: 80px;
 }
 
 #site-name strong {
@@ -106,8 +107,8 @@ div#site-name /* The name of the website */ {
   color: #000;
   text-decoration: none;
   display: block;
-  width: 250px;
-  height: 32px;
+  width: 217px;
+  height: 24px;
   text-indent: -10000px;
   overflow:hidden;
   background: url(../images/bg-site-name.png) left top no-repeat;
@@ -219,7 +220,8 @@ h1.title /* Title of the page */ {
   margin-right: 18px;
   padding-left: 10px;
   line-height: 2.125em; /* 1.5em + 0.625 (10px) = 2.125 */
-  color: #002D62;
+  /*color: #002D62;*/
+  color: #CFE0F3;
 }
 
 h2.title {

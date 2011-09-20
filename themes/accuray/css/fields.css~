@@ -57,7 +57,7 @@
 }
 
 .field-title a {
-  color: #407fbc;
+  color: #004964;
   text-decoration: underline;
 }
 
