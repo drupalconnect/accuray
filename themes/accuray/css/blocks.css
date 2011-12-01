@@ -125,16 +125,17 @@
 
 #header #block-menu-menu-stay-in-touch-header h2 {
   float: left;
-  width: 7.5em;
-  margin: 0 -7.5em 0 0;
+  width: 6.5em;
+  margin: 0 -6.5em 0 0;
   font-size: 1em;
   font-weight: normal;
   text-transform: none;
   color: #4d4d4d;
+  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
 }
 
 #header #block-menu-menu-stay-in-touch-header .content {
-  margin-left: 7.5em;
+  margin-left: 6.5em;
 }
 
 #header #block-menu-menu-stay-in-touch-header ul li {
@@ -171,4 +172,36 @@
 
 #header #block-menu-secondary-links ul li a {
   text-transform: uppercase;
+}
+
+/**
+ * Take a quick survey
+ */
+#block-menu-menu-survey h2,
+#block-menu-menu-survey-header h2 {
+  display: none;
+}
+
+#block-menu-menu-survey li,
+#block-menu-menu-survey-header li {
+  list-style-type: none;
+  list-style-image: none;
+}
+
+#block-menu-menu-survey li a {
+  padding-right: 30px;
+  color: #FFF;
+  text-decoration: none;
+  margin: 0 1em;
+  padding: 3px 20px 2px 0;
+  background: url(../images/icon-checkbox.png) right center no-repeat;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
+#block-menu-menu-survey-header li a {
+  font-size: 1em;
+  color: #4D4D4D;
+  padding: 0px 20px 1px 0;
+  background: url(../images/icon-checkbox.png) right center no-repeat;
 }

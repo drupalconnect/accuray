@@ -133,6 +133,7 @@ li a.active {
 #secondary-navigation #block-menu-menu-stay-in-touch {
   float: left;
   margin-bottom: 0;
+  margin-top: 1px;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch h2 {
@@ -143,6 +144,7 @@ li a.active {
   font-size: 0.75em;
   line-height: 16px;
   margin-right: 1ex;
+  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
 }
 
 #secondary-navigation #block-menu-menu-stay-in-touch .content {
