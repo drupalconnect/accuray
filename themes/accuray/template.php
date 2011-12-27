@@ -98,7 +98,7 @@ function accuray_preprocess(&$vars, $hook) {
  */
 
 function accuray_preprocess_page(&$vars, $hook) {
-  
+  global $base_url;
   /**
    * Conditionally set title and section_title. I know that context.module
    * would be the better way to do this, but support for doing things with 

@@ -117,7 +117,6 @@
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>">
-
   <?php if ($primary_links): ?>
     <div id="skip-link"><a href="#main-menu"><?php print t('Jump to Navigation'); ?></a></div>
   <?php endif; ?>
@@ -261,12 +260,23 @@
 
   </div></div></div></div><!-- /#page, /#page-wrapper -->
 
+  <div id="slide-out-survey" class="slide-out-div">
+  	<a class="handle" href="#">Content</a>
+  	<h3>How Are We Doing?</h3>
+  	<p>Take a minute to let us know<br />if our website has been<br />helpful to you.</p>
+  	<a href="node/4513" title="Yes"><div id="yes"></div></a><div id="no"></div>
+  </div>
   <?php print $page_closure; ?>
 
   <?php print $closure; ?>
   <!-- I know, this should be stuck in with drupal_add_js().-->
   <SCRIPT TYPE='text/javascript' LANGUAGE='JavaScript' SRC='/elqNow/elqCfg.js'></SCRIPT>
   <SCRIPT TYPE='text/javascript' LANGUAGE='JavaScript' SRC='/elqNow/elqImg.js'></SCRIPT>
-
+	<script type='text/javascript' language='JavaScript' >
+		function changecolorslowly(){
+			d = document.getElementById('slide-out-survey');
+			d.style.right= 0 + 'px';
+		}
+	</script>
 </body>
 </html>
