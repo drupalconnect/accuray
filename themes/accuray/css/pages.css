@@ -540,3 +540,30 @@ ul.links li {
   border: 1px solid #CCC;
   padding: 3px;
 }
+
+/**
+ * Survey Slideout Style
+ */
+.slide-out-div {
+    width:290px;
+    padding:20px 0;
+    height:210px;
+    background:url('../images/pop-up-background.png') top left no-repeat transparent;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#6a737b;
+    text-align:center;
+    font-size:16px;
+    z-index: 100;
+}
+
+.slide-out-div a.handle {
+	z-index: 100;
+}
+
+.slide-out-div h3 { font-weight:bold; font-size:22px; margin:20px 0; }
+.slide-out-div p { margin:0 0 20px; line-height:18px; }
+.slide-out-div #yes, .slide-out-div #no { width:87px; height:37px; }
+.slide-out-div #yes { background:url('../images/yes.png') top left no-repeat transparent; float:left; margin:0 0 0 50px; }
+.slide-out-div #no { background:url('../images/no.png') top left no-repeat transparent; float:right; margin:0 50px 0 0; }
+.handle { margin-top:13px; }
+ */
