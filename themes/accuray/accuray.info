@@ -54,6 +54,8 @@ conditional-stylesheets[if lte IE 8][all][] = css/ie8.css
   ; Optionally add some JavaScripts to your theme.
 ; scripts[] = js/script.js
 scripts[] = js/divHeight.js
+scripts[] = js/tabSlideOut.v1.3.js
+scripts[] = js/survey.js
 
   ; The regions defined in Zen's default page.tpl.php file.  The name in
   ; brackets is the name of the variable in the page.tpl.php file, (e.g.
