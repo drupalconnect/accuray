@@ -15,3 +15,10 @@
 .views_slideshow_singleframe_pager {
   /*bottom: 2em;*/
 }
+
+#header #block-menu-secondary-links {
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 97%;
+}
