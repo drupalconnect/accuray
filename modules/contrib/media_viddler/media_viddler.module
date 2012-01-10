@@ -1,0 +1,12 @@
+<?php
+
+/**
+ *  @file
+ *  Embedded Video Field provider file for viddler.com.
+ */
+
+function media_viddler_emfield_providers($module, $provider = NULL) {
+  if ($module == 'emvideo') {
+    return drupal_system_listing("$provider\.inc$", drupal_get_path('module', 'media_viddler') ."/providers", 'name', 0);
+  }
+}

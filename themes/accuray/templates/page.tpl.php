@@ -114,7 +114,6 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>">
   <?php if ($primary_links): ?>
@@ -266,6 +265,8 @@
   	<p>Take a minute to let us know<br />if our website has been<br />helpful to you.</p>
   	<a href="<?php print $base_url . $base_path; ?>node/6061" title="Yes"><div id="yes"></div></a><div id="no"></div>
   </div>
+  
+  <?php print $scripts; ?>
   <?php print $page_closure; ?>
 
   <?php print $closure; ?>

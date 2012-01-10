@@ -1,0 +1,108 @@
+<?php
+// $Id: contact_save.install,v 1.8 2010/10/26 21:21:29 joelstein Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function contact_save_schema() {
+  $schema['contact_save'] = array(
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE, 'unsigned' => TRUE),
+      'mail_key' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE),
+      'name' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'email' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'subject' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'cid' => array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE, 'not null' => TRUE),
+      'category' => array('type' => 'varchar', 'length' => 255),
+      'recipients' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'message' => array('type' => 'text', 'not null' => TRUE, 'size' => 'big'),
+      'body' => array('type' => 'text', 'not null' => TRUE, 'size' => 'big'),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'unsigned' => TRUE),
+      'reply' => array('type' => 'text', 'size' => 'big'),
+      'replied' => array('type' => 'int', 'unsigned' => TRUE),
+      'replier' => array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'category' => array('category'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function contact_save_install() {
+  drupal_install_schema('contact_save');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function contact_save_uninstall() {
+  drupal_uninstall_schema('contact_save');
+  variable_del('contact_save_reply_template');
+  variable_del('contact_save_submission_link');
+  variable_del('contact_save_purge_interval');
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function contact_save_enable() {
+  // Set weight of this module heavier than other modules, so modifications to
+  // outgoing messages get saved.
+  $weight = db_result(db_query("SELECT MAX(weight) FROM {system} WHERE name <> 'contact_save'"));
+  db_query("UPDATE {system} SET weight = %d WHERE name = 'contact_save'", $max_weight + 1);
+}
+
+/**
+ * Add replier field.
+ */
+function contact_save_update_6001() {
+  $ret = array();
+  db_add_field($ret, 'contact_save', 'replier', array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE));
+  return $ret;
+}
+
+/**
+ * Drop category, make cid not null, add index to cid.
+ */
+function contact_save_update_6002() {
+  $ret = array();
+  db_drop_field($ret, 'contact_save', 'category');
+  db_change_field($ret, 'contact_save', 'cid', 'cid', array('type' => 'int', 'size' => 'normal', 'unsigned' => TRUE, 'not null' => TRUE));
+  db_add_index($ret, 'contact_save', 'cid', array('cid'));
+  return $ret;
+}
+
+/**
+ * Set weight of this module heavier than other modules, so modifications to
+ * outgoing messages get saved. Also, add category field for the category name,
+ * in case the category ever gets deleted (we retain at least the category name).
+ */
+function contact_save_update_6100() {
+  $ret = array();
+
+  $weight = db_result(db_query("SELECT MAX(weight) FROM {system} WHERE name <> 'contact_save'"));
+  $ret[] = update_sql("UPDATE {system} SET weight = {$weight} WHERE name = 'contact_save'");
+
+  db_drop_index($ret, 'contact_save', 'cid');
+  db_add_field($ret, 'contact_save', 'category', array('type' => 'varchar', 'length' => 255));
+  $ret[] = update_sql("UPDATE {contact_save} cs LEFT JOIN {contact} c ON cs.cid = c.cid SET cs.category = c.category");
+  db_add_index($ret, 'contact_save', 'category', array('category'));
+
+  return $ret;
+}
+
+/**
+ * Adds body field to store the fully-generated body message, which makes
+ * integration with other modules a little simpler.
+ */
+function contact_save_update_6101() {
+  $ret = array();
+  db_add_field($ret, 'contact_save', 'body', array('type' => 'text', 'not null' => TRUE, 'size' => 'big'));
+  return $ret;
+}

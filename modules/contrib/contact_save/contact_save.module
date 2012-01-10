@@ -1,0 +1,260 @@
+<?php
+// $Id: contact_save.module,v 1.14 2010/10/26 21:21:29 joelstein Exp $
+
+/**
+ * Implementation of hook_menu().
+ */
+function contact_save_menu() {
+  // Admin views
+  $items['admin/build/contact/submissions'] = array(
+    'title' => 'Submissions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_submissions'),
+    'access arguments' => array('administer site-wide contact form'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+    'file' => 'contact_save.admin.inc',
+  );
+  $items['admin/build/contact/submissions/%'] = array(
+    'title callback' => '_contact_save_title',
+    'title arguments' => array(4),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_view_submission', 4),
+    'access arguments' => array('administer site-wide contact form'),
+    'type' => MENU_CALLBACK,
+    'file' => 'contact_save.admin.inc',
+  );
+  $items['admin/build/contact/submissions/%/delete'] = array(
+    'title' => 'Delete contact submission',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_delete_submission', 4),
+    'access arguments' => array('administer site-wide contact form'),
+    'type' => MENU_CALLBACK,
+    'file' => 'contact_save.admin.inc',
+  );
+
+  // Recipient-specific views
+  $items['user/%user/contact_save'] = array(
+    'title' => 'Messages',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_submissions', 1),
+    'access callback' => 'contact_save_recipient_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+    'file' => 'contact_save.admin.inc',
+  );
+  $items['user/%user/contact_save/%'] = array(
+    'title callback' => '_contact_save_title',
+    'title arguments' => array(3),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_view_submission', 3),
+    'access callback' => 'contact_save_recipient_access',
+    'access arguments' => array(1, 3),
+    'type' => MENU_CALLBACK,
+    'file' => 'contact_save.admin.inc',
+  );
+  $items['user/%user/contact_save/%/delete'] = array(
+    'title' => 'Delete contact submission',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_delete_submission', 3),
+    'access callback' => 'contact_save_recipient_access',
+    'access arguments' => array(1, 3),
+    'type' => MENU_CALLBACK,
+    'file' => 'contact_save.admin.inc',
+  );
+
+  // Shortcut link
+  $items['contact_save/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'contact_save_redirect',
+    'page arguments' => array(1),
+    'access callback' => 'contact_save_recipient_access',
+    'access arguments' => array(1),
+    'file' => 'contact_save.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function contact_save_perm() {
+  return array('administer own received messages');
+}
+
+/**
+ * Access control for pages displaying messages sent to specific recipient.
+ */
+function contact_save_recipient_access($account, $submission_id = NULL) {
+  global $user;
+
+  // If $account is numeric, user is accessing shortcut link (contact_save/%);
+  // switch the variables around
+  if (is_numeric($account)) {
+    $submission_id = $account;
+    $account = $user;
+  }
+
+  // Administrators can view any user's messages
+  if (user_access('administer site-wide contact form')) {
+    return TRUE;
+  }
+
+  // Users with "administer own received messages" can view their own messages
+  if ($user->uid and user_access('administer own received messages') and $user->uid == $account->uid) {
+
+    // If checking access for specific submission...
+    if ($submission_id) {
+
+      // Users can only view messages in which they are a recipient
+      if (!db_result(db_query("SELECT COUNT(*)
+        FROM {contact_save}
+        WHERE id = %d AND recipients LIKE '%%%s%%'",
+        $submission_id, $user->mail))) {
+        return FALSE;
+      }
+    }
+
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function contact_save_help($path, $arg) {
+  switch ($path) {
+    case 'admin/build/contact/submissions':
+      $args = array(
+        '@form' => url('contact'),
+        '@settings' => url('admin/build/contact/settings'),
+      );
+      return '<p>' . t('This page displays all messages submitted through the <a href="@form">site-wide contact form</a>. You may configure its behavior on the <a href="@settings">settings page</a>.', $args) . '</p>';
+      break;
+    case 'user/%/contact_save':
+      $args = array(
+        '@form' => url('contact'),
+      );
+      return '<p>' . t('This page displays all messages submitted to you through the <a href="@form">site-wide contact form</a>.', $args) . '</p>';
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function contact_save_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    // Add reply template to contact form settings page
+    case 'contact_admin_settings':
+      $link = url('admin/build/contact/submissions');
+      $form['contact_save_reply_template'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Reply template'),
+        '#description' => t('Auto-populated into the reply form which appears when viewing <a href="@link">contact form submissions</a>.<br />Available variables are: !name, !site_name.', array('@link' => $link)),
+        '#default_value' => variable_get('contact_save_reply_template', t("Dear !name,\n\n\n\n-- !site_name team")),
+      );
+      $form['contact_save_submission_link'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Include link to submission in contact e-mails'),
+        '#description' => t('Includes a link at the top of the notification e-mails to the saved submission on this website, in case you want to reply through the website.'),
+        '#default_value' => variable_get('contact_save_submission_link', 1),
+      );
+      $form['contact_save_purge_interval'] = array(
+        '#type' => 'select',
+        '#title' => t('Purge interval'),
+        '#description' => t('Automatically deletes saved <a href="@link">contact form submissions</a> after this interval of time has elapsed.', array('@link' => $link)),
+        '#options' => array(0 => t('Never (do not delete)')) + drupal_map_assoc(array(604800, 1209600, 2419200, 4838400, 7257600, 9676800, 31536000), 'format_interval'),
+        '#default_value' => variable_get('contact_save_purge_interval', 0),
+      );
+      $form['buttons']['#weight'] = 1;
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_mail_alter().
+ */
+function contact_save_mail_alter(&$message) {
+  global $user;
+
+  // Message generated by the Contact module.
+  if (in_array($message['id'], array('contact_page_mail', 'contact_user_mail'))) {
+    $record = array(
+      'mail_key' => $message['id'],
+      'uid' => $user->uid ? $user->uid : db_result(db_query("SELECT uid FROM {users} WHERE mail = '%s'", $message['params']['mail'])),
+      'name' => $message['params']['name'],
+      'email' => $message['params']['mail'],
+      'subject' => $message['params']['subject'],
+      'cid' => $message['params']['contact']['cid'],
+      'category' => $message['params']['contact']['category'],
+      'recipients' => $message['to'],
+      'message' => $message['params']['message'],
+      'body' => implode("\n\n", $message['body']),
+      'created' => time(),
+    );
+  }
+
+  // Message generated by the Author Contact module.
+  if ($message['id'] == 'authorcontact_sendcontact') {
+    $record = array(
+      'mail_key' => $message['id'],
+      'uid' => $user->uid ? $user->uid : db_result(db_query("SELECT uid FROM {users} WHERE mail = '%s'", $message['params']['senderemail'])),
+      'name' => $message['params']['sendername'],
+      'email' => $message['params']['senderemail'],
+      'subject' => t('Re: ') . $message['params']['nodetitle'],
+      'recipients' => $message['to'],
+      'message' => $message['params']['sendercomment'],
+      'body' => implode("\n\n", $message['body']),
+      'created' => time(),
+    );
+  }
+
+  // Save message if possible.
+  if (!empty($record)) {
+    drupal_write_record('contact_save', $record);
+  }
+
+  // Append link to first sentence in notification email
+  // (for messages generated by the site-wide contact form).
+  if ($message['id'] == 'contact_page_mail' and variable_get('contact_save_submission_link', 1)) {
+    $id = db_last_insert_id('contact_save', 'id');
+    $url = url('contact_save/' . $id, array('absolute' => TRUE));
+    $message['body'][0] .= t(' You may view and respond to this message at !url.', array('!url' => $url));
+  }
+}
+
+/**
+ * Implementation of hook_theme()
+ */
+function contact_save_theme() {
+  return array(
+    'contact_save_submissions' => array(
+      'arguments' => array('form' => NULL),
+      'file' => 'contact_save.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function contact_save_cron() {
+  // Purge contact form submissions from the database
+  if ($interval = variable_get('contact_save_purge_interval', 0)) {
+    db_query("DELETE FROM {contact_save} WHERE created < %d", time() - $interval);
+    if ($count = db_affected_rows()) {
+      watchdog('contact_save', '%submissions-removed from the database.', array('%submissions-removed' => format_plural($count, 'Removed 1 contact form submission', 'Removed @count contact form submissions')));
+    }
+  }
+}
+
+/**
+ * Page title callback when viewing a submission.
+ */
+function _contact_save_title($id) {
+  return db_result(db_query("SELECT subject FROM {contact_save} WHERE id = %d", $id));
+}

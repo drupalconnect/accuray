@@ -1,0 +1,7 @@
+Changelog for Media: Viddler.
+
+May 2009
+----------
+ #421164 - BassistJimmyJam created initial provider file. 
+ * Create initial module.
+

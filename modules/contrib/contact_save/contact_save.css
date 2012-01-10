@@ -1,0 +1,9 @@
+/* $Id: contact_save.css,v 1.2 2010/03/22 19:49:04 joelstein Exp $ */
+.contact-save-submitted,
+.contact-save-replied {
+  margin-bottom: 1em;
+}
+.contact-save-message,
+.contact-save-reply {
+  margin: 0 2em 1em;
+}

@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	$('.slide-out-div').css('display', 'block');
+});
+
 function getCookie(c_name)
 {
 var i,x,y,ARRcookies=document.cookie.split(";");
@@ -53,6 +57,5 @@ $(function(){
 			leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
 			fixedPosition: true,                      //options: true makes it stick(fixed position) on scroll
 			onLoadSlideOut: slideout
-	});
-			
+	});		
 });

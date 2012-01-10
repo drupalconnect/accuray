@@ -545,6 +545,7 @@ ul.links li {
  * Survey Slideout Style
  */
 .slide-out-div {
+	display: none;
     width:290px;
     padding:20px 0;
     height:210px;
