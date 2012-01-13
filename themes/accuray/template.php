@@ -228,3 +228,7 @@ function accuray_breadcrumb($breadcrumb) {
   // Otherwise, return an empty string.
   return '';
 }
+
+function accuray_date_all_day_label() {
+  return '';
+}
