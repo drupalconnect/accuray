@@ -76,3 +76,8 @@
   list-style-image: none;
   float: left;
 }
+
+.group-treatment-centers legend,
+.group-demos legend {
+	font-weight: bold;
+}

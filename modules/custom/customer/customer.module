@@ -1,0 +1,145 @@
+<?php
+
+function customer_menu() {
+	$items = array();
+	
+	$items['ahah-customer-form'] = array(
+		'title' => 'AHAH change',
+		'page callback' => 'customer_ahah_change',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+		'type' => MENU_CALLBACK,
+	);
+	
+	return $items;
+}
+
+
+
+function customer_form_alter(&$form, $form_state, $form_id) {
+	if ($form_id == 'customer_node_form') {
+		//print_r($form);
+		$form['field_institution']['#prefix'] = '<div id="cyber-demo">';
+		$form['field_institution']['#suffix'] = '</div>';
+		
+		
+    // without this here the ahah for #edit-field-select-value wont work (form_get_cache returns null from the ahah callback)
+    $form['field_type_of_visit']['#ahah'] = array(
+      'path' => 'ahah-customer-form',
+      //'wrapper' => 'edit-field-select-value-wrapper',
+      //'method' => 'replace',
+      //'effect' => 'fade',
+      'event' => 'click',
+    );
+    
+    $ahah_binding = array(
+      "button" => false,
+      "keypress" => null,
+      'url'   => url('ahah-customer-form'),
+      'event' => 'change',
+      'wrapper' => 'cyber-demo',
+      'selector' => '#edit-field-type-of-visit-value',
+      'effect'   => 'fade',
+      'method'   => 'replace',
+      'progress' => array('type' => 'throbber'),
+    );
+    
+    drupal_add_js('misc/jquery.form.js');
+    drupal_add_js('misc/ahah.js');
+    drupal_add_js(array('ahah' => array('edit-field-select-value-wrapper' => $ahah_binding)), 'setting');
+		
+		
+		/*$form['#cache'] = TRUE;
+		$form['field_type_of_visit']['#ahah'] = array(
+			'event' => 'change',
+			'path' => 'ahah-customer-form',
+			'wrapper' => 'cyber-demo',
+			'effect' => 'fade',
+		);*/
+		
+		
+		
+		//unset($form['field_type_of_visit']);
+		//unset($form['#field_info']['field_type_of_visit']);
+		/*$form['field_type_of_visit'] = array(
+			['#type'] => 'select',
+			['#title'] => 'What type of visit would you like to request',
+			['#options'] => array(0 => 'Please select one...','vip' => 'VIP Visit','reference' => 'Reference Site Visit'),
+			//['#ahah'] => array('event' => 'change', 'path' => 'ahah-customer-form', 'wrapper' => 'cyber-demo', 'effect' => 'fade'),
+		);*/
+
+		//$form['#after_build'][] = 'customer_after_build';
+		//$form['field_type_of_visit']['#pre-render'][] = 'customer_field_visit_pre_render';
+		// Remove for Reference Site Visit
+		/*unset($form['field_cyberknife_demo']);
+		unset($form['field_multi_plan_demo']);*/
+		// Remove for VIP Visit
+		/*unset($form['field_cyberknife_center']);
+		unset($form['field_tomotherapy_center']);
+		unset($form['field_other_center']);*/
+		//print_r($form);
+	}
+}
+
+
+
+/*function customer_after_build($form, &$form_state) {
+	//print_r($form);
+	$form['field_type_of_visit'][0]['value']['#ahah'] = array(
+		//'event' => 'change',
+		'path' => 'ahah-customer-form',
+		'wrapper' => 'cyber-demo',
+		'effect' => 'fade',
+	);
+	print_r($form);
+	return $form;
+}
+
+
+
+function customer_field_visit_pre_render($element) {
+	$element['value']['#ahah'] = array(
+		//'event' => 'change',
+		'path' => 'ahah-customer-form',
+		'wrapper' => 'cyber-demo',
+		'effect' => 'fade',
+	);
+	form_expand_ahah($element['value']);
+
+  // $element doesn't pass by reference, so don't forget to return it
+  return $element;
+
+}
+*/
+
+
+function customer_ahah_change() {
+	//include_once 'modules/node/node.pages.inc';
+	//print 'success'; exit();
+  include_once 'modules/node/node.pages.inc';
+	$form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  $form = form_get_cache($form_build_id, $form_state);
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  $form['#post'] = $_POST;
+  $form['#redirect'] = FALSE;
+  $form['#programmed'] = FALSE;
+  $form_state['post'] = $_POST;
+  drupal_process_form($form_id, $form, $form_state);
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  // From here on, we'll add our own code.
+  // We just get the element of $form that needs to be refreshed, and just resubmit that
+  // part through the json call. In this case we want to rebuild the 'kind' <div> wrapper and the
+  // select box it contains
+  $changed_elements = $form['field_institution'];
+  //unset($changed_elements['#prefix'], $changed_elements['suffix']); // we'll unset the div to make sure it won't be repeated!
+  //unset($changed_elements); // we'll unset the div to make sure it won't be repeated!
+  // the actual JSON call
+  $javascript = drupal_add_js(NULL, NULL, 'header');
+  drupal_json(array(
+    'status'   => TRUE,
+    'data'     => theme('status_messages') . drupal_render($changed_elements), // rebuild just the part that needs to be changed
+    'settings' => call_user_func_array('array_merge_recursive', $javascript['setting']),
+  ));
+}

@@ -1,0 +1,5 @@
+
+name = "Customer Form"
+description = "Provides modifications to the Customer content form."
+package = "Accuray"
+core = 6.x
